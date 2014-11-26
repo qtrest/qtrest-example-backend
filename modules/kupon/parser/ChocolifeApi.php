@@ -52,6 +52,8 @@ class ChocolifeApi extends BaseApi
                     'sourceServiceId' => $this->getSourceServiceId(),
                     'cityId' => $cityId,
                     'lastUpdateDateTime' => '0000-00-00 00:00:00',
+					'createTimestamp' => date('Y.m.d H:i:s', time()),
+					
                     'recordHash' => $recordHash,
 
                     'title' => $value['title'],
@@ -112,7 +114,7 @@ class ChocolifeApi extends BaseApi
         ]);
 
         $connection->createCommand()->update('coupon', [
-            'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
+			'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
             'longDescription' => $result['longDescription'],
             'conditions' => $result['conditions'],
             'features' => $result['features'],

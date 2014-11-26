@@ -35,7 +35,7 @@ class m141207_072100_create_coupon_table extends Migration
             'id' => Schema::TYPE_PK,
             'sourceServiceId' => Schema::TYPE_INTEGER,
             'cityId' => Schema::TYPE_INTEGER,
-            'createTimestamp' => Schema::TYPE_TIMESTAMP,
+            'createTimestamp' => Schema::TYPE_DATETIME,
             'lastUpdateDateTime' => Schema::TYPE_DATETIME,
             'recordHash' => Schema::TYPE_STRING,
             
