@@ -23,7 +23,7 @@ $serviceBaseUrl = $query->select('serviceBaseUrl')
             <div class="coupon-content" style="display:block">
                 <p class="coupon-caption"><?= Html::encode($model->title) ?>
                     <br/>
-					<?= (($model->discountType == 'coupon') ? Html::encode($model->originalCouponPrice) : (Html::encode($model->originalPrice) . ' / ' . Html::encode($model->discountPrice))) . ' (' . Html::encode($model->discountPercent) . ')' ?>
+					<?= ((($model->discountType == 'coupon') || ($model->discountType == 'freeCoupon') ) ? Html::encode($model->originalCouponPrice) : (Html::encode($model->originalPrice) . ' / ' . Html::encode($model->discountPrice))) . ' (' . Html::encode($model->discountPercent) . ')' ?>
 				</p>
                 <div class="coupon-description">
                     <?= Html::encode($model->shortDescription) ?>
