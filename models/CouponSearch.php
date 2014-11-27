@@ -42,9 +42,15 @@ class CouponSearch extends Coupon
     public function search($params)
     {
         $query = Coupon::find();
+		
+		$query->andWhere(['>', 'title', '']);
+		//$query->limit(50);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+			'pagination' => [
+				'pageSize' => 12,
+			],
         ]);
 
         if (!($this->load($params) && $this->validate())) {

@@ -87,7 +87,7 @@ class ChocolifeApi extends BaseApi
                 'conditions' => 'empty',
                 'features' => 'empty',
                 'timeToCompletion' => 'empty',
-
+				'originalCouponPrice' => Apist::filter('div.b-deal__info > span.e-deal__price.e-deal__price')->text(),
 				'originalPrice' => Apist::filter('div.b-deal__info > span.e-deal__price.e-deal__price--old')->text(),
                 'discountPercent' => Apist::filter('.e-deal__discount')->text(),
                 'discountPrice' => Apist::filter('div.b-deal__info > span:nth-child(2)')->text(),

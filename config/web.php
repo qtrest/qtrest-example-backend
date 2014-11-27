@@ -46,7 +46,11 @@ $config = [
 	'modules' => [
 		'kupon' => [
 			'class' => 'app\modules\kupon\Kupon'
-		]
+		],
+		'debug' => [
+			'class' => 'yii\debug\Module',
+			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11'],
+		],
 	],
     'params' => $params,
 ];
@@ -61,6 +65,12 @@ if (YII_ENV == 'dev') {
             'class' => 'yii\gii\Module',
             'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102'],
             //'password' => '123456'
+        ];
+		
+	$config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+            'class' => 'yii\debug\Module',
+			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11'],
         ];
 }
 
