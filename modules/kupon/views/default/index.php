@@ -15,7 +15,7 @@ use app\modules\kupon\parser\BlizzardApi as BlizzardApi;
         <code><?= __FILE__ ?></code>
     </p>
 	
-	<?
+	<?php
 		$chocolife = new ChocolifeApi();
 		print_r($chocolife->index());
 		echo '<br/>';
