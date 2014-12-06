@@ -39,6 +39,9 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'tools' => [
+            'class' => '\app\components\Tools',
+        ],
     ],
 	'modules' => [
 		'kupon' => [

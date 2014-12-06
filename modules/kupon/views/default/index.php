@@ -1,7 +1,10 @@
 <?php 
 use app\modules\kupon\parser\ChocolifeApi as ChocolifeApi;
 use app\modules\kupon\parser\BlizzardApi as BlizzardApi;
- ?>
+
+use app\components\Tools;
+
+?>
 
 <div class="kupon-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
@@ -17,7 +20,8 @@ use app\modules\kupon\parser\BlizzardApi as BlizzardApi;
 	
 	<?php
 		$chocolife = new ChocolifeApi();
-		print_r($chocolife->index());
+        Tools::print_array('ChocolifeApi',$chocolife->index());
+		//print_r($chocolife->index());
 		echo '<br/>';
 		$blizzard = new BlizzardApi();
 		print_r($blizzard->index());
