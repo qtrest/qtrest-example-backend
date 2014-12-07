@@ -19,13 +19,13 @@ use app\components\Tools;
     </p>
 	
 	<?php
+        //echo parse_url('http://www.chocolife.me/18236-zimnie-kanikuly-v-karakole-prozhivanie-v-otelyah-intour-i-park-hotel-so-skidkoy-do-42-ot-logos-travel#showOffers')['path'];
+
 		$chocolife = new ChocolifeApi();
-        Tools::print_array('ChocolifeApi',$chocolife->index());
-		//print_r($chocolife->index());
-		echo '<br/>';
-		$blizzard = new BlizzardApi();
-		print_r($blizzard->index());
+        $chocolife->initData();
+        //Tools::print_array('choco categories', $chocolife->categories());
+        $chocolife->fetchKupons(2);
+        $chocolife->updateCoupon(1);
 	?>
 	
 </div>
-

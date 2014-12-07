@@ -6,6 +6,76 @@ class Tools {
 
     public static $screen = 0;
 
+    public static function ru2lat($str)
+    {
+        $tr = array(
+            "А"=>"a", "Б"=>"b", "В"=>"v", "Г"=>"g", "Д"=>"d",
+            "Е"=>"e", "Ё"=>"yo", "Ж"=>"zh", "З"=>"z", "И"=>"i", 
+            "Й"=>"j", "К"=>"k", "Л"=>"l", "М"=>"m", "Н"=>"n", 
+            "О"=>"o", "П"=>"p", "Р"=>"r", "С"=>"s", "Т"=>"t", 
+            "У"=>"u", "Ф"=>"f", "Х"=>"kh", "Ц"=>"ts", "Ч"=>"ch", 
+            "Ш"=>"sh", "Щ"=>"sch", "Ъ"=>"", "Ы"=>"y", "Ь"=>"", 
+            "Э"=>"e", "Ю"=>"yu", "Я"=>"ya", "а"=>"a", "б"=>"b", 
+            "в"=>"v", "г"=>"g", "д"=>"d", "е"=>"e", "ё"=>"yo", 
+            "ж"=>"zh", "з"=>"z", "и"=>"i", "й"=>"j", "к"=>"k", 
+            "л"=>"l", "м"=>"m", "н"=>"n", "о"=>"o", "п"=>"p", 
+            "р"=>"r", "с"=>"s", "т"=>"t", "у"=>"u", "ф"=>"f", 
+            "х"=>"kh", "ц"=>"ts", "ч"=>"ch", "ш"=>"sh", "щ"=>"sch", 
+            "ъ"=>"", "ы"=>"y", "ь"=>"", "э"=>"e", "ю"=>"yu", 
+            "я"=>"ya", " "=>"-", "."=>"", ","=>"", "/"=>"-",  
+            ":"=>"", ";"=>"","—"=>"", "–"=>"-"
+        );
+        //print_r($str);
+        return strtr($str,$tr);
+    }
+
+    public static function trimArray($data) {
+
+        if (gettype($data) == 'array') {
+            return array_map(array(__CLASS__, "trimArray"), $data);
+        } else {
+            return trim($data);
+        }
+    }
+
+    public static function removeLastWordArray($data) {
+
+        if (gettype($data) == 'array') {
+            return array_map(array(__CLASS__, "removeLastWordArray"), $data);
+        } else {
+            if (substr_count($data, ' ') > 0) {
+                //echo $data . ' - ' . substr_count($data, ' ') . ', ';
+                $lastSpacePosition = strrpos($data, ' ');
+                $textWithoutLastWord = substr($data, 0, $lastSpacePosition);
+                return $textWithoutLastWord;
+            } else {
+                return $data;
+            }
+        }
+    }
+
+    public static function getLastWord($str, $delimitier = " ") {
+
+        $str = htmlentities($str, null, 'utf-8');
+        $str = str_replace("&nbsp;", " ", $str);
+
+        $last_word_start = strrpos ( $str , $delimitier) + 1;
+        $last_word_end = strlen($str) - 1;
+        $last_word = substr($str, $last_word_start, $last_word_end);
+        return $last_word;
+    }
+
+    public static function getFirstWord($str, $delimitier = " ") {
+
+        $str = htmlentities($str, null, 'utf-8');
+        $str = str_replace("&nbsp;", " ", $str);
+
+        $first_word_start = 0;
+        $first_word_end = strpos ( $str , $delimitier);
+        $first_word = substr($str, $first_word_start, $first_word_end);
+        return $first_word;
+    }
+
     public static function model_exists($className) {
         $modelFolder = Yii::app()->params['configurationName'];
         return file_exists(Yii::getPathOfAlias('application.models.'.$modelFolder).DIRECTORY_SEPARATOR.$className.'.php');
