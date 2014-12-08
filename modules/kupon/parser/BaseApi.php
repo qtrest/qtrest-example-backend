@@ -65,14 +65,28 @@ abstract class BaseApi extends Apist
             ->queryColumn();
 
         foreach($res as $key => $value) {
-            //echo $key . ' -> ' . $value . '<br/>';
+            //sleep ( rand(1,2) );
             $this->fetchKuponsByCityId($value);
         }
     }
 
     public function updateAllCoupons()
     {
+        $query = new Query;
+        $res = $query->select('id')
+            ->from('coupon')
+            ->where('sourceServiceId=:sourceServiceId',
+                [
+                    ':sourceServiceId' => $this->getSourceServiceId()
+                ]
+            )
+            ->createCommand()
+            ->queryColumn();
 
+        foreach($res as $key => $value) {
+            //sleep ( rand(1,2) );
+            $this->updateCouponById($value);
+        }
     }
 
     public function initData()
@@ -305,6 +319,26 @@ abstract class BaseApi extends Apist
     private function updateCouponById($couponId)
     {
         $connection=\Yii::$app->db;
+
+        $query = new Query;
+        $res = $query->select('lastUpdateDateTime')
+            ->from('coupon')
+            ->where('id=:couponId',
+                [
+                    ':couponId' => $couponId,
+                ]
+            )
+            ->createCommand()
+            ->queryScalar();
+
+        if ( !is_null ($res) ) {
+            $time = time();
+            $diff = $time - strtotime ($res);
+            //update every 4 hours (14400 unix seconds)
+            if ($diff <= 14400) {
+                return;
+            }
+        }
 
         $result = $this->couponAdvancedById($couponId);
 
