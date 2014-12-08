@@ -25,58 +25,35 @@ class ChocolifeApi extends BaseApi
         return 'Chocolife.me';
     }
 
-    public function fetchKupons($cityId)
+    protected function getCountryName()
     {
-        $connection=\Yii::$app->db;
-        $result = $this->index($cityId);
-        $cityCode = $result['cityCode'];
-        $kupons = $result['coupons'];
-
-        foreach ($kupons as $key => $value) {
-            $recordHashSrc = $cityCode.$value['sourceServiceId'].$value['pageLink'];
-            $recordHash = md5($recordHashSrc);
-
-            $query = new Query;
-            $res = $query->select('id')
-                ->from('coupon')
-                ->where('recordHash=:recordHash',
-                    [
-                        ':recordHash' => $recordHash,
-                    ]
-                )
-                ->createCommand()
-                ->queryScalar();
-
-            if (empty($res)) {
-                $connection->createCommand()->insert('coupon', [
-                    'sourceServiceId' => $this->getSourceServiceId(),
-                    'cityId' => $cityId,
-                    'lastUpdateDateTime' => '0000-00-00 00:00:00',
-					'createTimestamp' => date('Y.m.d H:i:s', time()),
-					
-                    'recordHash' => $recordHash,
-
-                    'title' => $value['title'],
-                    'shortDescription' => $value['shortDescription'],
-                    'longDescription' => $value['longDescription'],
-                    'conditions' => $value['conditions'],
-                    'features' => $value['features'],
-                    'timeToCompletion' => $value['timeToCompletion'],
-
-                    'originalPrice' => $value['originalPrice'],
-                    'discountPercent' => $value['discountPercent'],
-                    'discountPrice' => $value['discountPrice'],
-                    'boughtCount' => $value['boughtCount'],
-                    'sourceServiceCategories' => $value['sourceServiceCategories'],
-                    'imagesLinks' => $value['imagesLinks'],
-                    'pageLink' => $value['pageLink'],
-                    'mainImageLink' => $value['mainImageLink'],
-                ])->execute();
-            }
-        }
+        return 'Казахстан';
     }
 
-    public function categories()
+    protected function getCountryCode()
+    {
+        return 'kazakhstan';
+    }
+
+    protected function cities()
+    {
+        $result = $this->get('/', [
+            'cities'  => Apist::filter('.b-city_links__wrapper li a')->each([
+                'city' => Apist::current()->text(),
+                'link' => Apist::current()->attr('href')->call(function ($href)
+                {
+                    return $this->getBaseUrl() . $href;
+                }),
+                'path' => Apist::current()->attr('href'),
+            ]),
+        ]);
+
+        $result = Tools::trimArray($result);
+
+        return $result;
+    }
+
+    protected function categories()
     {
         $result = $this->get('/', [
             'categories'  => Apist::filter('#b-deals__menunav__nav li a')->each([
@@ -92,41 +69,7 @@ class ChocolifeApi extends BaseApi
         return $result;
     }
 
-    public function updateCoupon($couponId)
-    {
-        $connection=\Yii::$app->db;
-
-        $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
-
-        $result = $this->get($pageLink, [
-            'longDescription' => Apist::filter('#information > p.e-offer__description')->text(),
-            'conditions' => Apist::filter('#information > div.b-conditions')->html(),
-            'features' => Apist::filter('#information > div.b-offer__features')->html(),
-            'imageLinks' => Apist::filter('div.b-offer__imgs img')->each()->attr('src'),
-            'timeToCompletion' => Apist::filter('.e-offer__expire-date')->text()->call(function($stamp){
-                $stamp = substr(trim($stamp),0,10);
-                $diff = intval($stamp) - time();
-                return  $diff;
-            }),
-            'boughtCount' => Apist::filter('.b-offer__how_many_bought span')->text()->call(function ($str) {
-                return Tools::getFirstWord($str);
-            }),
-        ]);
-
-        $connection->createCommand()->update('coupon', [
-			'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
-            'longDescription' => $result['longDescription'],
-            'conditions' => $result['conditions'],
-            'features' => $result['features'],
-            'timeToCompletion' => $result['timeToCompletion'],
-            'boughtCount' => $result['boughtCount'],
-            'imagesLinks' => implode(', ', $result['imageLinks']),
-        ],['id' => $couponId])->execute();
-
-        //Tools::print_array('choco update coupon', $result);
-    }
-
-    protected function index($cityId)
+    protected function couponsByCityId($cityId)
     {
         $cityPath = \Yii::$app->db->createCommand('SELECT path FROM cityUrl WHERE cityId=\''.$cityId.'\'')->queryScalar();
         if (empty($cityPath)) {
@@ -172,21 +115,31 @@ class ChocolifeApi extends BaseApi
         return $result;
     }
 
-    protected function cities()
+    protected function couponAdvancedById($couponId)
     {
-        $result = $this->get('/', [
-            'cities'  => Apist::filter('.b-city_links__wrapper li a')->each([
-                'city' => Apist::current()->text(),
-                'link' => Apist::current()->attr('href')->call(function ($href)
-                {
-                    return $this->getBaseUrl() . $href;
-                }),
-                'path' => Apist::current()->attr('href'),
-            ]),
+        $connection=\Yii::$app->db;
+
+        $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
+
+        $result = $this->get($pageLink, [
+            'longDescription' => Apist::filter('#information > p.e-offer__description')->text(),
+            'conditions' => Apist::filter('#information > div.b-conditions')->html(),
+            'features' => Apist::filter('#information > div.b-offer__features')->html(),
+            'imageLinks' => Apist::filter('div.b-offer__imgs img')->each()->attr('src'),
+            'timeToCompletion' => Apist::filter('.e-offer__expire-date')->text()->call(function($stamp){
+                $stamp = substr(trim($stamp),0,10);
+                $diff = intval($stamp) - time();
+                return  $diff;
+            }),
+            'boughtCount' => Apist::filter('.b-offer__how_many_bought span')->text()->call(function ($str) {
+                return Tools::getFirstWord($str);
+            }),
         ]);
 
-        $result = Tools::trimArray($result);
-        
+        if (empty($result['longDescription']) && empty($result['timeToCompletion'])) {
+            //TODO SpecialPage!!!
+            return 0;
+        }
         return $result;
     }
 }

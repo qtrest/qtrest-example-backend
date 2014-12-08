@@ -17,6 +17,7 @@ class m141207_082233_create_cityUrls_table extends Migration
             'cityId' => Schema::TYPE_INTEGER,
             'url' => Schema::TYPE_STRING . ' NOT NULL',
             'path' => Schema::TYPE_STRING . ' NOT NULL',
+            'lastUpdateDateTime' => Schema::TYPE_DATETIME,
             'sourceServiceId' => Schema::TYPE_INTEGER,
         ], $tableOptions);
 

@@ -10,6 +10,10 @@ use yii\db\QueryBuilder;
 
 abstract class BaseApi extends Apist
 {
+    abstract protected function cities();
+    abstract protected function categories();
+    abstract protected function couponsByCityId($cityId);
+    abstract protected function couponAdvancedById($couponId);
 
     public function getBaseUrl()
     {
@@ -19,6 +23,22 @@ abstract class BaseApi extends Apist
     protected function getSourceServiceCode()
     {
         return '';
+    }
+
+    protected function getCountryName()
+    {
+        return '';
+    }
+
+
+    protected function getCountryCode()
+    {
+        return '';
+    }
+
+    protected function getCountryId()
+    {
+        return \Yii::$app->db->createCommand('SELECT id FROM country WHERE countryCode=\''.$this->getCountryCode().'\'')->queryScalar();
     }
 
     protected function getSourceServiceId()
@@ -31,16 +51,63 @@ abstract class BaseApi extends Apist
         return '';
     }
 
+    public function fetchAllCities()
+    {
+        $query = new Query;
+        $res = $query->select('cityId')
+            ->from('cityUrl')
+            ->where('sourceServiceId=:sourceServiceId',
+                [
+                    ':sourceServiceId' => $this->getSourceServiceId()
+                ]
+            )
+            ->createCommand()
+            ->queryColumn();
+
+        foreach($res as $key => $value) {
+            //echo $key . ' -> ' . $value . '<br/>';
+            $this->fetchKuponsByCityId($value);
+        }
+    }
+
+    public function updateAllCoupons()
+    {
+
+    }
+
     public function initData()
     {
         if (
             empty($this->getBaseUrl())
             || empty($this->getSourceServiceCode()) 
             || empty($this->getSourceServiceName())
+            || empty($this->getCountryName())
+            || empty($this->getCountryCode())
         ) {
             throw new \yii\web\HttpException(400, 'empty parameters', 405);
             return;
         }
+
+        $query = new Query;
+        $res = $query->select('lastUpdateDateTime')
+            ->from('sourceService')
+            ->where('id=:sourceServiceId',
+                [
+                    ':sourceServiceId' => $this->getSourceServiceId(),
+                ]
+            )
+            ->createCommand()
+            ->queryScalar();
+
+        if ( !is_null ($res) ) {
+            $time = time();
+            $diff = $time - strtotime ($res);
+            //update every 4 hours (14400 unix seconds)
+            if ($diff <= 14400) {
+                return;
+            }
+        }
+
         //check service source
         $connection=\Yii::$app->db;
         $query = new Query;
@@ -57,8 +124,29 @@ abstract class BaseApi extends Apist
             ])->execute();
         }
 
+        //check country
+        $connection=\Yii::$app->db;
+        $query = new Query;
+        $res = $query->select('id')
+            ->from('country')
+            ->where('countryCode=:countryCode', [':countryCode' => $this->getCountryCode()])
+            ->createCommand()
+            ->queryScalar();
+
+        if (empty($res)) {
+            $connection->createCommand()->insert('country', [
+                'countryName' => $this->getCountryName(),
+                'countryCode' => $this->getCountryCode(),
+            ])->execute();
+        }
+
         $this->fillInCityTable();
         $this->fillInCategoriesTable();
+
+        //update lastUpdateDateTime in sourceService
+        $connection->createCommand()->update('sourceService', [
+            'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
+        ],['id' => $this->getSourceServiceId()])->execute();
     }
 
     private function fillInCityTable()
@@ -80,6 +168,7 @@ abstract class BaseApi extends Apist
                 $connection->createCommand()->insert('city', [
                     'cityName' => $value['city'],
                     'cityCode' => Tools::ru2lat($value['city']),
+                    'countryId' => $this->getCountryId(),
                 ])->execute();
             }
 
@@ -135,7 +224,98 @@ abstract class BaseApi extends Apist
         }
     }
 
-    abstract protected function cities();
-    abstract protected function index($cityId);
-    abstract public function fetchKupons($cityId);
+    private function fetchKuponsByCityId($cityId)
+    {
+        $connection=\Yii::$app->db;
+
+        $query = new Query;
+        $res = $query->select('lastUpdateDateTime')
+            ->from('cityUrl')
+            ->where('cityId=:cityId AND sourceServiceId=:sourceServiceId',
+                [
+                    ':cityId' => $cityId,
+                    ':sourceServiceId' => $this->getSourceServiceId(),
+                ]
+            )
+            ->createCommand()
+            ->queryScalar();
+
+        if ( !is_null ($res) ) {
+            $time = time();
+            $diff = $time - strtotime ($res);
+            //update every 4 hours (14400 unix seconds)
+            if ($diff <= 14400) {
+                return;
+            }
+        }
+
+        $result = $this->couponsByCityId($cityId);
+        $cityCode = $result['cityCode'];
+        $kupons = $result['coupons'];
+
+        foreach ($kupons as $key => $value) {
+            $recordHashSrc = $cityCode.$value['sourceServiceId'].$value['pageLink'];
+            $recordHash = md5($recordHashSrc);
+
+            $query = new Query;
+            $res = $query->select('id')
+                ->from('coupon')
+                ->where('recordHash=:recordHash',
+                    [
+                        ':recordHash' => $recordHash,
+                    ]
+                )
+                ->createCommand()
+                ->queryScalar();
+
+            if (empty($res)) {
+                $connection->createCommand()->insert('coupon', [
+                    'sourceServiceId' => $this->getSourceServiceId(),
+                    'cityId' => $cityId,
+                    'lastUpdateDateTime' => '0000-00-00 00:00:00',
+                    'createTimestamp' => date('Y.m.d H:i:s', time()),
+
+                    'recordHash' => $recordHash,
+
+                    'title' => $value['title'],
+                    'shortDescription' => $value['shortDescription'],
+                    'longDescription' => $value['longDescription'],
+                    'conditions' => $value['conditions'],
+                    'features' => $value['features'],
+                    'timeToCompletion' => $value['timeToCompletion'],
+
+                    'originalPrice' => $value['originalPrice'],
+                    'discountPercent' => $value['discountPercent'],
+                    'discountPrice' => $value['discountPrice'],
+                    'boughtCount' => $value['boughtCount'],
+                    'sourceServiceCategories' => $value['sourceServiceCategories'],
+                    'imagesLinks' => $value['imagesLinks'],
+                    'pageLink' => $value['pageLink'],
+                    'mainImageLink' => $value['mainImageLink'],
+                ])->execute();
+            }
+        }
+
+        //update lastUpdateDateTime in cityUrl
+        $connection->createCommand()->update('cityUrl', [
+            'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
+        ],['cityId' => $cityId, 'sourceServiceId' => $this->getSourceServiceId()])->execute();
+    }
+
+    private function updateCouponById($couponId)
+    {
+        $connection=\Yii::$app->db;
+
+        $result = $this->couponAdvancedById($couponId);
+
+        $connection->createCommand()->update('coupon', [
+            'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
+            'longDescription' => $result['longDescription'],
+            'conditions' => $result['conditions'],
+            'features' => $result['features'],
+            'timeToCompletion' => $result['timeToCompletion'],
+            'boughtCount' => $result['boughtCount'],
+            'imagesLinks' => implode(', ', $result['imageLinks']),
+        ],['id' => $couponId])->execute();
+    }
 }

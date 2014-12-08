@@ -24,8 +24,7 @@ use app\components\Tools;
 		$chocolife = new ChocolifeApi();
         $chocolife->initData();
         //Tools::print_array('choco categories', $chocolife->categories());
-        $chocolife->fetchKupons(2);
-        $chocolife->updateCoupon(1);
+        $chocolife->fetchAllCities();
 	?>
 	
 </div>
