@@ -18,6 +18,13 @@ class m141207_071530_create_basic_tables extends Migration
             'countryCode' => Schema::TYPE_STRING . ' NOT NULL',
         ], $tableOptions);
 
+        $this->createTable('{{%sourceService}}', [
+            'id' => Schema::TYPE_PK,
+            'serviceName' => Schema::TYPE_STRING . ' NOT NULL',
+            'serviceCode' => Schema::TYPE_STRING . ' NOT NULL',
+            'lastUpdateDateTime' => Schema::TYPE_DATETIME,
+        ], $tableOptions);
+
         $this->createTable('{{%city}}', [
             'id' => Schema::TYPE_PK,
             'cityName' => Schema::TYPE_STRING . ' NOT NULL',
@@ -29,13 +36,6 @@ class m141207_071530_create_basic_tables extends Migration
         $this->addForeignKey(
             'FK_city_country', '{{%city}}', 'countryId', '{{%country}}', 'id', 'SET NULL', 'CASCADE'
         );
-
-    	$this->createTable('{{%sourceService}}', [
-            'id' => Schema::TYPE_PK,
-            'serviceName' => Schema::TYPE_STRING . ' NOT NULL',
-            'serviceCode' => Schema::TYPE_STRING . ' NOT NULL',
-            'lastUpdateDateTime' => Schema::TYPE_DATETIME,
-        ], $tableOptions);
 
     }
 
