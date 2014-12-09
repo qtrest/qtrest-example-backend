@@ -22,6 +22,7 @@ class m141207_071530_create_basic_tables extends Migration
             'id' => Schema::TYPE_PK,
             'serviceName' => Schema::TYPE_STRING . ' NOT NULL',
             'serviceCode' => Schema::TYPE_STRING . ' NOT NULL',
+            'serviceBaseUrl' => Schema::TYPE_STRING . ' NOT NULL',
             'lastUpdateDateTime' => Schema::TYPE_DATETIME,
         ], $tableOptions);
 

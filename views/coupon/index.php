@@ -9,24 +9,23 @@ use yii\widgets\ListView;
 
 $this->title = Yii::t('app', 'Coupons');
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 <div class="coupon-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Coupon',
-]), ['create'], ['class' => 'btn btn-success']) ?>
+<!--    <p>
+        <? echo Html::a(Yii::t('app', 'Create {modelClass}', ['modelClass' => 'Coupon',]), ['create'], ['class' => 'btn btn-success']);?>
     </p>
-
+-->
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
-        },
+        //'options' => ['class' => ''],
+        'itemOptions' => ['class' => 'coupon-item col-xs-4'],
+        'itemView' => '_item',
     ]) ?>
 
 </div>

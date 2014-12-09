@@ -135,6 +135,7 @@ abstract class BaseApi extends Apist
             $connection->createCommand()->insert('sourceService', [
                 'serviceName' => $this->getSourceServiceName(),
                 'serviceCode' => $this->getSourceServiceCode(),
+                'serviceBaseUrl' => $this->getBaseUrl(),
             ])->execute();
         }
 
