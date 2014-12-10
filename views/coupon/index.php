@@ -10,7 +10,6 @@ use yii\widgets\ListView;
 $this->title = Yii::t('app', 'Coupons');
 $this->params['breadcrumbs'][] = $this->title;
 
-
 ?>
 <div class="coupon-index">
 
