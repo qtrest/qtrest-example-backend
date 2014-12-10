@@ -20,11 +20,11 @@
         "yiisoft/yii2-swiftmailer": "*",
         "sleeping-owl/apist": "1.x",
         "yiisoft/yii2-gii": "*",
-	"xj/yii2-holder-widget": "*"
+	"xj/yii2-holder-widget": "*",
+        "yiisoft/yii2-debug": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
-        "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-faker": "*"
     },
     "config": {

@@ -8,12 +8,12 @@ use yii\widgets\ListView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Coupons');
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'] = '';
 
 ?>
 <div class="coupon-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?php // echo Html::encode($this->title) ?></h1>
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
 
 <!--    <p>
@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 -->
     <?= ListView::widget([
+		'summary' => '',
         'dataProvider' => $dataProvider,
         //'options' => ['class' => ''],
         'itemOptions' => ['class' => 'coupon-item col-xs-4'],

@@ -49,9 +49,11 @@ class m141207_072100_create_coupon_table extends Migration
             'timeToCompletion' => Schema::TYPE_STRING,
 
             'mainImageLink' => Schema::TYPE_STRING,
+			'originalCouponPrice' => Schema::TYPE_STRING,
             'originalPrice' => Schema::TYPE_STRING,
             'discountPercent' => Schema::TYPE_STRING,
             'discountPrice' => Schema::TYPE_STRING,
+			'discountType' => Schema::TYPE_STRING,
             'boughtCount' => Schema::TYPE_STRING,
             'sourceServiceCategories' => Schema::TYPE_STRING,
             'pageLink' => Schema::TYPE_STRING,

@@ -91,12 +91,17 @@ abstract class BaseApi extends Apist
 
     public function initData()
     {
+		$baseUrl = $this->getBaseUrl();
+		$sourceServiceCode = $this->getSourceServiceCode();
+		$sourceServiceName = $this->getSourceServiceName();
+		$countryName = $this->getCountryName();
+		$countryCode = $this->getCountryCode();
         if (
-            empty($this->getBaseUrl())
-            || empty($this->getSourceServiceCode()) 
-            || empty($this->getSourceServiceName())
-            || empty($this->getCountryName())
-            || empty($this->getCountryCode())
+            empty($baseUrl) 
+            || empty($sourceServiceCode) 
+            || empty($sourceServiceName)
+            || empty($countryName)
+            || empty($countryCode)
         ) {
             throw new \yii\web\HttpException(400, 'empty parameters', 405);
             return;
@@ -299,9 +304,12 @@ abstract class BaseApi extends Apist
                     'features' => $value['features'],
                     'timeToCompletion' => $value['timeToCompletion'],
 
-                    'originalPrice' => $value['originalPrice'],
-                    'discountPercent' => $value['discountPercent'],
+                    'originalCouponPrice' => $value['originalCouponPrice'],
+					'originalPrice' => $value['originalPrice'],
+                    'discountPercent' => ($value['discountPercent'] > '' ? $value['discountPercent'] : '0%'),
                     'discountPrice' => $value['discountPrice'],
+					'discountType' => (($value['originalPrice'] > '') && ($value['discountPrice'] > '')) ? 'full' : ($value['originalCouponPrice'] > '' ? ($value['originalCouponPrice'] == '0' ? 'freeCoupon' : 'coupon')  : 'undefined' ),
+					
                     'boughtCount' => $value['boughtCount'],
                     'sourceServiceCategories' => $value['sourceServiceCategories'],
                     'imagesLinks' => $value['imagesLinks'],
