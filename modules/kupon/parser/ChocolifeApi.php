@@ -60,6 +60,10 @@ class ChocolifeApi extends BaseApi
                 'categoryName' => Apist::filter('span')->text(),
                 'categoryId' => Apist::current()->attr('cat_id'),
                 'parentCategoryId' => Apist::current()->attr('parent_id'),
+                'categoryAdditionalInfo' => Apist::current()->call(function ($current)
+                {
+                        return '0';
+                }),
             ]),
         ]);
 

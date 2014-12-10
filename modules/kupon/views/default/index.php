@@ -23,8 +23,13 @@ use app\components\Tools;
 
 		$chocolife = new ChocolifeApi();
         $chocolife->initData();
-        //Tools::print_array('choco categories', $chocolife->categories());
-        $chocolife->fetchAllCities();
+        //$chocolife->fetchAllCities();
+
+        $blizzard = new BlizzardApi();
+        $blizzard->initData();
+        $blizzard->testCoupons(2);
+        //$blizzard->testCategories();
+
 	?>
 	
 </div>

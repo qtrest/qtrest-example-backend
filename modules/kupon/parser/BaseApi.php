@@ -15,6 +15,30 @@ abstract class BaseApi extends Apist
     abstract protected function couponsByCityId($cityId);
     abstract protected function couponAdvancedById($couponId);
 
+    public function testCities()
+    {
+        $cities = $this->cities();
+        Tools::print_array('Cities', $cities);
+    }
+
+    public function testCategories()
+    {
+        $categories = $this->categories();
+        Tools::print_array('Categories', $categories);
+    }
+
+    public function testCoupons($cityId)
+    {
+        $coupons = $this->couponsByCityId($cityId);
+        Tools::print_array('Coupons', $coupons);
+    }
+
+    public function testAdvancedCoupon()
+    {
+        //$advancedCoupon = $this->couponAdvancedById(1);
+        //Tools::print_array('Advanced coupon', $advancedCoupon);
+    }
+
     public function getBaseUrl()
     {
         return '';
@@ -197,7 +221,7 @@ abstract class BaseApi extends Apist
             $query = new Query;
             $res = $query->select('id')
                 ->from('cityUrl')
-                ->where('cityId=:cityId', [':cityId' => $cityId])
+                ->where('cityId=:cityId AND sourceServiceId=:sourceServiceId', [':cityId' => $cityId, ':sourceServiceId' => $this->getSourceServiceId()])
                 ->createCommand()
                 ->queryScalar();
 
@@ -206,6 +230,7 @@ abstract class BaseApi extends Apist
                     'cityId' => $cityId,
                     'url' => $value['link'],
                     'path' => $value['path'],
+                    'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
                     'sourceServiceId' => $this->getSourceServiceId(),
                 ])->execute();
             }
@@ -239,6 +264,7 @@ abstract class BaseApi extends Apist
                     'categoryCode' => Tools::ru2lat($value['categoryName']),
                     'categoryIdentifier' => $value['categoryId'],
                     'parentCategoryIdentifier' => $value['parentCategoryId'],
+                    'categoryAdditionalInfo' => $value['categoryAdditionalInfo'],
                 ])->execute();
             }
         }

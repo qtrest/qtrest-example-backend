@@ -19,6 +19,7 @@ class m141207_102420_create_categories_table extends Migration
             'categoryCode' => Schema::TYPE_STRING . ' NOT NULL',
             'categoryIdentifier' => Schema::TYPE_STRING . ' NOT NULL',
             'parentCategoryIdentifier' => Schema::TYPE_STRING . ' NOT NULL',
+            'categoryAdditionalInfo' => Schema::TYPE_STRING,
         ], $tableOptions);
 
         $this->createIndex('FK_categories_service', '{{%categories}}', 'sourceServiceId');

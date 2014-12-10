@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "469dd7d01a40a337ef9b17b3e98ff351",
+    "hash": "4b3c14ea7a8f3e737a975396052119f1",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -102,16 +102,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.45",
+            "version": "3.1.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "b656c5b61b05d2a479b69b20de5bc01b837a43c5"
+                "reference": "70b4cd4d470d31c1b44bb6412d1146a4b9ed48a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/b656c5b61b05d2a479b69b20de5bc01b837a43c5",
-                "reference": "b656c5b61b05d2a479b69b20de5bc01b837a43c5",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/70b4cd4d470d31c1b44bb6412d1146a4b9ed48a7",
+                "reference": "70b4cd4d470d31c1b44bb6412d1146a4b9ed48a7",
                 "shasum": ""
             },
             "require": {
@@ -1048,6 +1048,53 @@
             "time": "2014-12-07 16:42:41"
         },
         {
+            "name": "yiisoft/yii2-debug",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-debug.git",
+                "reference": "12116d86a73cbc53dbbedd6f8362fbcee6b106c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/12116d86a73cbc53dbbedd6f8362fbcee6b106c5",
+                "reference": "12116d86a73cbc53dbbedd6f8362fbcee6b106c5",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\debug\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The debugger extension for the Yii framework",
+            "keywords": [
+                "debug",
+                "debugger",
+                "yii2"
+            ],
+            "time": "2014-12-07 16:42:41"
+        },
+        {
             "name": "yiisoft/yii2-gii",
             "version": "2.0.1",
             "source": {
@@ -1237,53 +1284,6 @@
             "description": "The Codeception integration for the Yii framework",
             "keywords": [
                 "codeception",
-                "yii2"
-            ],
-            "time": "2014-12-07 16:42:41"
-        },
-        {
-            "name": "yiisoft/yii2-debug",
-            "version": "2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "12116d86a73cbc53dbbedd6f8362fbcee6b106c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/12116d86a73cbc53dbbedd6f8362fbcee6b106c5",
-                "reference": "12116d86a73cbc53dbbedd6f8362fbcee6b106c5",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-bootstrap": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\debug\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com"
-                }
-            ],
-            "description": "The debugger extension for the Yii framework",
-            "keywords": [
-                "debug",
-                "debugger",
                 "yii2"
             ],
             "time": "2014-12-07 16:42:41"

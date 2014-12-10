@@ -6,6 +6,15 @@ class Tools {
 
     public static $screen = 0;
 
+    public static function getTextInBrackets($str)
+    {
+        $startBracket = strpos($str, '(');
+        $endBracket = strpos($str, ')');
+        $lenght = ($endBracket - $startBracket);
+
+        return substr($str, $startBracket+1, $lenght-1);
+    }
+
     public static function ru2lat($str)
     {
         $tr = array(
