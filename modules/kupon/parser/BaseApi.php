@@ -233,7 +233,6 @@ abstract class BaseApi extends Apist
                     'cityId' => $cityId,
                     'url' => $value['link'],
                     'path' => $value['path'],
-                    'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
                     'sourceServiceId' => $this->getSourceServiceId(),
                 ])->execute();
             }
