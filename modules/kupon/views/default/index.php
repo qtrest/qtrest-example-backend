@@ -27,8 +27,10 @@ use app\components\Tools;
 
         $blizzard = new BlizzardApi();
         $blizzard->initData();
-        $blizzard->testCoupons(2);
+        //$blizzard->fetchAllCities();
+        //$blizzard->testCoupons(2, false);
         //$blizzard->testCategories();
+        //$blizzard->testAdvancedCoupon(1);
 
 	?>
 	

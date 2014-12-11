@@ -27,16 +27,20 @@ abstract class BaseApi extends Apist
         Tools::print_array('Categories', $categories);
     }
 
-    public function testCoupons($cityId)
+    public function testCoupons($cityId, $write = false)
     {
         $coupons = $this->couponsByCityId($cityId);
         Tools::print_array('Coupons', $coupons);
+
+        if ($write) {
+            $this->fetchKuponsByCityId($cityId);
+        }
     }
 
-    public function testAdvancedCoupon()
+    public function testAdvancedCoupon($couponId)
     {
-        //$advancedCoupon = $this->couponAdvancedById(1);
-        //Tools::print_array('Advanced coupon', $advancedCoupon);
+        $advancedCoupon = $this->couponAdvancedById($couponId);
+        Tools::print_array('Advanced coupon', $advancedCoupon);
     }
 
     public function getBaseUrl()
@@ -89,7 +93,6 @@ abstract class BaseApi extends Apist
             ->queryColumn();
 
         foreach($res as $key => $value) {
-            //sleep ( rand(1,2) );
             $this->fetchKuponsByCityId($value);
         }
     }
@@ -334,7 +337,7 @@ abstract class BaseApi extends Apist
 					'originalPrice' => $value['originalPrice'],
                     'discountPercent' => ($value['discountPercent'] > '' ? $value['discountPercent'] : '0%'),
                     'discountPrice' => $value['discountPrice'],
-					'discountType' => (($value['originalPrice'] > '') && ($value['discountPrice'] > '')) ? 'full' : ($value['originalCouponPrice'] > '' ? ($value['originalCouponPrice'] == '0' ? 'freeCoupon' : 'coupon')  : 'undefined' ),
+					'discountType' => ( ($value['discountType'] > '') ? $value['discountType'] : (($value['originalPrice'] > '') && ($value['discountPrice'] > '')) ? 'full' : ($value['originalCouponPrice'] > '' ? ($value['originalCouponPrice'] == '0' ? 'freeCoupon' : 'coupon')  : 'undefined' )),
 					
                     'boughtCount' => $value['boughtCount'],
                     'sourceServiceCategories' => $value['sourceServiceCategories'],

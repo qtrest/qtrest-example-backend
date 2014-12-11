@@ -6,6 +6,19 @@ class Tools {
 
     public static $screen = 0;
 
+    public static function getFirstSentence($text)
+    {
+        $pretext = '';
+        for ($i=0; $i<strlen($text); $i++){
+            // условие определения конца предложения (может быть более сложным)
+            if ($text[$i]=="." || $text[$i]=="!" || $text[$i]=="?") {
+                $pretext .= $text[$i]; break;
+            }
+            $pretext .= $text[$i];
+        }
+        return $pretext;
+    }
+
     public static function getTextInBrackets($str)
     {
         $startBracket = strpos($str, '(');

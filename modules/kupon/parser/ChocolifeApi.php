@@ -121,8 +121,6 @@ class ChocolifeApi extends BaseApi
 
     protected function couponAdvancedById($couponId)
     {
-        $connection=\Yii::$app->db;
-
         $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
 
         $result = $this->get($pageLink, [
