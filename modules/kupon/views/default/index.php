@@ -23,11 +23,11 @@ use app\components\Tools;
 
 		$chocolife = new ChocolifeApi();
         $chocolife->initData();
-        //$chocolife->fetchAllCities();
+        $chocolife->fetchAllCities();
 
         $blizzard = new BlizzardApi();
         $blizzard->initData();
-        //$blizzard->fetchAllCities();
+        $blizzard->fetchAllCities();
         //$blizzard->testCoupons(2, false);
         //$blizzard->testCategories();
         //$blizzard->testAdvancedCoupon(1);

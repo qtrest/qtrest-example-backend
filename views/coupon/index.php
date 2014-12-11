@@ -21,7 +21,7 @@ $this->params['breadcrumbs'] = '';
     </p>
 -->
     <?= ListView::widget([
-		'summary' => '',
+		//'summary' => '',
         'dataProvider' => $dataProvider,
         //'options' => ['class' => ''],
         'itemOptions' => ['class' => 'coupon-item col-xs-4'],

@@ -337,7 +337,7 @@ abstract class BaseApi extends Apist
 					'originalPrice' => $value['originalPrice'],
                     'discountPercent' => ($value['discountPercent'] > '' ? $value['discountPercent'] : '0%'),
                     'discountPrice' => $value['discountPrice'],
-                    
+
 					'discountType' => ( ($value['discountType'] > '')
                         ? $value['discountType']
                         : ((($value['originalPrice'] > '') && ($value['discountPrice'] > ''))
