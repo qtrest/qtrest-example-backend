@@ -337,7 +337,16 @@ abstract class BaseApi extends Apist
 					'originalPrice' => $value['originalPrice'],
                     'discountPercent' => ($value['discountPercent'] > '' ? $value['discountPercent'] : '0%'),
                     'discountPrice' => $value['discountPrice'],
-					'discountType' => ( ($value['discountType'] > '') ? $value['discountType'] : (($value['originalPrice'] > '') && ($value['discountPrice'] > '')) ? 'full' : ($value['originalCouponPrice'] > '' ? ($value['originalCouponPrice'] == '0' ? 'freeCoupon' : 'coupon')  : 'undefined' )),
+                    
+					'discountType' => ( ($value['discountType'] > '')
+                        ? $value['discountType']
+                        : ((($value['originalPrice'] > '') && ($value['discountPrice'] > ''))
+                            ? 'full'
+                            : ($value['originalCouponPrice'] > ''
+                                ? ($value['originalCouponPrice'] == '0'
+                                    ? 'freeCoupon'
+                                    : 'coupon')
+                                : 'undefined' ))),
 					
                     'boughtCount' => $value['boughtCount'],
                     'sourceServiceCategories' => $value['sourceServiceCategories'],
