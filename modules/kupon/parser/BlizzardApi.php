@@ -136,8 +136,6 @@ class BlizzardApi extends BaseApi
             return;
         }
 
-        $urls = [];
-
         //only services (Пока берём только услуги! С товарами там полная неразбериха...)
         $query = new Query;
         $categories = $query->select('categoryCode, categoryIdentifier, parentCategoryIdentifier, categoryAdditionalInfo')
@@ -195,30 +193,32 @@ class BlizzardApi extends BaseApi
 
             $result = Tools::trimArray($result);
 
-            for ($j = 0; $j < count($result['coupons']); $j++) {
-                $originalCouponPrice = $result['coupons'][$j]['originalCouponPrice'];
-                $originalPrice = $result['coupons'][$j]['originalPrice'];
-                $discountPrice = $result['coupons'][$j]['discountPrice'];
-                $discountPercent = $result['coupons'][$j]['discountPercent'];
+            if (isset($result['coupons'])) {
+                for ($j = 0; $j < count($result['coupons']); $j++) {
+                    $originalCouponPrice = $result['coupons'][$j]['originalCouponPrice'];
+                    $originalPrice = $result['coupons'][$j]['originalPrice'];
+                    $discountPrice = $result['coupons'][$j]['discountPrice'];
+                    $discountPercent = $result['coupons'][$j]['discountPercent'];
 
-                $originalRemain = $originalPrice - ($originalPrice * (intval($discountPercent) / 100));
+                    $originalRemain = $originalPrice - ($originalPrice * (intval($discountPercent) / 100));
 
-                $type = 'undefined';
-                if ($originalCouponPrice == '0') {
-                    $type = 'freeCoupon';
-                } else if ($originalRemain == $originalCouponPrice) {
-                    $type = 'full';
-                } else {
-                    $type = 'coupon';
+                    $type = 'undefined';
+                    if ($originalCouponPrice == '0') {
+                        $type = 'freeCoupon';
+                    } else if ($originalRemain == $originalCouponPrice) {
+                        $type = 'full';
+                    } else {
+                        $type = 'coupon';
+                    }
+
+                    $result['coupons'][$j]['discountType'] = $type;
                 }
 
-                $result['coupons'][$j]['discountType'] = $type;
-            }
+                $result['cityCode'] = Tools::ru2lat($result['city']);
 
-            $result['cityCode'] = Tools::ru2lat($result['city']);
-
-            foreach($result['coupons'] as $key => $value) {
-                $allResult['coupons'][] = $value;
+                foreach ($result['coupons'] as $key => $value) {
+                    $allResult['coupons'][] = $value;
+                }
             }
         }
 

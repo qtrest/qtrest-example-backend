@@ -6,6 +6,18 @@ class Tools {
 
     public static $screen = 0;
 
+    public static function getThreeFirstWords($str)
+    {
+        //return $str;
+        //$res = explode(' ', $str);
+        $res = explode(' ', $str);
+        if (count($res) > 3) {
+            return $res[0] . ' ' . $res[1] . ' ' . $res[2] . ' ' . $res[3] . '...';
+        } else {
+            return $str;
+        }
+    }
+
     public static function getFirstSentence($text)
     {
         $pretext = '';

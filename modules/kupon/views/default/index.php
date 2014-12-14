@@ -1,6 +1,7 @@
 <?php 
 use app\modules\kupon\parser\ChocolifeApi as ChocolifeApi;
 use app\modules\kupon\parser\BlizzardApi as BlizzardApi;
+use app\modules\kupon\parser\KupiKuponApi as KupiKuponApi;
 
 use app\components\Tools;
 
@@ -23,14 +24,22 @@ use app\components\Tools;
 
 		$chocolife = new ChocolifeApi();
         $chocolife->initData();
-        $chocolife->fetchAllCities();
+        //$chocolife->fetchAllCities();
 
         $blizzard = new BlizzardApi();
         $blizzard->initData();
-        $blizzard->fetchAllCities();
+        //$blizzard->fetchAllCities();
         //$blizzard->testCoupons(2, false);
         //$blizzard->testCategories();
         //$blizzard->testAdvancedCoupon(1);
+
+        $kupiKupon = new KupiKuponApi();
+        $kupiKupon->initData();
+        //$kupiKupon->testCities();
+        //$kupiKupon->testCategories();
+        //$kupiKupon->testCoupons(1, false);
+        //$kupiKupon->fetchAllCities();
+        $kupiKupon->testAdvancedCoupon(2);
 
 	?>
 	
