@@ -39,7 +39,7 @@ use app\components\Tools;
         //$kupiKupon->testCategories();
         //$kupiKupon->testCoupons(1, false);
         //$kupiKupon->fetchAllCities();
-        $kupiKupon->testAdvancedCoupon(2);
+        //$kupiKupon->testAdvancedCoupon(2);
 
 	?>
 	
