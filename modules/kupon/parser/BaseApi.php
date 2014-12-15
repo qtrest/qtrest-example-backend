@@ -231,8 +231,8 @@ abstract class BaseApi extends Apist
             if (empty($res)) {
                 $connection->createCommand()->insert('cityUrl', [
                     'cityId' => $cityId,
-                    'url' => $value['link'],
-                    'path' => $value['path'],
+                    'url' => ($value['path'] == '#' ? '/' : $value['link']),
+                    'path' => ($value['path'] == '#' ? '/' : $value['path']),
                     'sourceServiceId' => $this->getSourceServiceId(),
                 ])->execute();
             }

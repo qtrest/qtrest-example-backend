@@ -32,6 +32,12 @@ class DefaultController extends Controller
             $kupiKupon->initData();
             $kupiKupon->fetchAllCities();
             echo 'KupiKuponApi Success!<br/>';
+
+            $mirKuponov = new MirKuponovApi();
+            $mirKuponov->initData();
+            $mirKuponov->fetchAllCities();
+            echo 'MirKuponovApi Success!<br/>';
+
         } else {
             echo 'Access denied!';
         }

@@ -204,7 +204,7 @@ class KupiKuponApi extends BaseApi
             'boughtCount' => Apist::filter('.already_buy span.count')->text(),
         ]);
 
-        if ($result['boughtCount'] == '') {
+        if (!isset($result['boughtCount']) || $result['boughtCount'] == '') {
             $result['boughtCount'] = 0;
         }
 
