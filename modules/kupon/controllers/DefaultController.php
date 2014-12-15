@@ -7,6 +7,7 @@ use yii\web\Controller;
 use app\modules\kupon\parser\ChocolifeApi as ChocolifeApi;
 use app\modules\kupon\parser\BlizzardApi as BlizzardApi;
 use app\modules\kupon\parser\KupiKuponApi as KupiKuponApi;
+use app\modules\kupon\parser\MirKuponovApi as MirKuponovApi;
 
 class DefaultController extends Controller
 {
