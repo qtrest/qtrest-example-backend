@@ -17,19 +17,25 @@ abstract class BaseApi extends Apist
 
     public function testCities()
     {
+        \Yii::info('run testCities '.get_class($this), 'kupon');
         $cities = $this->cities();
+        \Yii::info(serialize($cities), 'kupon');
         Tools::print_array('Cities', $cities);
     }
 
     public function testCategories()
     {
+        \Yii::info('run testCategories '.get_class($this), 'kupon');
         $categories = $this->categories();
+        \Yii::info(serialize($categories), 'kupon');
         Tools::print_array('Categories', $categories);
     }
 
     public function testCoupons($cityId, $write = false)
     {
+        \Yii::info('run testCoupons '.get_class($this), 'kupon');
         $coupons = $this->couponsByCityId($cityId);
+        \Yii::info(serialize($coupons), 'kupon');
         Tools::print_array('Coupons', $coupons);
 
         if ($write) {
@@ -39,7 +45,9 @@ abstract class BaseApi extends Apist
 
     public function testAdvancedCoupon($couponId)
     {
+        \Yii::info('run testAdvancedCoupon '.get_class($this), 'kupon');
         $advancedCoupon = $this->couponAdvancedById($couponId);
+        \Yii::info(serialize($advancedCoupon), 'kupon');
         Tools::print_array('Advanced coupon', $advancedCoupon);
     }
 
@@ -81,6 +89,7 @@ abstract class BaseApi extends Apist
 
     public function fetchAllCities()
     {
+        \Yii::info('run fetchAllCities '.get_class($this), 'kupon');
         $query = new Query;
         $res = $query->select('cityId')
             ->from('cityUrl')
@@ -99,6 +108,7 @@ abstract class BaseApi extends Apist
 
     public function updateAllCoupons()
     {
+        \Yii::info('run updateAllCoupons '.get_class($this), 'kupon');
         $query = new Query;
         $res = $query->select('id')
             ->from('coupon')
@@ -118,6 +128,7 @@ abstract class BaseApi extends Apist
 
     public function initData()
     {
+        \Yii::info('run initData '.get_class($this), 'kupon');
 		$baseUrl = $this->getBaseUrl();
 		$sourceServiceCode = $this->getSourceServiceCode();
 		$sourceServiceName = $this->getSourceServiceName();
@@ -198,7 +209,9 @@ abstract class BaseApi extends Apist
 
     private function fillInCityTable()
     {
+        \Yii::info('run fillInCityTable '.get_class($this), 'kupon');
         $cities = $this->cities()['cities'];
+        \Yii::info(serialize($cities), 'kupon');
 
         $connection=\Yii::$app->db;
 
@@ -241,7 +254,9 @@ abstract class BaseApi extends Apist
 
     private function fillInCategoriesTable()
     {
+        \Yii::info('run fillInCityTable '.get_class($this), 'kupon');
         $categories = $this->categories()['categories'];
+        \Yii::info(serialize($categories), 'kupon');
 
         $connection=\Yii::$app->db;
 
@@ -274,6 +289,8 @@ abstract class BaseApi extends Apist
 
     private function fetchKuponsByCityId($cityId)
     {
+        \Yii::info('run fetchKuponsByCityId '. $cityId . ' ' .get_class($this), 'kupon');
+
         $connection=\Yii::$app->db;
 
         $query = new Query;
@@ -302,6 +319,7 @@ abstract class BaseApi extends Apist
         $kupons = $result['coupons'];
 
         foreach ($kupons as $key => $value) {
+            \Yii::info(serialize($value), 'kupon');
             $recordHashSrc = $cityCode.$value['sourceServiceId'].$value['pageLink'];
             $recordHash = md5($recordHashSrc);
 
@@ -364,6 +382,7 @@ abstract class BaseApi extends Apist
 
     private function updateCouponById($couponId)
     {
+        \Yii::info('run updateCouponById '. $couponId . ' ' .get_class($this), 'kupon');
         $connection=\Yii::$app->db;
 
         $query = new Query;
@@ -387,6 +406,7 @@ abstract class BaseApi extends Apist
         }
 
         $result = $this->couponAdvancedById($couponId);
+        \Yii::info(serialize($result), 'kupon');
 
         $connection->createCommand()->update('coupon', [
             'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
