@@ -39,6 +39,11 @@ class DefaultController extends Controller
             $mirKuponov->fetchAllCities();
             echo 'MirKuponovApi Success!<br/>';
 
+            $autoKupon = new AutoKuponApi();
+            $autoKupon->initData();
+            $autoKupon->fetchAllCities();
+            echo 'AutoKuponApi Success!<br/>';
+
         } else {
             echo 'Access denied!';
         }

@@ -3,6 +3,8 @@ use app\modules\kupon\parser\ChocolifeApi as ChocolifeApi;
 use app\modules\kupon\parser\BlizzardApi as BlizzardApi;
 use app\modules\kupon\parser\KupiKuponApi as KupiKuponApi;
 use app\modules\kupon\parser\MirKuponovApi as MirKuponovApi;
+use app\modules\kupon\parser\AutoKuponApi as AutoKuponApi;
+use app\modules\kupon\parser\BiglionApi as BiglionApi;
 
 use app\components\Tools;
 
@@ -49,6 +51,21 @@ use app\components\Tools;
     //$mirKuponov->testCoupons(1, false);
     //$mirKuponov->fetchAllCities();
     //$mirKuponov->testAdvancedCoupon(624);
+
+    $autoKupon = new AutoKuponApi();
+    $autoKupon->initData();
+    //$autoKupon->testCities();
+    //$autoKupon->testCategories();
+    //$autoKupon->testCoupons(1, false);
+    //$autoKupon->fetchAllCities();
+
+    $biglion = new BiglionApi();
+    $biglion->initData();
+    //$biglion->testCities();
+    $biglion->testCategories();
+    //$autoKupon->testCoupons(1, false);
+    //$autoKupon->fetchAllCities();
+    //$autoKupon->testAdvancedCoupon(624);
 	?>
 	
 </div>

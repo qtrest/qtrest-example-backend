@@ -11,7 +11,7 @@ class MirKuponovApi extends BaseApi
 
     public function getBaseUrl()
     {
-        return 'http://mirkuponov.kz/';
+        return 'http://mirkuponov.kz';
     }
 
     protected function getSourceServiceCode()
