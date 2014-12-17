@@ -38,6 +38,7 @@ class BiglionApi extends BaseApi
     {
         //return 0;
         $result = $this->get('/', [
+            'cookies' => true,
             'cities'  => Apist::filter('#citylist-kz li a')->each([
                 'city' => Apist::current()->text(),
                 'link' => Apist::current()->attr('href'),
@@ -56,6 +57,7 @@ class BiglionApi extends BaseApi
 
     protected function categories()
     {
+
         //return 0;
         $result = $this->get('/services/', [
             'categories'  => Apist::filter('div.top_main_submenu ul li a')->each([
@@ -75,6 +77,10 @@ class BiglionApi extends BaseApi
                     return parse_url($href)['path'];
                 }),
             ]),
+        ],
+        [
+            'headers' => array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'),
+            'cookies' => true,
         ]);
 
         $result = Tools::trimArray($result);
@@ -119,6 +125,7 @@ class BiglionApi extends BaseApi
 
         for ($i = 0; $i < count($links); $i++) {
             $result = $this->get($links[$i][0], [
+                'cookies' => true,
                 'city' => Apist::filter('div.city > a')->text(),
                 'coupons' => Apist::filter('#content_container a.catalog_offer')->each([
                     'title' => Apist::filter('span.offer_frame > span.title > span')->text(),
@@ -199,6 +206,7 @@ class BiglionApi extends BaseApi
         $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
 
         $result = $this->get($pageLink, [
+            'cookies' => true,
             'longDescription' => Apist::filter('#content_container > div.offer_page_body > div.description')->html(),
             'conditions' => Apist::filter('#content_container > div.offer_page_body > div.terms_body > div.terms')->html(),
             'features' => Apist::filter('#content_container > div.offer_page_body > div.terms_body > div.features')->html(),

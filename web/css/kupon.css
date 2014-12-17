@@ -39,3 +39,27 @@
 .coupon-content a {
     color: white;
 }
+
+.span-right {
+    float: right;
+}
+
+.span-left {
+    float: left;
+}
+
+.span-full {
+    float: left;
+    font-size: 90%;
+    width: 100%;
+}
+
+.span-bottomright {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+position: absolute;
+right: 5px;
+bottom: 5px;
