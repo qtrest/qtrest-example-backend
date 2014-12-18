@@ -6,6 +6,10 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\CouponSearch */
 /* @var $form yii\widgets\ActiveForm */
+
+use yii\helpers\ArrayHelper;
+use app\models\City;
+
 ?>
 
 <div class="coupon-search">
@@ -15,15 +19,16 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?php // echo $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'sourceServiceId') ?>
+    <?php // echo $form->field($model, 'sourceServiceId') ?>
 
-    <?= $form->field($model, 'cityId') ?>
+    <?php echo $form->field($model, 'cityId')->dropDownList(ArrayHelper::map(City::find()->all(), 'id', 'cityName')) ?>
+    <?php echo $form->field($model, 'fullTextStr') ?>
 
-    <?= $form->field($model, 'createTimestamp') ?>
+    <?php // echo $form->field($model, 'createTimestamp') ?>
 
-    <?= $form->field($model, 'lastUpdateDateTime') ?>
+    <?php // echo $form->field($model, 'lastUpdateDateTime') ?>
 
     <?php // echo $form->field($model, 'recordHash') ?>
 
@@ -56,8 +61,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'pageLink') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Поиск'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Сброс'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

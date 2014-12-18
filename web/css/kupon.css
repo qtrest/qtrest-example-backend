@@ -53,13 +53,20 @@
     font-size: 90%;
     width: 100%;
 }
+.span-full-down {
+    font-size: 90%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
 
 .span-bottomright {
     position: absolute;
     right: 5px;
-    bottom: 5px;
+    bottom: 25px;
 }
 
-position: absolute;
-right: 5px;
-bottom: 5px;
+.block-items {
+    display:block;
+}

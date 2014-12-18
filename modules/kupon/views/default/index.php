@@ -60,7 +60,7 @@ use app\components\Tools;
     //$autoKupon->fetchAllCities();
 
     $biglion = new BiglionApi();
-    $biglion->initData();
+    //$biglion->initData();
     //$biglion->testCities();
     $biglion->testCategories();
     //$autoKupon->testCoupons(1, false);

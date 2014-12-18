@@ -79,8 +79,8 @@ class BiglionApi extends BaseApi
             ]),
         ],
         [
-            'headers' => array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'),
-            'cookies' => true,
+            //'headers' => array('User-Agent' => 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'),
+            //'cookies' => true,
         ]);
 
         $result = Tools::trimArray($result);

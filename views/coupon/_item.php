@@ -25,12 +25,6 @@ $serviceName = $query->select('serviceName')
 
     <div class="thumbnail">
         <div class="image-ratio" style="background-image:url('<?= $serviceBaseUrl . '/' . $model->mainImageLink; ?>')">
-            <span class="label label-success span-full">
-                        <?= ((($model->discountType == 'coupon') || ($model->discountType == 'freeCoupon') )
-                            ? 'Купон: ' . Html::encode($model->originalCouponPrice)
-                            : 'Цена: ' . (Html::encode($model->originalPrice) . '. Сертификат: ' . Html::encode($model->discountPrice))) . '. Скидка: ' . Html::encode($model->discountPercent) . '%'
-                        ?>
-				    </span>
             <span class="label label-info span-right"><?= $serviceName; ?></span>
             <span class="label label-warning span-left "><?= 'Купили: ' . $model->boughtCount; ?></span>
             <div class="coupon-content" style="display:block">
@@ -42,7 +36,14 @@ $serviceName = $query->select('serviceName')
                     <a target="_BLANK" href="<?= $serviceBaseUrl . $model->pageLink; ?>" class="btn btn-info span-bottomright">Купить</a>
                 </div>
 
+
             </div>
+            <span class="label label-success span-full-down">
+                    <?= ((($model->discountType == 'coupon') || ($model->discountType == 'freeCoupon') )
+                        ? 'Купон: ' . Html::encode($model->originalCouponPrice)
+                        : 'Цена: ' . (Html::encode($model->originalPrice) . '. Сертификат: ' . Html::encode($model->discountPrice))) . '. Скидка: ' . Html::encode($model->discountPercent) . '%'
+                    ?>
+            </span>
         </div>
     </div>
 <!--    <?//= Html::a(Html::encode($model->title), ['view', 'id' => $model->id]) ?>-->

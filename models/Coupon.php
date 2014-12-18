@@ -33,6 +33,7 @@ use Yii;
  */
 class Coupon extends \yii\db\ActiveRecord
 {
+    public $fullTextStr;
     /**
      * @inheritdoc
      */
@@ -62,7 +63,7 @@ class Coupon extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'sourceServiceId' => Yii::t('app', 'Source Service ID'),
-            'cityId' => Yii::t('app', 'City ID'),
+            'cityId' => Yii::t('app', 'Город'),
             'createTimestamp' => Yii::t('app', 'Create Timestamp'),
             'lastUpdateDateTime' => Yii::t('app', 'Last Update Date Time'),
             'recordHash' => Yii::t('app', 'Record Hash'),
@@ -80,6 +81,7 @@ class Coupon extends \yii\db\ActiveRecord
             'boughtCount' => Yii::t('app', 'Bought Count'),
             'sourceServiceCategories' => Yii::t('app', 'Source Service Categories'),
             'pageLink' => Yii::t('app', 'Page Link'),
+            'fullTextStr' => 'Полнотекстовый поиск (наименование, описание, условия и особенности)'
         ];
     }
 

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'] = '';
 <div class="coupon-index">
 
     <h1><?php // echo Html::encode($this->title) ?></h1>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
 <!--    <p>
         <? echo Html::a(Yii::t('app', 'Create {modelClass}', ['modelClass' => 'Coupon',]), ['create'], ['class' => 'btn btn-success']);?>
@@ -23,6 +23,7 @@ $this->params['breadcrumbs'] = '';
     <?= ListView::widget([
 		//'summary' => '',
         'dataProvider' => $dataProvider,
+        'layout' => '{summary}<div class="block-items">{items}</div>{pager}',
         //'options' => ['class' => ''],
         'itemOptions' => ['class' => 'coupon-item col-xs-4'],
         'itemView' => '_item',
