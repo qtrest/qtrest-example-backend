@@ -70,3 +70,14 @@
 .block-items {
     display:block;
 }
+
+.field-couponsearch-cityid {
+    width: 49%;
+    margin-right: 2%;
+    float: left;
+}
+
+.field-couponsearch-sourceserviceid {
+    width: 49%;
+    float: left;
+}

@@ -9,7 +9,8 @@ use yii\widgets\ActiveForm;
 
 use yii\helpers\ArrayHelper;
 use app\models\City;
-
+use app\models\SourceService;
+use app\components\Tools;
 ?>
 
 <div class="coupon-search">
@@ -23,7 +24,19 @@ use app\models\City;
 
     <?php // echo $form->field($model, 'sourceServiceId') ?>
 
-    <?php echo $form->field($model, 'cityId')->dropDownList(ArrayHelper::map(City::find()->all(), 'id', 'cityName')) ?>
+    <?php
+    $cities = ArrayHelper::map(City::find()->all(), 'id', 'cityName');
+    array_unshift($cities, 'Все');
+    //Tools::print_array('cities', $cities);
+     echo $form->field($model, 'cityId')->dropDownList($cities);
+    ?>
+    <?php
+    $services = ArrayHelper::map(SourceService::find()->all(), 'id', 'serviceName');
+    array_unshift($services, 'Все');
+    //Tools::print_array('cities', $cities);
+    echo $form->field($model, 'sourceServiceId')->dropDownList($services);
+    ?>
+
     <?php echo $form->field($model, 'fullTextStr') ?>
 
     <?php // echo $form->field($model, 'createTimestamp') ?>

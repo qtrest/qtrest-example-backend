@@ -57,6 +57,9 @@ $config = [
 		'kupon' => [
 			'class' => 'app\modules\kupon\Kupon'
 		],
+        'autoproxy' => [
+            'class' => 'app\modules\autoproxy\AutoProxy',
+        ],
 		'debug' => [
 			'class' => 'yii\debug\Module',
 			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11'],

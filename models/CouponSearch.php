@@ -42,9 +42,6 @@ class CouponSearch extends Coupon
     public function search($params)
     {
         $query = Coupon::find();
-		
-
-		//$query->limit(50);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,13 +54,22 @@ class CouponSearch extends Coupon
             return $dataProvider;
         }
 
-        $query->orWhere(['like', 'title', $this->fullTextStr])
-            ->orWhere(['like', 'shortDescription', $this->fullTextStr])
-            ->orWhere(['like', 'longDescription', $this->fullTextStr])
-            ->orWhere(['like', 'conditions', $this->fullTextStr])
-            ->orWhere(['like', 'features', $this->fullTextStr]);
+        if ($this->fullTextStr > '') {
+            $query->orWhere(['like', 'title', $this->fullTextStr])
+                ->orWhere(['like', 'shortDescription', $this->fullTextStr])
+                ->orWhere(['like', 'longDescription', $this->fullTextStr])
+                ->orWhere(['like', 'conditions', $this->fullTextStr])
+                ->orWhere(['like', 'features', $this->fullTextStr]);
+        }
 
         $query->andWhere(['>', 'title', '']);
+
+        if ($this->cityId == 0) {
+            $this->cityId = '';
+        }
+        if ($this->sourceServiceId == 0) {
+            $this->sourceServiceId = '';
+        }
 
         $query->andFilterWhere([
             'id' => $this->id,

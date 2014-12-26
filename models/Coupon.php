@@ -62,7 +62,7 @@ class Coupon extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'sourceServiceId' => Yii::t('app', 'Source Service ID'),
+            'sourceServiceId' => Yii::t('app', 'Купонатор'),
             'cityId' => Yii::t('app', 'Город'),
             'createTimestamp' => Yii::t('app', 'Create Timestamp'),
             'lastUpdateDateTime' => Yii::t('app', 'Last Update Date Time'),

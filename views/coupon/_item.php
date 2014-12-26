@@ -36,7 +36,6 @@ $serviceName = $query->select('serviceName')
                     <a target="_BLANK" href="<?= $serviceBaseUrl . $model->pageLink; ?>" class="btn btn-info span-bottomright">Купить</a>
                 </div>
 
-
             </div>
             <span class="label label-success span-full-down">
                     <?= ((($model->discountType == 'coupon') || ($model->discountType == 'freeCoupon') )
