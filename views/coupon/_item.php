@@ -40,7 +40,7 @@ $serviceName = $query->select('serviceName')
             <span class="label label-success span-full-down">
                     <?= ((($model->discountType == 'coupon') || ($model->discountType == 'freeCoupon') )
                         ? 'Купон: ' . Html::encode($model->originalCouponPrice)
-                        : 'Цена: ' . (Html::encode(round($model->originalPrice)) . '. Сертификат: ' . Html::encode($model->discountPrice))) . '. Скидка: ' . str_replace('%', '', Html::encode($model->discountPercent)) . '%'
+                        : 'Цена: ' . (Html::encode($model->originalPrice) . '. Сертификат: ' . Html::encode($model->discountPrice))) . '. Скидка: ' . str_replace('%', '', Html::encode($model->discountPercent)) . '%'
                     ?>
             </span>
         </div>
