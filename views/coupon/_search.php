@@ -10,13 +10,14 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\City;
 use app\models\SourceService;
+use app\models\CouponType;
 use app\components\Tools;
 ?>
 
 <div class="coupon-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => [Yii::$app->controller->action->id],
         'method' => 'get',
     ]); ?>
 
@@ -35,6 +36,12 @@ use app\components\Tools;
     array_unshift($services, 'Все');
     //Tools::print_array('cities', $cities);
     echo $form->field($model, 'sourceServiceId')->dropDownList($services);
+    ?>
+    <?php
+    $types = ArrayHelper::map(CouponType::find()->all(), 'couponTypeCode', 'couponTypeName');
+    array_unshift($types, 'Все');
+    //Tools::print_array('cities', $cities);
+    echo $form->field($model, 'discountType')->dropDownList($types);
     ?>
 
     <?php echo $form->field($model, 'fullTextStr') ?>

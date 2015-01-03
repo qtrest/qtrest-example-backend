@@ -8,6 +8,7 @@ use app\models\CouponSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 /**
  * CouponController implements the CRUD actions for Coupon model.
@@ -30,8 +31,22 @@ class CouponController extends Controller
      * Lists all Coupon models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionActual()
     {
+        //echo '<br/><br/><br/><br/>'.Yii::$app->controller->action->id;
+        //print_r(Yii::$app->request->queryParams);
+        $searchModel = new CouponSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionArchive()
+    {
+        //echo '<br/><br/><br/><br/>'.Yii::$app->controller->action->id;
         $searchModel = new CouponSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

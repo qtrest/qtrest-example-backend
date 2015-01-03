@@ -106,26 +106,6 @@ abstract class BaseApi extends Apist
         }
     }
 
-    public function updateAllCoupons()
-    {
-        \Yii::info('run updateAllCoupons '.get_class($this), 'kupon');
-        $query = new Query;
-        $res = $query->select('id')
-            ->from('coupon')
-            ->where('sourceServiceId=:sourceServiceId',
-                [
-                    ':sourceServiceId' => $this->getSourceServiceId()
-                ]
-            )
-            ->createCommand()
-            ->queryColumn();
-
-        foreach($res as $key => $value) {
-            //sleep ( rand(1,2) );
-            $this->updateCouponById($value);
-        }
-    }
-
     public function initData()
     {
         \Yii::info('run initData '.get_class($this), 'kupon');
@@ -380,6 +360,33 @@ abstract class BaseApi extends Apist
         ],['cityId' => $cityId, 'sourceServiceId' => $this->getSourceServiceId()])->execute();
     }
 
+    public function updateAllCoupons()
+    {
+        \Yii::info('run updateAllCoupons '.get_class($this), 'kupon');
+
+        $today = date_create(date('Y-m-d',time()));
+        date_sub($today, date_interval_create_from_date_string('3 days'));
+
+        $query = new Query;
+        $res = $query->select('id')
+            ->from('coupon')
+            ->where('sourceServiceId=:sourceServiceId AND isArchive=:isArchive AND lastUpdateDateTime < :lastUpdateDateTime',
+                [
+                    ':sourceServiceId' => $this->getSourceServiceId(),
+                    ':isArchive' => 0,
+                    ':lastUpdateDateTime' => $today->format('Y-m-d H:i:s'),
+                ]
+            )
+            ->limit(10)
+            ->createCommand()
+            ->queryColumn();
+
+        foreach($res as $key => $value) {
+            //sleep ( rand(1,2) );
+            $this->updateCouponById($value);
+        }
+    }
+
     private function updateCouponById($couponId)
     {
         \Yii::info('run updateCouponById '. $couponId . ' ' .get_class($this), 'kupon');
@@ -408,14 +415,42 @@ abstract class BaseApi extends Apist
         $result = $this->couponAdvancedById($couponId);
         \Yii::info(serialize($result), 'kupon');
 
-        $connection->createCommand()->update('coupon', [
-            'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
-            'longDescription' => $result['longDescription'],
-            'conditions' => $result['conditions'],
-            'features' => $result['features'],
-            'timeToCompletion' => $result['timeToCompletion'],
-            'boughtCount' => $result['boughtCount'],
-            'imagesLinks' => implode(', ', $result['imageLinks']),
-        ],['id' => $couponId])->execute();
+        //Если данные пусты, то скорее всгео запись обновить не удалось и она является архивной.
+        if (empty($result['longDescription']) && empty($result['timeToCompletion'])
+        && empty($result['conditions']) && empty($result['boughtCount'])) {
+
+            //обновить одну запись пробуем максимум пять раз после чего считаем её архивной.
+            $tryToUpdateCount = $query->select('tryToUpdateCount')
+                ->from('coupon')
+                ->where('id=:couponId',
+                    [
+                        ':couponId' => $couponId,
+                    ]
+                )
+                ->createCommand()
+                ->queryScalar();
+
+            if ($tryToUpdateCount >= 5) {
+                $connection->createCommand()->update('coupon', [
+                    'isArchive' => 1,
+                ], ['id' => $couponId])->execute();
+            } else {
+                $connection->createCommand()->update('coupon', [
+                    'tryToUpdateCount' => $tryToUpdateCount + 1,
+                ], ['id' => $couponId])->execute();
+            }
+
+            return;
+        } else {
+            $connection->createCommand()->update('coupon', [
+                'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
+                'longDescription' => $result['longDescription'],
+                'conditions' => $result['conditions'],
+                'features' => $result['features'],
+                'timeToCompletion' => $result['timeToCompletion'],
+                'boughtCount' => $result['boughtCount'],
+                'imagesLinks' => implode(', ', $result['imageLinks']),
+            ], ['id' => $couponId])->execute();
+        }
     }
 }

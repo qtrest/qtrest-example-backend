@@ -72,12 +72,18 @@
 }
 
 .field-couponsearch-cityid {
-    width: 49%;
+    width: 32%;
     margin-right: 2%;
     float: left;
 }
 
 .field-couponsearch-sourceserviceid {
-    width: 49%;
+    width: 32%;
+    margin-right: 2%;
+    float: left;
+}
+
+.field-couponsearch-discounttype {
+    width: 32%;
     float: left;
 }

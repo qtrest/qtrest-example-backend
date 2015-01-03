@@ -19,7 +19,10 @@ class CouponSearch extends Coupon
     {
         return [
             [['id', 'sourceServiceId', 'cityId'], 'integer'],
-            [['createTimestamp', 'lastUpdateDateTime', 'fullTextStr', 'recordHash', 'title', 'shortDescription', 'longDescription', 'conditions', 'features', 'imagesLinks', 'timeToCompletion', 'mainImageLink', 'originalPrice', 'discountPercent', 'discountPrice', 'boughtCount', 'sourceServiceCategories', 'pageLink'], 'safe'],
+            [['createTimestamp', 'lastUpdateDateTime', 'fullTextStr', 'recordHash', 'title', 'shortDescription',
+                'longDescription', 'conditions', 'features', 'imagesLinks', 'timeToCompletion', 'mainImageLink',
+                'originalPrice', 'discountPercent', 'discountPrice', 'discountType', 'boughtCount',
+                'sourceServiceCategories', 'pageLink', 'isArchive'], 'safe'],
         ];
     }
 
@@ -41,6 +44,7 @@ class CouponSearch extends Coupon
      */
     public function search($params)
     {
+        //echo '<br/><br/><br/><br/><br/><br/>lo:'.$this->isArchive;
         $query = Coupon::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -50,9 +54,17 @@ class CouponSearch extends Coupon
 			],
         ]);
 
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
+        //echo '2';
+//        if (!($this->load($params) && $this->validate())) {
+//            return $dataProvider;
+//        }
+        //echo '3';
+
+//        if (!empty($_GET)) {
+//            print_r($params);
+//            echo 'dis:'.$this->discountType;
+//            //Yii::$app->end();
+//        }
 
         if ($this->fullTextStr > '') {
             $query->orWhere(['like', 'title', $this->fullTextStr])
@@ -64,17 +76,28 @@ class CouponSearch extends Coupon
 
         $query->andWhere(['>', 'title', '']);
 
+        if (Yii::$app->controller->action->id == 'archive') {
+            $this->isArchive = 1;
+        }
+        //echo '<br/><br/><br/><br/><br/><br/>lo:'.$this->isArchive;
+        //Yii::$app->end();
+
         if ($this->cityId == 0) {
             $this->cityId = '';
         }
         if ($this->sourceServiceId == 0) {
             $this->sourceServiceId = '';
         }
+//        if ($this->discountType == 0) {
+//            $this->discountType = '';
+//        }
 
         $query->andFilterWhere([
             'id' => $this->id,
             'sourceServiceId' => $this->sourceServiceId,
             'cityId' => $this->cityId,
+            'isArchive' => $this->isArchive,
+            'discountType' => $this->discountType,
             'createTimestamp' => $this->createTimestamp,
             'lastUpdateDateTime' => $this->lastUpdateDateTime,
         ]);

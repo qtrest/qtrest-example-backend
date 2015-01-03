@@ -24,6 +24,7 @@ use Yii;
  * @property string $originalPrice
  * @property string $discountPercent
  * @property string $discountPrice
+ * @property string $discountType
  * @property string $boughtCount
  * @property string $sourceServiceCategories
  * @property string $pageLink
@@ -51,7 +52,9 @@ class Coupon extends \yii\db\ActiveRecord
             [['sourceServiceId', 'cityId'], 'integer'],
             [['createTimestamp', 'lastUpdateDateTime'], 'safe'],
             [['longDescription', 'conditions', 'features', 'imagesLinks'], 'string'],
-            [['recordHash', 'title', 'shortDescription', 'timeToCompletion', 'mainImageLink', 'originalPrice', 'discountPercent', 'discountPrice', 'boughtCount', 'sourceServiceCategories', 'pageLink'], 'string', 'max' => 255]
+            [['recordHash', 'title', 'shortDescription', 'timeToCompletion', 'mainImageLink',
+                'originalPrice', 'discountPercent', 'discountType', 'discountPrice', 'boughtCount',
+                'sourceServiceCategories', 'pageLink'], 'string', 'max' => 255]
         ];
     }
 
@@ -78,10 +81,12 @@ class Coupon extends \yii\db\ActiveRecord
             'originalPrice' => Yii::t('app', 'Original Price'),
             'discountPercent' => Yii::t('app', 'Discount Percent'),
             'discountPrice' => Yii::t('app', 'Discount Price'),
+            'discountType' => Yii::t('app', 'Тип скидки'),
             'boughtCount' => Yii::t('app', 'Bought Count'),
             'sourceServiceCategories' => Yii::t('app', 'Source Service Categories'),
             'pageLink' => Yii::t('app', 'Page Link'),
-            'fullTextStr' => 'Полнотекстовый поиск (наименование, описание, условия и особенности)'
+            'fullTextStr' => 'Полнотекстовый поиск (наименование, описание, условия и особенности)',
+            'isArchive' => 'Архив'
         ];
     }
 
