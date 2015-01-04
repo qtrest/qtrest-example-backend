@@ -44,27 +44,33 @@ class CouponSearch extends Coupon
      */
     public function search($params)
     {
-        //echo '<br/><br/><br/><br/><br/><br/>lo:'.$this->isArchive;
+        //echo '<br/><br/><br/><br/><br/><br/>';
+        if (!isset($params['CouponSearch'])) {
+            $params['CouponSearch'] = [];
+        }
+        if (!isset($params['CouponSearch']['isArchive'])) {
+            if (Yii::$app->controller->action->id == 'archive') {
+                //$this->isArchive = 1;
+                $params['CouponSearch']['isArchive'] = 1;
+            }
+            if (Yii::$app->controller->action->id == 'actual') {
+                //$this->isArchive = 0;
+                $params['CouponSearch']['isArchive'] = 0;
+            }
+        }
+        //print_r($params);
         $query = Coupon::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-			'pagination' => [
-				'pageSize' => 12,
-			],
+            'pagination' => [
+                'pageSize' => 12,
+            ],
         ]);
 
-        //echo '2';
-//        if (!($this->load($params) && $this->validate())) {
-//            return $dataProvider;
-//        }
-        //echo '3';
-
-//        if (!empty($_GET)) {
-//            print_r($params);
-//            echo 'dis:'.$this->discountType;
-//            //Yii::$app->end();
-//        }
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
         if ($this->fullTextStr > '') {
             $query->orWhere(['like', 'title', $this->fullTextStr])
@@ -76,24 +82,15 @@ class CouponSearch extends Coupon
 
         $query->andWhere(['>', 'title', '']);
 
-        if (Yii::$app->controller->action->id == 'archive') {
-            $this->isArchive = 1;
-        }
-        if (Yii::$app->controller->action->id == 'actual') {
-            $this->isArchive = 0;
-        }
-        //echo '<br/><br/><br/><br/><br/><br/>lo:'.$this->isArchive;
-        //Yii::$app->end();
-
         if ($this->cityId == 0) {
             $this->cityId = '';
         }
         if ($this->sourceServiceId == 0) {
             $this->sourceServiceId = '';
         }
-//        if ($this->discountType == 0) {
-//            $this->discountType = '';
-//        }
+        if ($this->discountType == 0) {
+            $this->discountType = '';
+        }
 
         $query->andFilterWhere([
             'id' => $this->id,
@@ -104,22 +101,6 @@ class CouponSearch extends Coupon
             'createTimestamp' => $this->createTimestamp,
             'lastUpdateDateTime' => $this->lastUpdateDateTime,
         ]);
-
-//        $query->andFilterWhere(['like', 'recordHash', $this->recordHash])
-//            ->andFilterWhere(['like', 'title', $this->title])
-//            ->andFilterWhere(['like', 'shortDescription', $this->shortDescription])
-//            ->andFilterWhere(['like', 'longDescription', $this->longDescription])
-//            ->andFilterWhere(['like', 'conditions', $this->conditions])
-//            ->andFilterWhere(['like', 'features', $this->features])
-//            ->andFilterWhere(['like', 'imagesLinks', $this->imagesLinks])
-//            ->andFilterWhere(['like', 'timeToCompletion', $this->timeToCompletion])
-//            ->andFilterWhere(['like', 'mainImageLink', $this->mainImageLink])
-//            ->andFilterWhere(['like', 'originalPrice', $this->originalPrice])
-//            ->andFilterWhere(['like', 'discountPercent', $this->discountPercent])
-//            ->andFilterWhere(['like', 'discountPrice', $this->discountPrice])
-//            ->andFilterWhere(['like', 'boughtCount', $this->boughtCount])
-//            ->andFilterWhere(['like', 'sourceServiceCategories', $this->sourceServiceCategories])
-//            ->andFilterWhere(['like', 'pageLink', $this->pageLink]);
 
         return $dataProvider;
     }
