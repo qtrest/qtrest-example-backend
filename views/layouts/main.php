@@ -20,6 +20,9 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 
+    <META name="description" CONTENT="Все купонаторы и скидки на одном сайте! Skid.KZ - единый агрегатор скидок, нацеленный на максимальную простоту в представлении информации о скидках всем гражданам и гостям нашей страны!">
+    <META name="keywords" CONTENT="купон, все купоны, все скидки Казахстана, все скидки, скидки, агрегатор скидок, поиск скидок, фильтр скидок, база скидок">
+
     <!-- Google Analitycs -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
