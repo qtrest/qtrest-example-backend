@@ -26,14 +26,16 @@ $serviceName = $query->select('serviceName')
     <div class="thumbnail">
         <div class="image-ratio" style="background-image:url('<?= $serviceBaseUrl . '/' . $model->mainImageLink; ?>')">
             <span class="label label-info span-right"><?= $serviceName; ?></span>
-            <span class="label label-warning span-left "><?= 'Купили: ' . $model->boughtCount; ?></span>
+            <span class="label label-warning span-left "><?= 'Купили: ' . ($model->boughtCount > '' ? $model->boughtCount : '?'); ?></span>
             <div class="coupon-content" style="display:block">
                 <p class="coupon-caption"><?= Html::encode($model->title) ?>
                     <br/>
                 </p>
                 <div class="coupon-description">
                     <?= Html::encode($model->shortDescription) ?>
-                    <a target="_BLANK" href="<?= $serviceBaseUrl . $model->pageLink; ?>" class="btn btn-info span-bottomright">Купить</a>
+                    <?php if (Yii::$app->controller->action->id == 'actual'): ?>
+                        <a target="_BLANK" href="<?= $serviceBaseUrl . $model->pageLink; ?>" class="btn btn-info span-bottomright">Купить</a>
+                    <?php endif; ?>
                 </div>
 
             </div>

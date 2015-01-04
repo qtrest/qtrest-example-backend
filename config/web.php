@@ -6,6 +6,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => ['coupon'],
     'vendorPath' => dirname(__DIR__)."/vendor",
     'components' => [
         'request' => [

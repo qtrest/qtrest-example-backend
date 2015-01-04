@@ -79,6 +79,9 @@ class CouponSearch extends Coupon
         if (Yii::$app->controller->action->id == 'archive') {
             $this->isArchive = 1;
         }
+        if (Yii::$app->controller->action->id == 'actual') {
+            $this->isArchive = 0;
+        }
         //echo '<br/><br/><br/><br/><br/><br/>lo:'.$this->isArchive;
         //Yii::$app->end();
 

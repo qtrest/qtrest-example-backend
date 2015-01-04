@@ -7,7 +7,11 @@ use yii\widgets\ListView;
 /* @var $searchModel app\models\CouponSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Coupons');
+if ( Yii::$app->controller->action->id == 'actual' ) {
+    $this->title = 'Skid.KZ - Актуальные';
+} else if ( Yii::$app->controller->action->id == 'archive' ) {
+    $this->title = 'Skid.KZ - Архив';
+}
 $this->params['breadcrumbs'] = '';
 
 ?>
