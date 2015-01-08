@@ -21,7 +21,8 @@
         "sleeping-owl/apist": "1.x",
         "yiisoft/yii2-gii": "*",
 	"xj/yii2-holder-widget": "*",
-        "yiisoft/yii2-debug": "*"
+        "yiisoft/yii2-debug": "*",
+	"ijackua/yii2-sharelinks-widget": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

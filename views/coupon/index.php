@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use ijackua\sharelinks\ShareLinks;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CouponSearch */
@@ -32,5 +33,12 @@ $this->params['breadcrumbs'] = '';
         'itemOptions' => ['class' => 'coupon-item col-xs-4'],
         'itemView' => '_item',
     ]) ?>
+
+    <?php
+    //echo \ijackua\sharelinks\ShareLinks::widget(
+    //[
+    //'viewName' => '@app/views/mypath/shareLinks.php'   //custom view file for you links appearance
+    //]);
+    ?>
 
 </div>

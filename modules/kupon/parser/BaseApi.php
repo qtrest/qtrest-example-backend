@@ -377,6 +377,7 @@ abstract class BaseApi extends Apist
                     ':lastUpdateDateTime' => $today->format('Y-m-d H:i:s'),
                 ]
             )
+            ->orderBy('lastUpdateDateTime')
             ->limit(10)
             ->createCommand()
             ->queryColumn();
