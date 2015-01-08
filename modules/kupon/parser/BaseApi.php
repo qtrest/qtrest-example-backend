@@ -378,7 +378,7 @@ abstract class BaseApi extends Apist
                 ]
             )
             ->orderBy('lastUpdateDateTime')
-            ->limit(10)
+            ->limit(25)
             ->createCommand()
             ->queryColumn();
 
