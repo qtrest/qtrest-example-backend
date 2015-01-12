@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 use app\models\City;
 use app\models\SourceService;
 use app\models\CouponType;
+use app\models\CouponCategories;
 use app\components\Tools;
 ?>
 
@@ -43,6 +44,18 @@ use app\components\Tools;
     //Tools::print_array('cities', $cities);
     echo $form->field($model, 'discountType')->dropDownList($types);
     ?>
+    <?php
+    $categories = ArrayHelper::map(CouponCategories::find()->all(), 'id', 'categoryName');
+    $link = Html::a('(показать/скрыть)',
+        \yii\helpers\Url::to('javascript:$("#couponsearch-sourceservicecategories").toggle();'));
+    echo $form->field($model, 'sourceServiceCategories', [
+        'template' => "{label}\n  $link\n{input}\n{hint}\n{error}"
+    ])->checkboxList($categories);
+    $this->registerJs('$("#couponsearch-sourceservicecategories").hide();', \yii\web\View::POS_READY);
+    ?>
+
+
+
 
     <?php echo $form->field($model, 'fullTextStr') ?>
 

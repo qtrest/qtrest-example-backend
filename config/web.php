@@ -63,7 +63,7 @@ $config = [
         ],
 		'debug' => [
 			'class' => 'yii\debug\Module',
-			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11'],
+			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11', '192.168.1.5'],
 		],
 	],
     'params' => $params,
@@ -77,14 +77,14 @@ if (YII_ENV == 'dev') {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
             'class' => 'yii\gii\Module',
-            'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102'],
+            'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.5'],
             //'password' => '123456'
         ];
 		
 	$config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
             'class' => 'yii\debug\Module',
-			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11'],
+			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11', '192.168.1.5'],
         ];
 }
 

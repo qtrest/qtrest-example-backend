@@ -58,6 +58,7 @@ class CouponSearch extends Coupon
                 $params['CouponSearch']['isArchive'] = 0;
             }
         }
+
         //print_r($params);
         $query = Coupon::find();
 
@@ -92,6 +93,15 @@ class CouponSearch extends Coupon
             $this->discountType = '';
         }
 
+        //Категории
+        if (isset($params['CouponSearch']['sourceServiceCategories'])) {
+            $c = $params['CouponSearch']['sourceServiceCategories'];
+            if ($c!='') {
+                $categoriesStr = implode(',', $c);
+                $query->andFilterWhere(['like', 'sourceServiceCategories', $categoriesStr]);
+            }
+        }
+
         $query->andFilterWhere([
             'id' => $this->id,
             'sourceServiceId' => $this->sourceServiceId,
@@ -101,7 +111,6 @@ class CouponSearch extends Coupon
             'createTimestamp' => $this->createTimestamp,
             'lastUpdateDateTime' => $this->lastUpdateDateTime,
         ]);
-
         return $dataProvider;
     }
 }

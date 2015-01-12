@@ -83,7 +83,7 @@ class Coupon extends \yii\db\ActiveRecord
             'discountPrice' => Yii::t('app', 'Discount Price'),
             'discountType' => Yii::t('app', 'Тип скидки'),
             'boughtCount' => Yii::t('app', 'Bought Count'),
-            'sourceServiceCategories' => Yii::t('app', 'Source Service Categories'),
+            'sourceServiceCategories' => Yii::t('app', 'Категории'),
             'pageLink' => Yii::t('app', 'Page Link'),
             'fullTextStr' => 'Полнотекстовый поиск (наименование, описание, условия и особенности)',
             'isArchive' => 'Архив'
