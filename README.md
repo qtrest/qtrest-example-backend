@@ -19,3 +19,7 @@ Install
 10) Setup mysql wait_timeout=360
 11) Setup php max_execution_time to 240 or 360
 12) sudo apt-get install php-apc
+
+Deploy
+------------------
+skid.kz/deploy/bitbucket-hook-skid.kz.php
