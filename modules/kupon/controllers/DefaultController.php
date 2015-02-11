@@ -2,6 +2,9 @@
 
 namespace app\modules\kupon\controllers;
 
+use app\components\ProxyHandler;
+use app\models\Proxy;
+use app\modules\kupon\parser\ProxyParser;
 use yii\web\Controller;
 
 use app\modules\kupon\parser\ChocolifeApi as ChocolifeApi;
@@ -18,6 +21,13 @@ class DefaultController extends Controller
 //        return $this->render('index');
 //    }
 
+    public function actionFetchbiglion()
+    {
+        $bgl = new BiglionApi();
+        $bgl->initData();
+        $bgl->fetchAllCities();
+        $bgl->updateAllCoupons();
+    }
     public function actionFetchall($pass)
     {
         if ($pass == 'kafeg') {
@@ -81,6 +91,21 @@ class DefaultController extends Controller
 
         } else {
             echo 'Access denied!';
+        }
+    }
+
+    public function actionUpdateproxies($pass)
+    {
+        if ($pass == 'kafeg') {
+            $proxyHandler = new ProxyParser();
+            $proxyList = $proxyHandler->googleProxy();
+            foreach ($proxyList as $p) {
+                $m = new Proxy();
+                $m->ip = $p['ip'];
+                $m->port = $p['port'];
+                $m->save();
+            }
+            echo count($proxyList) . ' proxies added.';
         }
     }
 }
