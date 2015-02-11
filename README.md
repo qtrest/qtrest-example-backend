@@ -16,3 +16,6 @@ Install
 9) Setup cron:
 * */2 * * * /usr/bin/wget -O - http://skid.kz/index.php?r=/fetchall\&pass=kafeg >/dev/null 2>&1
 * */3 * * * /usr/bin/wget -O - http://skid.kz/index.php?r=/updateall\&pass=kafeg >/dev/null 2>&1
+10) Setup mysql wait_timeout=360
+11) Setup php max_execution_time to 240 or 360
+12) sudo apt-get install php-apc
