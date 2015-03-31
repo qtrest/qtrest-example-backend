@@ -5,14 +5,16 @@ Skid.KZ - агрегатор данных со скидочных сервисо
 
 Install
 -------------------
+0) ssh-keygen -t rsa and add this to bitbucked repo
 1) Install composer
 2) Clone bare repository 'cd /home/admin/; git clone --mirror git@bitbucket.org:kafeg/kupon.git' (manual: https://serverpilot.io/community/articles/how-to$
-3) cd /home/admin/web/skid.kz/public_html/
-4) GIT_WORK_TREE=/home/admin/web/skid.kz/public_html/ git checkout -f master
+3) GIT_WORK_TREE=/home/admin/web/skid.kz/public_html/ git checkout -f master
+4) cd /home/admin/web/skid.kz/public_html/
 5) composer.phar global require "fxp/composer-asset-plugin:1.0.0"
 6) composer.phar update
+6.5) Setup database with config/db.php
 7) php yii migrate
-8) Setup apache virtualhost
+8) Setup apache virtualhost for /home/admin/web/skid.kz/public_html/web
 9) Setup cron:
 * */2 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/fetchall\&pass=kafeg >/dev/null 2>&1
 * */5 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/updateall\&pass=kafeg >/dev/null 2>&1
