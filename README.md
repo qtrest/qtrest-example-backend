@@ -27,9 +27,9 @@ Install
 
 9) Setup cron:
 
-* */2 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/fetchall\&pass=kafeg >/dev/null 2>&1
+ * */2 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/fetchall\&pass=kafeg >/dev/null 2>&1
 
-* */5 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/updateall\&pass=kafeg >/dev/null 2>&1
+ * */5 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/updateall\&pass=kafeg >/dev/null 2>&1
 
 10) Setup mysql wait_timeout=360
 
