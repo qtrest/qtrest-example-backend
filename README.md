@@ -5,10 +5,10 @@ Skid.KZ - агрегатор данных со скидочных сервисо
 
 Install
 -------------------
-0) ssh-keygen -t rsa and add this to bitbucked repo
-1) Install composer
-2) Clone bare repository 'cd /home/admin/; git clone --mirror git@bitbucket.org:kafeg/kupon.git' (manual: https://serverpilot.io/community/articles/how-to$
-3) GIT_WORK_TREE=/home/admin/web/skid.kz/public_html/ git checkout -f master
+0) ssh-keygen -t rsa and add this to bitbucked repo<br/>
+1) Install composer<br/>
+2) Clone bare repository 'cd /home/admin/; git clone --mirror git@bitbucket.org:kafeg/kupon.git' (manual: https://serverpilot.io/community/articles/how-to$<br/>
+3) GIT_WORK_TREE=/home/admin/web/skid.kz/public_html/ git checkout -f master<br/>
 4) cd /home/admin/web/skid.kz/public_html/
 5) composer.phar global require "fxp/composer-asset-plugin:1.0.0"
 6) composer.phar update
