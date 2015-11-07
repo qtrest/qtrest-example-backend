@@ -4,6 +4,7 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'defaultRoute' => 'coupon',
@@ -77,14 +78,14 @@ if (YII_ENV == 'dev') {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
             'class' => 'yii\gii\Module',
-            'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.5'],
+            'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.0.103'],
             //'password' => '123456'
         ];
 		
 	$config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
             'class' => 'yii\debug\Module',
-			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11', '192.168.1.5'],
+			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11', '192.168.0.103'],
         ];
 }
 
