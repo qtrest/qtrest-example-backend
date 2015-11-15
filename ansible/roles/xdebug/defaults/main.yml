@@ -1,5 +1,5 @@
 ---
-xdebug_settings: 
+xdebug_settings:
       xdebug.remote_host: 192.168.0.102
       xdebug.remote_port: 9001
       xdebug.max_nesting_level: 200

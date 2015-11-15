@@ -40,3 +40,15 @@ Install
 Deploy
 ------------------
 skid.kz/deploy/bitbucket-hook-skid.kz.php
+
+Setup developing environment.
+------------------
+1. Install git, vagrant, composer
+2. Git clone this project
+3. "composer install" 
+4. "vagrant up" command from project root
+4. Wait for Ansible infrastructure provisioning
+5. "vagrant ssh" start ssh session on virtual machine and connect
+6. Project files will be mounted in /vagrant folder. Files are syncing automatically
+
+

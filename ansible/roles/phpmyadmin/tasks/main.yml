@@ -1,5 +1,14 @@
+- name: Add ppa  Repository
+  sudo: yes
+  apt_repository: repo=ppa:nijel/phpmyadmin
+
+- name: Update apt
+  sudo: yes
+  apt: update_cache=yes
+
 - name: install phpmyadmin
   apt: name=phpmyadmin state=latest
+ 
 - name: link phpmyadmin
   sudo: yes
   file: src=/usr/share/phpmyadmin dest=/vagrant/pma state=link

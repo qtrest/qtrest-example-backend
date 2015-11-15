@@ -28,7 +28,7 @@ sudo apt-get install -y ansible
 cp /vagrant/ansible/inventories/dev /etc/ansible/hosts -f
 chmod 666 /etc/ansible/hosts
 cat /vagrant/ansible/files/authorized_keys >> /home/vagrant/.ssh/authorized_keys
-#sudo ansible-playbook /vagrant/ansible/playbook.yml -e hostname=$1 --connection=local
+sudo ansible-playbook /vagrant/ansible/playbook.yml -e hostname=$1 --connection=local
 #рассчет на то, что композер запустит сам разработчик на компьютере,
 #т.к. вагрант будем юзать только как среду исполнения, не разработки
 #cd /vagrant && composer install && ./yii migrate --interactive=0
