@@ -1,0 +1,29 @@
+---
+server:
+    install: '1'
+    packages: [git]
+    timezone: UTC
+    locale: en_US.UTF-8
+vagrant_local:
+    install: '1'
+    vm: { base_box: trusty64, hostname: default, ip: 192.168.0.103, memory: '1024', sharedfolder: '', syncType: rsync }
+apache:
+    install: '1'
+    docroot: /vagrant
+    servername: kupon
+mysql:
+    install: '1'
+    root_password: '123'
+    database: admin_coupon
+    user: admin_coupon
+    password: uruPhscu77Vy3hUA
+    dump: ''
+php:
+    install: '1'
+    ppa: php5-5.6
+    packages: [php5-cli, php5-intl, php5-mcrypt, php5-curl, php5-gd, php5-memcached, php5-mysql, php5-xdebug, php5-xsl]
+xdebug:
+    install: '1'
+composer:
+    install: '1'
+

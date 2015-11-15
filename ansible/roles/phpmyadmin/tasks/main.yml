@@ -1,0 +1,6 @@
+- name: install phpmyadmin
+  apt: name=phpmyadmin state=latest
+- name: link phpmyadmin
+  sudo: yes
+  file: src=/usr/share/phpmyadmin dest=/vagrant/pma state=link
+  notify: restart apache 
