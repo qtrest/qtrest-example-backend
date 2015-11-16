@@ -37,6 +37,8 @@ Install
 
 12) sudo apt-get install php-apc
 
+13) Setup clean urls for host in your apache or nginx.
+
 Deploy
 ------------------
 skid.kz/deploy/bitbucket-hook-skid.kz.php
