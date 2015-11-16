@@ -28,8 +28,11 @@ class DefaultController extends Controller
         $bgl->fetchAllCities();
         $bgl->updateAllCoupons();
     }
+
     public function actionFetchall()
     {
+        //echo 'Access denied!';
+        //return;
         //if ($pass == 'kafeg') {
             $chocolife = new ChocolifeApi();
             $chocolife->initData();
@@ -68,6 +71,9 @@ class DefaultController extends Controller
 
     public function actionUpdateall()
     {
+        //echo 'Access denied!';
+        //return;
+
         //if ($pass == 'kafeg') {
             $chocolife = new ChocolifeApi();
             $chocolife->updateAllCoupons();
