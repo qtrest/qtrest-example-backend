@@ -94,8 +94,6 @@ class DefaultController extends Controller
 
             ob_flush();
 
-            return;
-
             \Yii::info('ChocolifeApi Success!', 'kupon');
 
             $blizzard = new BlizzardApi();
