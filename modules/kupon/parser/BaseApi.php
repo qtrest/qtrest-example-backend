@@ -378,7 +378,7 @@ abstract class BaseApi extends Apist
                 ]
             )
             ->orderBy('lastUpdateDateTime')
-            ->limit(25)
+            ->limit(5) //only 5 coupons every 2 hours
             ->createCommand()
             ->queryColumn();
 
@@ -409,6 +409,7 @@ abstract class BaseApi extends Apist
             $diff = $time - strtotime ($res);
             //update every 4 hours (14400 unix seconds)
             if ($diff <= 14400) {
+                \Yii::info('skip update by time '. $couponId . ' ' .get_class($this), 'kupon');
                 return;
             }
         }
@@ -416,7 +417,7 @@ abstract class BaseApi extends Apist
         $result = $this->couponAdvancedById($couponId);
         \Yii::info(serialize($result), 'kupon');
 
-        //Если данные пусты, то скорее всгео запись обновить не удалось и она является архивной.
+        //Если данные пусты, то скорее всего запись обновить не удалось и она является архивной. Пробуем 5 раз для каждой записи. Если так и не получилось - архивируем запись.
         if (empty($result['longDescription']) && empty($result['timeToCompletion'])
         && empty($result['conditions']) && empty($result['boughtCount'])) {
 
@@ -431,6 +432,8 @@ abstract class BaseApi extends Apist
                 ->createCommand()
                 ->queryScalar();
 
+            \Yii::info('tryToUpdateCoupon '. $couponId . ' ' .get_class($this) . ' UPDATE COUNT ' . $tryToUpdateCount, 'kupon');
+
             if ($tryToUpdateCount >= 5) {
                 $connection->createCommand()->update('coupon', [
                     'isArchive' => 1,
@@ -443,6 +446,9 @@ abstract class BaseApi extends Apist
 
             return;
         } else {
+            
+            \Yii::info('tryToUpdateCoupon '. $couponId . ' ' .get_class($this) . ' UPDATE COMPLETED!', 'kupon');
+
             $connection->createCommand()->update('coupon', [
                 'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
                 'longDescription' => $result['longDescription'],
