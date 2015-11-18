@@ -54,6 +54,10 @@ $config = [
         'tools' => [
             'class' => '\app\components\Tools',
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
     ],
 	'modules' => [
 		'kupon' => [

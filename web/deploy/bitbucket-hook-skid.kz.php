@@ -9,6 +9,7 @@ $update = false;
 
 // Parse data from Bitbucket hook payload
 $payload = json_decode($_POST['payload']);
+$branch = 'none';
 
 if (empty($payload->commits)){
   // When merging and pushing to bitbucket, the commits array will be empty.

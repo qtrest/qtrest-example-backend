@@ -28,9 +28,12 @@ class DefaultController extends Controller
         $bgl->fetchAllCities();
         $bgl->updateAllCoupons();
     }
-    public function actionFetchall($pass)
+
+    public function actionFetchall()
     {
-        if ($pass == 'kafeg') {
+        //echo 'Access denied!';
+        //return;
+        //if ($pass == 'kafeg') {
             $chocolife = new ChocolifeApi();
             $chocolife->initData();
             $chocolife->fetchAllCities();
@@ -61,14 +64,17 @@ class DefaultController extends Controller
             $autoKupon->updateAllCoupons();
             echo 'AutoKuponApi Success!<br/>';
 
-        } else {
-            echo 'Access denied!';
-        }
+        //} else {
+        //    echo 'Access denied!';
+        //}
     }
 
-    public function actionUpdateall($pass)
+    public function actionUpdateall()
     {
-        if ($pass == 'kafeg') {
+        //echo 'Access denied!';
+        //return;
+
+        //if ($pass == 'kafeg') {
             $chocolife = new ChocolifeApi();
             $chocolife->updateAllCoupons();
             echo 'ChocolifeApi Success!<br/>';
@@ -89,14 +95,14 @@ class DefaultController extends Controller
             $autoKupon->updateAllCoupons();
             echo 'AutoKuponApi Success!<br/>';
 
-        } else {
-            echo 'Access denied!';
-        }
+        //} else {
+        //    echo 'Access denied!';
+        //}
     }
 
-    public function actionUpdateproxies($pass)
+    public function actionUpdateproxies()
     {
-        if ($pass == 'kafeg') {
+        //if ($pass == 'kafeg') {
             $proxyHandler = new ProxyParser();
             $proxyList = $proxyHandler->googleProxy();
             foreach ($proxyList as $p) {
@@ -106,6 +112,6 @@ class DefaultController extends Controller
                 $m->save();
             }
             echo count($proxyList) . ' proxies added.';
-        }
+        //}
     }
 }
