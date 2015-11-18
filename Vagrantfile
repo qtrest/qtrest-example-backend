@@ -23,7 +23,7 @@ def which(cmd)
 end
 
 Vagrant.configure("2") do |config|
-
+	config.vbguest.auto_update = false
     config.vm.provider :virtualbox do |v|
         v.name = "kupon"
         v.customize [
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
     
     config.vm.box_url = "https://vagrantcloud.com/ubuntu/boxes/trusty64/versions/14.04/providers/virtualbox.box"
     
-    config.vm.network :public_network, ip: "192.168.0.103"
+    config.vm.network :private_network, ip: "192.168.0.103"
     config.ssh.forward_agent = true
 
     # If ansible is in your path it will provision from your HOST machine

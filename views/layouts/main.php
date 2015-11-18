@@ -80,6 +80,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Актуальные', 'url' => ['/coupon/actual']],
                     ['label' => 'Архив', 'url' => ['/coupon/archive']],
+                    ['label' => 'Статистика', 'url' => ['/coupon/archive']],
                 ],
             ]);
             echo Nav::widget([
