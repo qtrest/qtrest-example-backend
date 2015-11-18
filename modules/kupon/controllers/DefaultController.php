@@ -130,6 +130,8 @@ class DefaultController extends Controller
 
             \Yii::info('actionUpdateall end', 'kupon');
 
+            return;
+
         //} else {
         //    echo 'Access denied!';
         //}
