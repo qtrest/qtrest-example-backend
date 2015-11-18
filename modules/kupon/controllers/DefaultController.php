@@ -82,7 +82,7 @@ class DefaultController extends Controller
 
             echo 'Start updating!<br/>';
 
-            ob_flush();
+            //ob_flush();
 
             \Yii::info('actionUpdateall start', 'kupon');
 
@@ -92,7 +92,7 @@ class DefaultController extends Controller
             $chocolife->updateAllCoupons();
             echo 'ChocolifeApi Success!<br/>';
 
-            ob_flush();
+            //ob_flush();
 
             \Yii::info('ChocolifeApi Success!', 'kupon');
 
@@ -100,7 +100,7 @@ class DefaultController extends Controller
             $blizzard->updateAllCoupons();
             echo 'BlizzardApi Success!<br/>';
 
-            ob_flush();
+            //ob_flush();
 
             \Yii::info('BlizzardApi Success!', 'kupon');
 
@@ -108,7 +108,7 @@ class DefaultController extends Controller
             $kupiKupon->updateAllCoupons();
             echo 'KupiKuponApi Success!<br/>';
 
-            ob_flush();
+            //ob_flush();
 
             \Yii::info('KupiKuponApi Success!', 'kupon');
 
@@ -116,7 +116,7 @@ class DefaultController extends Controller
             $mirKuponov->updateAllCoupons();
             echo 'MirKuponovApi Success!<br/>';
 
-            ob_flush();
+            //ob_flush();
 
             \Yii::info('MirKuponovApi Success!', 'kupon');
 
@@ -124,7 +124,7 @@ class DefaultController extends Controller
             $autoKupon->updateAllCoupons();
             echo 'AutoKuponApi Success!<br/>';
 
-            ob_flush();
+            //ob_flush();
 
             \Yii::info('AutoKuponApi Success!', 'kupon');
 
