@@ -71,29 +71,66 @@ class DefaultController extends Controller
 
     public function actionUpdateall()
     {
+        //$logger = \Yii::getLogger();
+        //$logger->autoFlush = 1;
+        //$logger->autoDump = true;
+
         //echo 'Access denied!';
         //return;
 
         //if ($pass == 'kafeg') {
+
+            echo 'Start updating!<br/>';
+
+            //ob_flush();
+
+            \Yii::info('actionUpdateall start', 'kupon');
+
             $chocolife = new ChocolifeApi();
+            \Yii::info('ChocolifeApi created', 'kupon');
+            //\Yii::getLogger()->collect();
             $chocolife->updateAllCoupons();
             echo 'ChocolifeApi Success!<br/>';
+
+            //ob_flush();
+
+            \Yii::info('ChocolifeApi Success!', 'kupon');
 
             $blizzard = new BlizzardApi();
             $blizzard->updateAllCoupons();
             echo 'BlizzardApi Success!<br/>';
 
+            //ob_flush();
+
+            \Yii::info('BlizzardApi Success!', 'kupon');
+
             $kupiKupon = new KupiKuponApi();
             $kupiKupon->updateAllCoupons();
             echo 'KupiKuponApi Success!<br/>';
+
+            //ob_flush();
+
+            \Yii::info('KupiKuponApi Success!', 'kupon');
 
             $mirKuponov = new MirKuponovApi();
             $mirKuponov->updateAllCoupons();
             echo 'MirKuponovApi Success!<br/>';
 
+            //ob_flush();
+
+            \Yii::info('MirKuponovApi Success!', 'kupon');
+
             $autoKupon = new AutoKuponApi();
             $autoKupon->updateAllCoupons();
             echo 'AutoKuponApi Success!<br/>';
+
+            //ob_flush();
+
+            \Yii::info('AutoKuponApi Success!', 'kupon');
+
+            \Yii::info('actionUpdateall end', 'kupon');
+
+            return;
 
         //} else {
         //    echo 'Access denied!';

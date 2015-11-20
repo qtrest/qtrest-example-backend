@@ -33,6 +33,11 @@ if ($update) {
   // Log the deployment
   $commit_hash = shell_exec('cd ' . $repo_dir . ' && ' . $git_bin_path  . ' rev-parse --short HEAD');
   file_put_contents('deploy.log', date('m/d/Y h:i:s a') . " Deployed branch: " .  $branch . " Commit: " . $commit_hash . "\n", FILE_APPEND);
+
+  echo 'Ok!';
+} else {
+  echo 'Skip!';
 }
 ?>
+
 

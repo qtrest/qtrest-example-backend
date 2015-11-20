@@ -33,6 +33,7 @@ $config = [
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
+            'flushInterval' => 1, // <-- here
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
@@ -47,6 +48,7 @@ $config = [
                     'logFile' => '@app/runtime/logs/kupon/kupon.log',
                     'maxFileSize' => 1024 * 2,
                     'maxLogFiles' => 20,
+                    'exportInterval' => 1, // <-- and here
                 ],
             ],
         ],
