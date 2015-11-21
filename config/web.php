@@ -60,6 +60,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
+        'devicedetect' => [
+            'class' => 'alexandernst\devicedetect\DeviceDetect'
+        ],
     ],
 	'modules' => [
 		'kupon' => [

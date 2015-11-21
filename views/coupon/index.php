@@ -25,12 +25,21 @@ $this->params['breadcrumbs'] = '';
         <? echo Html::a(Yii::t('app', 'Create {modelClass}', ['modelClass' => 'Coupon',]), ['create'], ['class' => 'btn btn-success']);?>
     </p>
 -->
-    <?= ListView::widget([
+    <?php
+    
+    $itemClass = 'coupon-item ';
+    if (\Yii::$app->devicedetect->isMobile()) {
+        $itemClass .= ' col-xs-12';
+    } else {
+        $itemClass .= ' col-xs-4';
+    }
+    
+    echo ListView::widget([
 		//'summary' => '',
         'dataProvider' => $dataProvider,
         'layout' => '{summary}<div class="block-items">{items}</div>{pager}',
         //'options' => ['class' => ''],
-        'itemOptions' => ['class' => 'coupon-item col-xs-4'],
+        'itemOptions' => ['class' => $itemClass],
         'itemView' => '_item',
     ]) ?>
 
