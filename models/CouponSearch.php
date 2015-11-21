@@ -67,7 +67,7 @@ class CouponSearch extends Coupon
             'pagination' => [
                 'pageSize' => 12,
             ],
-        ]);
+        ]); 
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
@@ -89,7 +89,7 @@ class CouponSearch extends Coupon
         if ($this->sourceServiceId == 0) {
             $this->sourceServiceId = '';
         }
-        if ($this->discountType == 0) {
+        if ($this->discountType == '0') {
             $this->discountType = '';
         }
 
