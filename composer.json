@@ -22,7 +22,8 @@
         "yiisoft/yii2-gii": "*",
 	"xj/yii2-holder-widget": "*",
         "yiisoft/yii2-debug": "*",
-	"ijackua/yii2-sharelinks-widget": "dev-master"
+	"ijackua/yii2-sharelinks-widget": "dev-master",
+        "alexandernst/yii2-device-detect": "0.0.8"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
