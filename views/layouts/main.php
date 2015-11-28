@@ -111,7 +111,7 @@ AppAsset::register($this);
             <?=Yii::$app->view->render('/site/statistics')?>
             <?php Yii::$app->view->registerJs(<<<JS
                 $.ajax({
-                        url: "site/statistics",
+                        url: "/site/statistics",
                         success: function (data) {
                             $("#statModal .modal-body").append(data);
                         },
