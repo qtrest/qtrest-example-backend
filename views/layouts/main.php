@@ -80,7 +80,10 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Актуальные', 'url' => ['/coupon/actual']],
                     ['label' => 'Архив', 'url' => ['/coupon/archive']],
-                    ['label' => 'Статистика', 'url' => ['/coupon/archive']],
+                    ['label' => 'Статистика', 'url' => '#', 'options' => [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#statModal'
+                    ]],
                 ],
             ]);
             echo Nav::widget([
@@ -105,7 +108,20 @@ AppAsset::register($this);
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <?= $content ?>
+            <?=Yii::$app->view->render('/site/statistics')?>
+            <?php Yii::$app->view->registerJs(<<<JS
+                $.ajax({
+                        url: "site/statistics",
+                        success: function (data) {
+                            $("#statModal .modal-body").append(data);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log(errorThrown);
+                        }
 
+                });
+JS
+                , \yii\web\View::POS_READY);?>
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Все мои сервисы -->
             <ins class="adsbygoogle"

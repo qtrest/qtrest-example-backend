@@ -2,6 +2,8 @@
 
 namespace app\modules\kupon\parser;
 
+use app\models\Coupon;
+use app\models\Statistics;
 use SleepingOwl\Apist\Apist;
 use app\components\Tools;
 use yii\db\Query;
@@ -358,6 +360,30 @@ abstract class BaseApi extends Apist
         $connection->createCommand()->update('cityUrl', [
             'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
         ],['cityId' => $cityId, 'sourceServiceId' => $this->getSourceServiceId()])->execute();
+
+        $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),
+            'new', date('Y-m-d'), count($kupons));
+    }
+
+    private function createUpdateStatistics($sourceId, $sourceAlias, $codeType, $createDate, $countKupons)
+    {
+        $statistics = Statistics::find()->where('sourceId=:sId AND codeType=:cT AND createDate=:cD',[
+            ':sId' => $sourceId,
+            ':cT' => $codeType,
+            ':cD' => $createDate
+        ])->one();
+        if ($statistics) {
+            $count = (int)$statistics->count + count($countKupons);
+        } else {
+            $statistics = new Statistics();
+            $count = count($countKupons);
+        }
+        $statistics->sourceId = $sourceId;
+        $statistics->alias = $sourceAlias;
+        $statistics->count = $count;
+        $statistics->createDate = $createDate;
+        $statistics->codeType = $codeType;
+        $statistics->save();
     }
 
     public function updateAllCoupons()
@@ -458,6 +484,10 @@ abstract class BaseApi extends Apist
                 'boughtCount' => $result['boughtCount'],
                 'imagesLinks' => implode(', ', $result['imageLinks']),
             ], ['id' => $couponId])->execute();
+
+            //$coupon = Coupon::findOne($couponId);
+            $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),
+                'archive', date('Y-m-d'), 1);
         }
     }
 }

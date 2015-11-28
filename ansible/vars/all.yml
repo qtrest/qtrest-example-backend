@@ -9,7 +9,7 @@ vagrant_local:
     vm: { base_box: trusty64, hostname: default, ip: 192.168.0.103, memory: '1024', sharedfolder: '', syncType: rsync }
 apache:
     install: '1'
-    docroot: /vagrant
+    docroot: /vagrant/web
     servername: kupon
 mysql:
     install: '1'
@@ -17,7 +17,7 @@ mysql:
     database: admin_coupon
     user: admin_coupon
     password: uruPhscu77Vy3hUA
-    dump: ''
+    dump: ''    
 php:
     install: '1'
     ppa: php5-5.6

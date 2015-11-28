@@ -12,10 +12,12 @@ class m151108_144815_create_journal_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
         $this->createTable('{{%statistics}}', [
+            'id' => $this->primaryKey(),
             'sourceId' => $this->integer(),
+            'createDate' => $this->date(),
             'alias' => $this->string(),
+            'codeType' => $this->string()->notNull(),//new or archive
             'count' => $this->integer()->notNull()->defaultValue(0),
-            'PRIMARY KEY (`sourceId`)'
         ], $tableOptions);
         $this->addForeignKey('source', '{{%statistics}}', 'sourceId', '{{%sourceService}}', 'id');
     }

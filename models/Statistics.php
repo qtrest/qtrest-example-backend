@@ -7,9 +7,14 @@ use Yii;
 /**
  * This is the model class for table "statistics".
  *
- * @property string $source
+ * @property integer $id
+ * @property integer $sourceId
+ * @property string $createDate
  * @property string $alias
+ * @property string $codeType
  * @property integer $count
+ *
+ * @property SourceService $source
  */
 class Statistics extends \yii\db\ActiveRecord
 {
@@ -27,9 +32,10 @@ class Statistics extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['source'], 'required'],
-            [['count'], 'integer'],
-            [['source', 'alias'], 'string', 'max' => 255]
+            [['sourceId', 'count'], 'integer'],
+            [['createDate'], 'safe'],
+            [['codeType'], 'required'],
+            [['alias', 'codeType'], 'string', 'max' => 255]
         ];
     }
 
@@ -39,9 +45,20 @@ class Statistics extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'source' => Yii::t('app', 'Source'),
-            'alias' => Yii::t('app', 'Alias'),
-            'count' => Yii::t('app', 'Count'),
+            'id' => 'ID',
+            'sourceId' => 'Source ID',
+            'createDate' => 'Create Date',
+            'alias' => 'Alias',
+            'codeType' => 'Code Type',
+            'count' => 'Count',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSource()
+    {
+        return $this->hasOne(SourceService::className(), ['id' => 'sourceId']);
     }
 }

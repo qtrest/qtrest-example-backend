@@ -8,8 +8,15 @@
 
 - name: install phpmyadmin
   apt: name=phpmyadmin state=latest
- 
+  
 - name: link phpmyadmin
   sudo: yes
-  file: src=/usr/share/phpmyadmin dest=/vagrant/pma state=link
-  notify: restart apache 
+  file: src=/etc/phpmyadmin/apache.conf dest=/etc/apache2/conf-available/phpmyadmin.conf state=link   
+  
+- name: enable phpmyadmin
+  sudo: yes
+  shell: a2enconf phpmyadmin
+  notify: restart apache  
+ 
+ #База phpmyadmin не была создана, т.к. это делает интерактивная штука. Решений пока не нашел
+ #Фикс: ручками выполнить sudo dpkg-reconfigure phmyadmin

@@ -19,9 +19,10 @@ class CouponSearch extends Coupon
     {
         return [
             [['id', 'sourceServiceId', 'cityId'], 'integer'],
+            [['discountType'], 'string'],
             [['createTimestamp', 'lastUpdateDateTime', 'fullTextStr', 'recordHash', 'title', 'shortDescription',
                 'longDescription', 'conditions', 'features', 'imagesLinks', 'timeToCompletion', 'mainImageLink',
-                'originalPrice', 'discountPercent', 'discountPrice', 'discountType', 'boughtCount',
+                'originalPrice', 'discountPercent', 'discountPrice', 'boughtCount',
                 'sourceServiceCategories', 'pageLink', 'isArchive'], 'safe'],
         ];
     }
