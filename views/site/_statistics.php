@@ -10,11 +10,23 @@ use yii\grid\GridView;
 echo GridView::widget([
     'id' => 'gridNew',
     'dataProvider' => $arrayProviderNew,
-    'layout' => '{items}'
+    'layout' => '{items}',
+    'columns' => [
+        ['attribute' => 'name', 'label' => 'Сервис'],
+        ['attribute' => 'today', 'label' => 'Сегодня'],
+        ['attribute' => 'week', 'label' => 'За неделю'],
+        ['attribute' => 'month', 'label' => 'За месяц']
+    ]
 ]);
 echo GridView::widget([
     'id' => 'gridArchive',
     'dataProvider' => $arrayProviderArchived,
     'layout' => '{items}',
-    'options' => ['style' => 'display:none']
+    'options' => ['style' => 'display:none'],
+    'columns' => [
+        ['attribute' => 'name', 'label' => 'Сервис'],
+        ['attribute' => 'today', 'label' => 'Сегодня'],
+        ['attribute' => 'week', 'label' => 'За неделю'],
+        ['attribute' => 'month', 'label' => 'За месяц']
+    ]
 ]);
