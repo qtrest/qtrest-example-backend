@@ -69,3 +69,10 @@ Setup developing environment.
 6. Project files will be mounted in /vagrant folder. Files are syncing automatically
 
 
+Test services!
+--------------------
+http://skid.kz/kupon/default/testapi?serviceId=1
+http://skid.kz/kupon/default/testapi?serviceId=2
+http://skid.kz/kupon/default/testapi?serviceId=3
+http://skid.kz/kupon/default/testapi?serviceId=4
+http://skid.kz/kupon/default/testapi?serviceId=5

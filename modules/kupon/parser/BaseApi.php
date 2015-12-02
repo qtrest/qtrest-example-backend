@@ -79,7 +79,7 @@ abstract class BaseApi extends Apist
         return \Yii::$app->db->createCommand('SELECT id FROM country WHERE countryCode=\''.$this->getCountryCode().'\'')->queryScalar();
     }
 
-    protected function getSourceServiceId()
+    public function getSourceServiceId()
     {
         return \Yii::$app->db->createCommand('SELECT id FROM sourceService WHERE serviceCode=\''.$this->getSourceServiceCode().'\'')->queryScalar();
     }

@@ -151,4 +151,47 @@ class DefaultController extends Controller
             echo count($proxyList) . ' proxies added.';
         //}
     }
+    
+    public function actionTestapi($serviceId)
+    {
+        $api = NULL;
+        switch ($serviceId) {
+            case 1:
+                $api = new ChocolifeApi();
+                break;
+            case 2:
+                $api = new BlizzardApi();
+                break;
+            case 3:
+                $api = new KupiKuponApi();
+                break;
+            case 4:
+                $api = new MirKuponovApi();
+                break;
+            case 5:
+                $api = new AutoKuponApi();
+                break;
+            default:
+                echo "Not found!";
+                return;
+        }
+        
+        echo $api->getBaseUrl() . "<br/>";
+        
+        $api->testCities();
+        
+        echo "<br/>";
+        $api->testCategories();
+        
+        echo "<br/>";
+        $api->testCoupons(1, false);
+        
+        echo "<br/>";
+        $api->testCoupons(2, false);
+        
+        echo "<br/>";
+        $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\'')->queryScalar();
+        
+        $api->testAdvancedCoupon($lastCouponId);
+    }
 }
