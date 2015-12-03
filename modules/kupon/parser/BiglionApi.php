@@ -45,7 +45,11 @@ class BiglionApi extends BaseApi
                 'path' => Apist::current()->attr('href')->call(function ($href)
                 {
                     //subdomens!!!
-                    return $href;
+                    if(Tools::startsWith($href, 'http://') || Tools::startsWith($href, 'https://')) {
+                        return $href;
+                    } else {
+                        return $this->getBaseUrl() . $href;
+                    }
                 })
             ]),
         ]);

@@ -42,7 +42,11 @@ class MirKuponovApi extends BaseApi
                 'city' => Apist::current()->text(),
                 'link' => Apist::current()->attr('href')->call(function ($href)
                 {
-                    return $this->getBaseUrl() . $href;
+                    if(Tools::startsWith($href, 'http://') || Tools::startsWith($href, 'https://')) {
+                        return $href;
+                    } else {
+                        return $this->getBaseUrl() . $href;
+                    }
                 }),
                 'path' => Apist::current()->attr('href'),
             ]),

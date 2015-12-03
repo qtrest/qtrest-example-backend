@@ -37,32 +37,32 @@ class DefaultController extends Controller
             $chocolife = new ChocolifeApi();
             $chocolife->initData();
             $chocolife->fetchAllCities();
-            $chocolife->updateAllCoupons();
+            //$chocolife->updateAllCoupons();
             echo 'ChocolifeApi Success!<br/>';
 
-            $blizzard = new BlizzardApi();
-            $blizzard->initData();
-            $blizzard->fetchAllCities();
-            $blizzard->updateAllCoupons();
-            echo 'BlizzardApi Success!<br/>';
+            // $blizzard = new BlizzardApi();
+            // $blizzard->initData();
+            // $blizzard->fetchAllCities();
+            // $blizzard->updateAllCoupons();
+            // echo 'BlizzardApi Success!<br/>';
 
-            $kupiKupon = new KupiKuponApi();
-            $kupiKupon->initData();
-            $kupiKupon->fetchAllCities();
-            $kupiKupon->updateAllCoupons();
-            echo 'KupiKuponApi Success!<br/>';
+            // $kupiKupon = new KupiKuponApi();
+            // $kupiKupon->initData();
+            // $kupiKupon->fetchAllCities();
+            // $kupiKupon->updateAllCoupons();
+            // echo 'KupiKuponApi Success!<br/>';
 
-            $mirKuponov = new MirKuponovApi();
-            $mirKuponov->initData();
-            $mirKuponov->fetchAllCities();
-            $mirKuponov->updateAllCoupons();
-            echo 'MirKuponovApi Success!<br/>';
+            // $mirKuponov = new MirKuponovApi();
+            // $mirKuponov->initData();
+            // $mirKuponov->fetchAllCities();
+            // $mirKuponov->updateAllCoupons();
+            // echo 'MirKuponovApi Success!<br/>';
 
-            $autoKupon = new AutoKuponApi();
-            $autoKupon->initData();
-            $autoKupon->fetchAllCities();
-            $autoKupon->updateAllCoupons();
-            echo 'AutoKuponApi Success!<br/>';
+            // $autoKupon = new AutoKuponApi();
+            // $autoKupon->initData();
+            // $autoKupon->fetchAllCities();
+            // $autoKupon->updateAllCoupons();
+            // echo 'AutoKuponApi Success!<br/>';
 
         //} else {
         //    echo 'Access denied!';
@@ -152,8 +152,11 @@ class DefaultController extends Controller
         //}
     }
     
-    public function actionTestapi($serviceId)
+    public function actionTestapi($serviceId, $testType = 1)
     {
+        $headers = \Yii::$app->response->headers;
+        $headers->add('Content-Type', 'text/xml; charset=utf-8');
+        
         $api = NULL;
         switch ($serviceId) {
             case 1:
@@ -178,20 +181,26 @@ class DefaultController extends Controller
         
         echo $api->getBaseUrl() . "<br/>";
         
-        $api->testCities();
-        
-        echo "<br/>";
-        $api->testCategories();
-        
-        echo "<br/>";
-        $api->testCoupons(1, false);
-        
-        echo "<br/>";
-        $api->testCoupons(2, false);
-        
-        echo "<br/>";
-        $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\'')->queryScalar();
-        
-        $api->testAdvancedCoupon($lastCouponId);
+        switch ($testType) {
+            case 1:
+                $api->testCities();
+                break;
+            case 2:
+                $api->testCategories();
+                break;
+            case 3:
+                $api->testCoupons(1, false);
+                break;
+            case 4:
+                $api->testCoupons(2, false);
+                break;
+            case 5:
+                $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\'')->queryScalar();
+                $api->testAdvancedCoupon($lastCouponId);
+                break;
+            default:
+                echo "Not found!";
+                return;
+        }
     }
 }

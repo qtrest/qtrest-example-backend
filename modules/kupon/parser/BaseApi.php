@@ -110,6 +110,7 @@ abstract class BaseApi extends Apist
 
     public function initData()
     {
+        //first we need to check all parameters and if they wrong - exit from program
         \Yii::info('run initData '.get_class($this), 'kupon');
 		$baseUrl = $this->getBaseUrl();
 		$sourceServiceCode = $this->getSourceServiceCode();
@@ -127,6 +128,7 @@ abstract class BaseApi extends Apist
             return;
         }
 
+        //Than - we checking last data init call. Recall only after 4 hours!
         $query = new Query;
         $res = $query->select('lastUpdateDateTime')
             ->from('sourceService')
@@ -147,7 +149,7 @@ abstract class BaseApi extends Apist
             }
         }
 
-        //check service source
+        //check source service is alredy available in database
         $connection=\Yii::$app->db;
         $query = new Query;
         $res = $query->select('id')
@@ -156,6 +158,7 @@ abstract class BaseApi extends Apist
             ->createCommand()
             ->queryScalar();
 
+        //if service does not exists - we must to add it
         if (empty($res)) {
             $connection->createCommand()->insert('sourceService', [
                 'serviceName' => $this->getSourceServiceName(),
@@ -164,7 +167,7 @@ abstract class BaseApi extends Apist
             ])->execute();
         }
 
-        //check country
+        //check service country
         $connection=\Yii::$app->db;
         $query = new Query;
         $res = $query->select('id')
@@ -173,6 +176,7 @@ abstract class BaseApi extends Apist
             ->createCommand()
             ->queryScalar();
 
+        //if country does not exists - we add it
         if (empty($res)) {
             $connection->createCommand()->insert('country', [
                 'countryName' => $this->getCountryName(),
@@ -180,7 +184,12 @@ abstract class BaseApi extends Apist
             ])->execute();
         }
 
+        //parse and fill cities table
+        //this function scan and add all new cities from this services
         $this->fillInCityTable();
+        
+        //parse and fill categories table
+        //this function auto detect new categories for each service and add them to database
         $this->fillInCategoriesTable();
 
         //update lastUpdateDateTime in sourceService
@@ -191,14 +200,18 @@ abstract class BaseApi extends Apist
 
     private function fillInCityTable()
     {
+        //get allcities from target service
         \Yii::info('run fillInCityTable '.get_class($this), 'kupon');
         $cities = $this->cities()['cities'];
         \Yii::info(serialize($cities), 'kupon');
 
         $connection=\Yii::$app->db;
 
+        //step by step for each city we check exists it in database or not. if exists - check for link changed.
+        //If not exists - add them to database
         foreach ($cities as $key => $value) {
 
+            //city exists?
             $query = new Query;
             $res = $query->select('id')
                 ->from('city')
@@ -206,6 +219,7 @@ abstract class BaseApi extends Apist
                 ->createCommand()
                 ->queryScalar();
 
+            //add if not exists
             if (empty($res)) {
                 $connection->createCommand()->insert('city', [
                     'cityName' => $value['city'],
@@ -214,8 +228,10 @@ abstract class BaseApi extends Apist
                 ])->execute();
             }
 
+            //then - check cityUrl for current service
             $cityId = $connection->createCommand('SELECT id FROM city WHERE cityCode=\''.Tools::ru2lat($value['city']).'\'')->queryScalar();
 
+            //cityUrl exists?
             $query = new Query;
             $res = $query->select('id')
                 ->from('cityUrl')
@@ -223,13 +239,30 @@ abstract class BaseApi extends Apist
                 ->createCommand()
                 ->queryScalar();
 
+            //if not - add them. If yes - check for link and path changed!!!
             if (empty($res)) {
                 $connection->createCommand()->insert('cityUrl', [
                     'cityId' => $cityId,
-                    'url' => ($value['path'] == '#' ? '/' : $value['link']),
+                    'url' => ($value['link'] == '#' ? '/' : $value['link']),
                     'path' => ($value['path'] == '#' ? '/' : $value['path']),
                     'sourceServiceId' => $this->getSourceServiceId(),
                 ])->execute();
+            } else {
+                $cityUrlRow = $query->select('id, url, path')
+                ->from('cityUrl')
+                ->where('cityId=:cityId AND sourceServiceId=:sourceServiceId', [':cityId' => $cityId, ':sourceServiceId' => $this->getSourceServiceId()])
+                ->createCommand()
+                ->queryOne();
+                
+                if (($cityUrlRow['url'] != $value['link']) || ($cityUrlRow['path'] != $value['path']) ) {
+                    $connection->createCommand()->update('cityUrl', 
+                    [
+                        'url'=> $value['link'],
+                        'path'=> $value['path'],
+                    ],
+                    'id=:id',
+                    [':id'=>$cityUrlRow['id']])->execute();
+                }
             }
         }
     }

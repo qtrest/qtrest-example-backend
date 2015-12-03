@@ -71,8 +71,24 @@ Setup developing environment.
 
 Test services!
 --------------------
-http://skid.kz/kupon/default/testapi?serviceId=1
-http://skid.kz/kupon/default/testapi?serviceId=2
-http://skid.kz/kupon/default/testapi?serviceId=3
-http://skid.kz/kupon/default/testapi?serviceId=4
-http://skid.kz/kupon/default/testapi?serviceId=5
+
+ChocolifeApi: http://skid.kz/kupon/default/testapi?serviceId=1
+
+BlizzardApi: http://skid.kz/kupon/default/testapi?serviceId=2
+
+KupiKuponApi: http://skid.kz/kupon/default/testapi?serviceId=3
+
+MirKuponovApi: http://skid.kz/kupon/default/testapi?serviceId=4
+
+AutoKuponApi: http://skid.kz/kupon/default/testapi?serviceId=5
+
+You MUST specify TESTTYPE!!!
+http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
+
+1. cities
+2. categories
+3. coupons for Almaty
+4. coupons for Astana
+5. advanced coupon for last coupon id
+
+Example: http://skid.kz/kupon/default/testapi?serviceId=1&testType=2

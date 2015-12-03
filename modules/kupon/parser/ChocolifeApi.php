@@ -42,7 +42,11 @@ class ChocolifeApi extends BaseApi
                 'city' => Apist::current()->text(),
                 'link' => Apist::current()->attr('href')->call(function ($href)
                 {
-                    return $this->getBaseUrl() . $href;
+                    if(Tools::startsWith($href, 'http://') || Tools::startsWith($href, 'https://')) {
+                        return $href;
+                    } else {
+                        return $this->getBaseUrl() . $href;
+                    }
                 }),
                 'path' => Apist::current()->attr('href'),
             ]),
@@ -56,7 +60,7 @@ class ChocolifeApi extends BaseApi
     protected function categories()
     {
         $result = $this->get('/', [
-            'categories'  => Apist::filter('#b-deals__menunav__nav li a')->each([
+            'categories'  => Apist::filter('#b-deals__menunav__category__place li a')->each([
                 'categoryName' => Apist::filter('span')->text(),
                 'categoryId' => Apist::current()->attr('cat_id'),
                 'parentCategoryId' => Apist::current()->attr('parent_id'),
@@ -68,7 +72,8 @@ class ChocolifeApi extends BaseApi
         ]);
 
         $result = Tools::trimArray($result);
-        $result = Tools::removeLastWordArray($result);
+        //used before 03/12/2015
+        //$result = Tools::removeLastWordArray($result);
 
         return $result;
     }
@@ -86,7 +91,23 @@ class ChocolifeApi extends BaseApi
             //'cityLat'  => Tools::ru2lat(Apist::filter('#js-b-header > div.b-logo__city__wrapper > div.b-city__change > a > span')->text()->mb_substr(0, -1)),
 			'coupons' => Apist::filter('body > div.b-deals__wrapper > ul li')->each([
                 'title' => Apist::filter('.e-deal__title')->text(),
+                'altTitle' => Apist::filter('.e-plate__img')->attr('alt')->call(function ($alt) { return Tools::getThreeFirstWords($alt); }),
+                //exists then else NOT working. Why?
+                //                 'title' => Apist::filter('.e-deal__title')->exists()->then(
+                //     Apist::filter('.e-deal__title')->text() // This value will be used if .page-header element was found
+                // )->else(
+                //     Apist::filter('.e-plate__img')->attr('alt')->call(function ($alt)
+                //     {
+                //         return Tools::getFirstSentence($alt);
+                //     })
+                // ),
+                // 'shortDescription' => Apist::filter('.e-deal__text')->exists()->then(
+                //         Apist::filter('.e-deal__text')->text() // This value will be used if .page-header element was found
+                //     )->else(
+                //         Apist::filter('.e-plate__img')->attr('alt')
+                //     ),
                 'shortDescription' => Apist::filter('.e-deal__text')->text(),
+                'altShortDescription' => Apist::filter('.e-plate__img')->attr('alt'),
                 'longDescription' => 'empty',
                 'conditions' => 'empty',
                 'features' => 'empty',
@@ -95,26 +116,37 @@ class ChocolifeApi extends BaseApi
 				'originalPrice' => Apist::filter('div.b-deal__info > span.e-deal__price.e-deal__price--old')->text(),
                 'discountPercent' => Apist::filter('.e-deal__discount')->text(),
                 'discountPrice' => Apist::filter('div.b-deal__info > span:nth-child(2)')->text(),
-				'pageLink' => Apist::filter('div.b-deal__info > a')->attr('href')->call(function ($href) {
+				'pageLink' => Apist::filter('.b-main_page__link')->attr('href')->call(function ($href) {
                     return parse_url($href)['path'];
                 }),
-                'boughtCount' => Apist::filter('div.b-deal__bought > span')->text()->call(function ($str)
-                {
-                    return Tools::getLastWord($str);
+                'altPageLink' => Apist::filter('.e-deal__imgs a')->attr('href')->call(function ($href) {
+                    return parse_url($href)['path'];
                 }),
+                'boughtCount' => Apist::filter('div.b-deal__bought .e-deal__count')->text(),
                 'sourceServiceCategories' => Apist::current()->attr('data-categories')->call(function ($str)
                 {
                     return str_replace('[','',str_replace(']','',$str));
                 }),
                 'sourceServiceId' => $this->getSourceServiceId(),
                 'imagesLinks' => 'empty',
-                'mainImageLink' => Apist::filter('div.e-deal__imgs img')->attr('data-original'),
+                'mainImageLink' => Apist::filter('div.e-deal__imgs img')->attr('src'),
+                'altMainImageLink' => Apist::filter('.e-plate__img')->attr('src'),
 			]),
         ]);
 
         $result = Tools::trimArray($result);
 
         $result['cityCode'] = Tools::ru2lat($result['city']);
+        
+        for($i = 0; $i < count($result['coupons']); $i++) {
+            if (empty(trim($result['coupons'][$i]['title']))) {
+                $result['coupons'][$i]['title'] = $result['coupons'][$i]['altTitle'];
+                $result['coupons'][$i]['shortDescription'] = $result['coupons'][$i]['altShortDescription'];
+                $result['coupons'][$i]['mainImageLink'] = $result['coupons'][$i]['altMainImageLink'];
+                $result['coupons'][$i]['pageLink'] = $result['coupons'][$i]['altPageLink'];
+                
+            }
+        }
 
         return $result;
     }
