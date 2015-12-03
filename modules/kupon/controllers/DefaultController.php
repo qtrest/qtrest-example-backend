@@ -37,32 +37,32 @@ class DefaultController extends Controller
             $chocolife = new ChocolifeApi();
             $chocolife->initData();
             $chocolife->fetchAllCities();
-            //$chocolife->updateAllCoupons();
+            $chocolife->updateAllCoupons();
             echo 'ChocolifeApi Success!<br/>';
 
-            // $blizzard = new BlizzardApi();
-            // $blizzard->initData();
-            // $blizzard->fetchAllCities();
-            // $blizzard->updateAllCoupons();
-            // echo 'BlizzardApi Success!<br/>';
+            $blizzard = new BlizzardApi();
+            $blizzard->initData();
+            $blizzard->fetchAllCities();
+            $blizzard->updateAllCoupons();
+            echo 'BlizzardApi Success!<br/>';
 
-            // $kupiKupon = new KupiKuponApi();
-            // $kupiKupon->initData();
-            // $kupiKupon->fetchAllCities();
-            // $kupiKupon->updateAllCoupons();
-            // echo 'KupiKuponApi Success!<br/>';
+            $kupiKupon = new KupiKuponApi();
+            $kupiKupon->initData();
+            $kupiKupon->fetchAllCities();
+            $kupiKupon->updateAllCoupons();
+            echo 'KupiKuponApi Success!<br/>';
 
-            // $mirKuponov = new MirKuponovApi();
-            // $mirKuponov->initData();
-            // $mirKuponov->fetchAllCities();
-            // $mirKuponov->updateAllCoupons();
-            // echo 'MirKuponovApi Success!<br/>';
+            $mirKuponov = new MirKuponovApi();
+            $mirKuponov->initData();
+            $mirKuponov->fetchAllCities();
+            $mirKuponov->updateAllCoupons();
+            echo 'MirKuponovApi Success!<br/>';
 
-            // $autoKupon = new AutoKuponApi();
-            // $autoKupon->initData();
-            // $autoKupon->fetchAllCities();
-            // $autoKupon->updateAllCoupons();
-            // echo 'AutoKuponApi Success!<br/>';
+            $autoKupon = new AutoKuponApi();
+            $autoKupon->initData();
+            $autoKupon->fetchAllCities();
+            $autoKupon->updateAllCoupons();
+            echo 'AutoKuponApi Success!<br/>';
 
         //} else {
         //    echo 'Access denied!';
