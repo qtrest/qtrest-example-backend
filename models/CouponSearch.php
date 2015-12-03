@@ -68,9 +68,7 @@ class CouponSearch extends Coupon
             'pagination' => [
                 'pageSize' => 15,
             ],
-            'sort'=> [
-                'defaultOrder'=>'id DESC',
-            ],
+            'sort'=> ['defaultOrder' => ['id'=>SORT_DESC]]
         ]); 
 
         if (!($this->load($params) && $this->validate())) {
