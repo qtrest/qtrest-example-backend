@@ -24,7 +24,8 @@
         "yiisoft/yii2-debug": "*",
 	"ijackua/yii2-sharelinks-widget": "dev-master",
         "alexandernst/yii2-device-detect": "0.0.8",
-        "kartik-v/yii2-widget-switchinput": "*"
+        "kartik-v/yii2-widget-switchinput": "*",
+        "romdim/yii2-bootstrap-material": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
