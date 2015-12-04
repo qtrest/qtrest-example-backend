@@ -116,8 +116,15 @@ class ChocolifeApi extends BaseApi
 				'originalPrice' => Apist::filter('div.b-deal__info > span.e-deal__price.e-deal__price--old')->text(),
                 'discountPercent' => Apist::filter('.e-deal__discount')->text(),
                 'discountPrice' => Apist::filter('div.b-deal__info > span:nth-child(2)')->text(),
+                'rawPageLink' => Apist::filter('.b-main_page__link')->attr('href')->call(function ($href) {
+                    return $href;
+                }),
+                'pathPageLink' => Apist::filter('.b-main_page__link')->attr('href')->call(function ($href) {
+                    return parse_url($href)['path']; 
+                }),
 				'pageLink' => Apist::filter('.b-main_page__link')->attr('href')->call(function ($href) {
-                    return parse_url($href)['path'];
+                    return $href;
+                    //return parse_url($href)['path']; 
                 }),
                 'altPageLink' => Apist::filter('.e-deal__imgs a')->attr('href')->call(function ($href) {
                     return $href;
@@ -132,7 +139,8 @@ class ChocolifeApi extends BaseApi
                 'imagesLinks' => 'empty',
                 'mainImageLink' => Apist::filter('div.e-deal__imgs img')->attr('data-original'),
                 'mainSrcImageLink' => Apist::filter('div.e-deal__imgs img')->attr('src'),
-                'altMainImageLink' => Apist::filter('.e-plate__img')->attr('src'),
+                'altMainImageLink' => Apist::filter('.e-plate__img')->attr('data-original'),
+                'altSrcMainImageLink' => Apist::filter('.e-plate__img')->attr('src'),
 			]),
         ]);
 
@@ -141,14 +149,19 @@ class ChocolifeApi extends BaseApi
         $result['cityCode'] = Tools::ru2lat($result['city']);
         
         for($i = 0; $i < count($result['coupons']); $i++) {
+            if (empty(trim($result['coupons'][$i]['mainImageLink']))) {
+                $result['coupons'][$i]['mainImageLink'] = $result['coupons'][$i]['mainSrcImageLink'];
+            }
+
+            if (empty(trim($result['coupons'][$i]['altMainImageLink']))) {
+                $result['coupons'][$i]['altMainImageLink'] = $result['coupons'][$i]['altSrcMainImageLink'];
+            }
+
             if (empty(trim($result['coupons'][$i]['title']))) {
                 $result['coupons'][$i]['title'] = $result['coupons'][$i]['altTitle'];
                 $result['coupons'][$i]['shortDescription'] = $result['coupons'][$i]['altShortDescription'];
                 $result['coupons'][$i]['mainImageLink'] = $result['coupons'][$i]['altMainImageLink'];
                 $result['coupons'][$i]['pageLink'] = $result['coupons'][$i]['altPageLink'];
-            }
-            if (empty(trim($result['coupons'][$i]['mainImageLink']))) {
-                $result['coupons'][$i]['mainImageLink'] = $result['coupons'][$i]['mainSrcImageLink'];
             }
         }
 
