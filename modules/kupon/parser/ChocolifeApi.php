@@ -130,7 +130,8 @@ class ChocolifeApi extends BaseApi
                 }),
                 'sourceServiceId' => $this->getSourceServiceId(),
                 'imagesLinks' => 'empty',
-                'mainImageLink' => Apist::filter('div.e-deal__imgs img')->attr('src'),
+                'mainImageLink' => Apist::filter('div.e-deal__imgs img')->attr('data-original'),
+                'mainSrcImageLink' => Apist::filter('div.e-deal__imgs img')->attr('src'),
                 'altMainImageLink' => Apist::filter('.e-plate__img')->attr('src'),
 			]),
         ]);
@@ -145,7 +146,9 @@ class ChocolifeApi extends BaseApi
                 $result['coupons'][$i]['shortDescription'] = $result['coupons'][$i]['altShortDescription'];
                 $result['coupons'][$i]['mainImageLink'] = $result['coupons'][$i]['altMainImageLink'];
                 $result['coupons'][$i]['pageLink'] = $result['coupons'][$i]['altPageLink'];
-                
+            }
+            if (empty(trim($result['coupons'][$i]['mainImageLink']))) {
+                $result['coupons'][$i]['mainImageLink'] = $result['coupons'][$i]['mainSrcImageLink'];
             }
         }
 
