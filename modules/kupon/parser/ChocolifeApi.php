@@ -120,7 +120,8 @@ class ChocolifeApi extends BaseApi
                     return parse_url($href)['path'];
                 }),
                 'altPageLink' => Apist::filter('.e-deal__imgs a')->attr('href')->call(function ($href) {
-                    return parse_url($href)['path'];
+                    return $href;
+                    //return parse_url($href)['path'];
                 }),
                 'boughtCount' => Apist::filter('div.b-deal__bought .e-deal__count')->text(),
                 'sourceServiceCategories' => Apist::current()->attr('data-categories')->call(function ($str)
