@@ -406,10 +406,10 @@ abstract class BaseApi extends Apist
             ':cD' => $createDate
         ])->one();
         if ($statistics) {
-            $count = (int)$statistics->count + count($countKupons);
+            $count = (int)$statistics->count + $countKupons;
         } else {
             $statistics = new Statistics();
-            $count = count($countKupons);
+            $count = $countKupons;
         }
         $statistics->sourceId = $sourceId;
         $statistics->alias = $sourceAlias;
