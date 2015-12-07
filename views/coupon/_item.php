@@ -8,6 +8,7 @@
 
 use yii\helpers\Html;
 use yii\db\Query;
+use app\components\Tools;
 
 $query = new Query;
 $serviceBaseUrl = $query->select('serviceBaseUrl')
