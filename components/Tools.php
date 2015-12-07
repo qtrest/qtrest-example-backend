@@ -88,6 +88,36 @@ class Tools {
         }
     }
 
+    public static function removeLastDigitsArray($data) {
+
+        if (gettype($data) == 'array') {
+            return array_map(array(__CLASS__, "removeLastDigitsArray"), $data);
+        } else {
+            $data = trim($data);
+            if (strlen($data)<=0) { return $data; }
+            while (in_array($data[strlen($data)-1], ["1","2","3","4","5","6","7","8","9","0"])) {
+                if (strlen($data)<=1) { return $data; }
+                $data = substr_replace($data ,"",-1);
+            }
+            return $data;
+        }
+    }
+
+    public static function removeLastDigits($data) {
+        $data = trim($data);
+        if (strlen($data)<=0) { return $data; }
+        while (in_array($data[strlen($data)-1], ["1","2","3","4","5","6","7","8","9","0"])) {
+            if (strlen($data)<=1) { return $data; }
+            $data = substr_replace($data ,"",-1);
+        }
+        return $data;
+    }
+
+    function isDigitString($str)
+    {
+        return preg_match("/^-?[0-9]+$/", $str);
+    }
+
     public static function getLastWord($str, $delimitier = " ") {
 
         $str = htmlentities($str, null, 'utf-8');

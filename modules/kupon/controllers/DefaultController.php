@@ -29,6 +29,38 @@ class DefaultController extends Controller
         $bgl->updateAllCoupons();
     }
 
+    public function actionFetchblizzard()
+    {
+        $bgl = new BlizzardApi();
+        $bgl->initData();
+        $bgl->fetchAllCities();
+        $bgl->updateAllCoupons();
+    }
+
+    public function actionFetchkupikupon()
+    {
+        $bgl = new KupiKuponApi();
+        $bgl->initData();
+        $bgl->fetchAllCities();
+        $bgl->updateAllCoupons();
+    }
+
+    public function actionFetchmirkuponov()
+    {
+        $bgl = new MirKuponovApi();
+        $bgl->initData();
+        $bgl->fetchAllCities();
+        $bgl->updateAllCoupons();
+    }
+
+    public function actionFetchautokupon()
+    {
+        $bgl = new MirKuponovApi();
+        $bgl->initData();
+        $bgl->fetchAllCities();
+        $bgl->updateAllCoupons();
+    }
+
     public function actionFetchall()
     {
         //echo 'Access denied!';
@@ -157,8 +189,7 @@ class DefaultController extends Controller
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         $headers = \Yii::$app->response->headers;
-        $headers->add('Content-Type', 'text/xml');
-        $headers->add('Content-Type', 'text/xml; charset=utf-8');
+        $headers->add('Content-Type', 'text/html; charset=utf-8');
         
         $api = NULL;
         switch ($serviceId) {

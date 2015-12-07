@@ -17,6 +17,22 @@ abstract class BaseApi extends Apist
     abstract protected function couponsByCityId($cityId);
     abstract protected function couponAdvancedById($couponId);
 
+    public function testConnection()
+    {
+        //\Yii::info('run testCities '.get_class($this), 'kupon');
+        $cities = $this->cities();
+        //\Yii::info(serialize($cities), 'kupon');
+
+        if (isset($cities['error'])) {
+            if (isset($cities['error']['status'])) {
+                echo "Error: " . $cities['error']['reason'];
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
     public function testCities()
     {
         \Yii::info('run testCities '.get_class($this), 'kupon');

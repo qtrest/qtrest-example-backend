@@ -68,47 +68,81 @@ class BlizzardApi extends BaseApi
     protected function categories()
     {
         $result = $this->get('/', [
-            'categories'  => Apist::filter('#main > div.content > div.content_head > div.rubrics2 > ul:nth-child(1) li, #main > div.content > div.content_head > div.rubrics2 > ul:nth-child(1) li a.podc_aa')->each([
+            'categories'  => Apist::filter('.navigation_menu .menu_ul1 a')->each([
                 'categoryName' => Apist::current()->call(function ($current)
                     {
-                        $id = $current->attr('id');
+                        //$id = $current->attr('id');
                         return $current->filter('a')->text();
                     }),
                 'categoryId' => Apist::current()->call(function ($current)
                 {
 
-                    $categoryId = str_replace('categ', '', $current->attr('id'));
+                    $href = $current->attr('href');
+                    $href = trim ($href);
+                    $href = rtrim ($href, '/');
+
+                    $categoryId = end(explode('/', $href));
 
                     if ($categoryId > '') {
-                        BlizzardApi::$lastParentCategoryId = $categoryId;
                         return $categoryId;
                     } else {
-                        $categoryId = end(explode('/', $current->attr('href')));
-
-                        if ($categoryId > '') {
-                            return end(explode('-', $categoryId));
-                        } else {
-                            return -1;
-                        }
+                        return -1;
                     }
+
+                    //old, before 07.12.2015
+                    // $categoryId = str_replace('categ', '', $current->attr('id'));
+
+                    // if ($categoryId > '') {
+                    //     BlizzardApi::$lastParentCategoryId = $categoryId;
+                    //     return $categoryId;
+                    // } else {
+                    //     $categoryId = end(explode('/', $current->attr('href')));
+
+                    //     if ($categoryId > '') {
+                    //         return end(explode('-', $categoryId));
+                    //     } else {
+                    //         return -1;
+                    //     }
+                    // }
                 }),
+
                 'parentCategoryId' => Apist::current()->call(function ($current)
                 {
-                    $categoryId = str_replace('categ', '', $current->attr('id'));
 
-                    if ($categoryId > '') {
-                        BlizzardApi::$lastParentCategoryId = $categoryId;
-                        return $categoryId;
-                    } else {
-                        $categoryId = end(explode('/', $current->attr('href')));
+                    $href = $current->attr('href');
+                    $href = trim ($href);
+                    $href = rtrim ($href, '/');
 
-                        if ($categoryId > '') {
-                            return current(explode('-', $categoryId));
-                        } else {
-                            return BlizzardApi::$lastParentCategoryId;
+                    $arr = explode('/', $href);
+
+                    $categoryId = -1;
+
+                    if (count ($arr) > 1) {
+                        if (Tools::isDigitString($arr[count ($arr) -2])) {
+                            $categoryId = $arr[count ($arr) -2];
                         }
                     }
+
+                    return $categoryId;
+
+
+                    //old, before 07122015
+                    // $categoryId = str_replace('categ', '', $current->attr('id'));
+
+                    // if ($categoryId > '') {
+                    //     BlizzardApi::$lastParentCategoryId = $categoryId;
+                    //     return $categoryId;
+                    // } else {
+                    //     $categoryId = end(explode('/', $current->attr('href')));
+
+                    //     if ($categoryId > '') {
+                    //         return current(explode('-', $categoryId));
+                    //     } else {
+                    //         return BlizzardApi::$lastParentCategoryId;
+                    //     }
+                    // }
                 }),
+
                 'categoryAdditionalInfo' => Apist::current()->call(function ($current)
                 {
                     $href = $current->attr('href');
@@ -123,9 +157,27 @@ class BlizzardApi extends BaseApi
         ]);
 
         $result = Tools::trimArray($result);
-        $result = Tools::removeLastWordArray($result);
 
-        return $result;
+        //remove digits from last of categoryName
+        for($i = 0; $i < count($result['categories']); $i++) {
+            if (!empty(trim($result['categories'][$i]['categoryName']))) {
+                $result['categories'][$i]['categoryName'] = Tools::removeLastDigits($result['categories'][$i]['categoryName']);
+            }
+        }
+
+        $resultCleared = array();
+        $resultCleared['categories'] = array();
+
+        //clear empty categories and 
+        for($i = 0; $i < count($result['categories']); $i++) {
+            if (!empty(trim($result['categories'][$i]['categoryName']))) {
+                if ( !in_array($result['categories'][$i]['categoryId'], ["feedback", "how-it-work", "how_pay_order", "delivery", "contact", "about", "feedback", "bonusclub"]) ) {
+                    $resultCleared['categories'][] = $result['categories'][$i];
+                }
+            }
+        }
+
+        return $resultCleared;
     }
 
     protected function couponsByCityId($cityId)

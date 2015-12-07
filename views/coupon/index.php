@@ -29,7 +29,11 @@ $this->params['breadcrumbs'] = '';
     
     $itemClass = 'coupon-item ';
     if (\Yii::$app->devicedetect->isMobile()) {
-        $itemClass .= ' col-xs-12';
+        if (\Yii::$app->devicedetect->isTablet()) {
+            $itemClass .= ' col-xs-6';
+        } else {
+            $itemClass .= ' col-xs-12';
+        }
     } else {
         $itemClass .= ' col-xs-4';
     }

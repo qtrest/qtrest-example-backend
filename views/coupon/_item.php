@@ -21,11 +21,17 @@ $serviceName = $query->select('serviceName')
     ->where('id=:id', [':id' => $model->sourceServiceId])
     ->createCommand()
     ->queryScalar();
+
+$cityName = $query->select('cityName')
+    ->from('city')
+    ->where('id=:id', [':id' => $model->cityId])
+    ->createCommand()
+    ->queryScalar();
 ?>
 
     <div class="thumbnail">
         <div class="image-ratio" style="background-image:url('<?= (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)); ?>')">
-            <span class="label label-info span-right"><?= $serviceName; ?></span>
+            <span class="label label-info span-right"><?= $serviceName . '<br/>' . $cityName; ?></span>
             <span class="label label-warning span-left "><?= 'Купили: ' . ($model->boughtCount > '' ? $model->boughtCount : '?'); ?></span>
             <div class="coupon-content" style="display:block">
                 <p class="coupon-caption"><?= Html::encode($model->title) ?><br/></p>
