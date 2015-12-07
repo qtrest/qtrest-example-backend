@@ -38,7 +38,13 @@ $cityName = $query->select('cityName')
                 <div class="coupon-description">
                     <?= Html::encode($model->shortDescription) ?>
                     <?php if (Yii::$app->controller->action->id == 'actual'): ?>
-                        <a target="_BLANK" href="<?= $serviceBaseUrl . $model->pageLink; ?>" class="btn btn-info span-bottomright">Купить</a>
+                        <a target="_BLANK" href="<?php 
+                        if(Tools::startsWith($model->pageLink, 'http://') || Tools::startsWith($model->pageLink, 'https://')) {
+                            echo $model->pageLink;
+                        } else {
+                            echo $serviceBaseUrl . $model->pageLink;
+                        }
+                        ?>" class="btn btn-info span-bottomright">Купить</a>
                     <?php endif; ?>
                 </div>
             </div>
