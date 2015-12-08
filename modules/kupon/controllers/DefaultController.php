@@ -33,8 +33,8 @@ class DefaultController extends Controller
     {
         $bgl = new BlizzardApi();
         $bgl->initData();
-        $bgl->fetchAllCities();
-        $bgl->updateAllCoupons();
+        //$bgl->fetchAllCities();
+        //$bgl->updateAllCoupons();
     }
 
     public function actionFetchkupikupon()
@@ -223,10 +223,10 @@ class DefaultController extends Controller
                 $api->testCategories();
                 break;
             case 3:
-                $api->testCoupons(1, false);
+                $api->testCoupons(1, false); //almaty
                 break;
             case 4:
-                $api->testCoupons(2, false);
+                $api->testCoupons(2, false); //astana
                 break;
             case 5:
                 $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\'')->queryScalar();

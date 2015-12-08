@@ -255,7 +255,7 @@ abstract class BaseApi extends Apist
                 ->createCommand()
                 ->queryScalar();
 
-            //if not - add them. If yes - check for link and path changed!!!
+            //if not - add them. If yes - check for link or path changed and update it!!!
             if (empty($res)) {
                 $connection->createCommand()->insert('cityUrl', [
                     'cityId' => $cityId,
@@ -293,6 +293,7 @@ abstract class BaseApi extends Apist
 
         foreach ($categories as $key => $value) {
 
+            //category exists?
             $query = new Query;
             $res = $query->select('id')
                 ->from('categories')
@@ -305,6 +306,7 @@ abstract class BaseApi extends Apist
                 ->createCommand()
                 ->queryScalar();
 
+            //if not - add them. If yes - check for categoryAdditionalInfo changed and update it!!!
             if (empty($res)) {
                 $connection->createCommand()->insert('categories', [
                     'sourceServiceId' => $this->getSourceServiceId(),
@@ -314,6 +316,25 @@ abstract class BaseApi extends Apist
                     'parentCategoryIdentifier' => $value['parentCategoryId'],
                     'categoryAdditionalInfo' => $value['categoryAdditionalInfo'],
                 ])->execute();
+            } else {
+                $categoryRow = $query->select('id, categoryAdditionalInfo')
+                ->from('categories')
+                ->where('categoryCode=:categoryCode AND sourceServiceId=:sourceServiceId', 
+                    [':categoryCode' => Tools::ru2lat($value['categoryName']), 
+                    //':categoryIdentifier' => $value['categoryId'],
+                    ':sourceServiceId' => $this->getSourceServiceId()])
+                ->createCommand()
+                ->queryOne();
+                
+                if ( $categoryRow['categoryAdditionalInfo'] != $value['categoryAdditionalInfo'] ) {
+                    $connection->createCommand()->update('categories', 
+                    [
+                        'categoryAdditionalInfo'=> $value['categoryAdditionalInfo'],
+                    ],
+                    'id=:id',
+                    [':id'=>$categoryRow['id']])->execute();
+                }
+                //echo Tools::ru2lat($value['categoryName']) . '<br/>';
             }
         }
     }

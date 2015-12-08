@@ -28,12 +28,16 @@ $cityName = $query->select('cityName')
     ->where('id=:id', [':id' => $model->cityId])
     ->createCommand()
     ->queryScalar();
+
+$phpDate = strtotime( $model->createTimestamp );
+$createDate = date( 'd.m.Y', $phpDate );
+
 ?>
 
-    <div class="thumbnail">
+    <div class="thumbnail image-ratio-base" style="background-image:url('/img/skid_bg_2.jpg')">
         <div class="image-ratio" style="background-image:url('<?= (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)); ?>')">
             <span class="label label-info span-right"><?= $serviceName . '<br/>' . $cityName; ?></span>
-            <span class="label label-warning span-left "><?= 'Купили: ' . ($model->boughtCount > '' ? $model->boughtCount : '?'); ?></span>
+            <span class="label label-warning span-left "><?= 'Купили: ' . ($model->boughtCount > '' ? $model->boughtCount : '?') . '<br/> Создано: ' . $createDate; ?></span>
             <div class="coupon-content" style="display:block">
                 <p class="coupon-caption"><?= Html::encode($model->title) ?><br/></p>
                 <div class="coupon-description">

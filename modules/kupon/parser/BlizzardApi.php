@@ -70,10 +70,10 @@ class BlizzardApi extends BaseApi
         $result = $this->get('/', [
             'categories'  => Apist::filter('.navigation_menu .menu_ul1 a')->each([
                 'categoryName' => Apist::current()->call(function ($current)
-                    {
-                        //$id = $current->attr('id');
-                        return $current->filter('a')->text();
-                    }),
+                {
+                    //$id = $current->attr('id');
+                    return trim($current->filter('a')->text());
+                }),
                 'categoryId' => Apist::current()->call(function ($current)
                 {
 
@@ -161,7 +161,7 @@ class BlizzardApi extends BaseApi
         //remove digits from last of categoryName
         for($i = 0; $i < count($result['categories']); $i++) {
             if (!empty(trim($result['categories'][$i]['categoryName']))) {
-                $result['categories'][$i]['categoryName'] = Tools::removeLastDigits($result['categories'][$i]['categoryName']);
+                $result['categories'][$i]['categoryName'] = trim(Tools::removeLastDigits($result['categories'][$i]['categoryName']));
             }
         }
 
@@ -203,7 +203,14 @@ class BlizzardApi extends BaseApi
         $links = [];
 
         foreach($categories as $key => $value) {
-            $links[] = array ($cityPath . $value['categoryAdditionalInfo'], $value['categoryIdentifier']);
+            $categorylink = "";
+            if(Tools::startsWith($value['categoryAdditionalInfo'], 'http://') || Tools::startsWith($value['categoryAdditionalInfo'], 'https://')) {
+                $categorylink = $value['categoryAdditionalInfo'];
+            } else {
+                $categorylink = $cityPath . $value['categoryAdditionalInfo'];
+            }
+
+            $links[] = array ($categorylink, $value['categoryIdentifier']);
         }
 
         //TODO all categories links!!!
@@ -213,33 +220,35 @@ class BlizzardApi extends BaseApi
 
         for ($i = 0; $i < count($links); $i++) {
             $result = $this->get($links[$i][0], [
-                'city' => Apist::filter('#main > div.header > div.top_panel > ul > li:nth-child(1) > a')->text(),
+                'city' => Apist::filter('#tows > div > span')->text(),
                 //'cityLat'  => Tools::ru2lat(Apist::filter('#js-b-header > div.b-logo__city__wrapper > div.b-city__change > a > span')->text()->mb_substr(0, -1)),
-                'coupons' => Apist::filter('.page .akc')->each([
-                    'title' => Apist::filter('.akc_name > a')->text()->call(function ($str) {
-                        return Tools::getFirstSentence($str);
-                    }),
-                    'shortDescription' => Apist::filter('.akc_name > a')->text(),
+                'coupons' => Apist::filter('#page_content figure')->each([
+                    'title' => Apist::filter('.act_info .podcateg_name')->text(),
+                    'shortDescription' => Apist::filter('.act_info .act_title')->text(),
                     'longDescription' => 'empty',
                     'conditions' => 'empty',
                     'features' => 'empty',
                     'timeToCompletion' => 'empty',
-                    'originalCouponPrice' => Apist::filter('div.akc_diskount > div.zakl')->text()->call(function ($str) {
-                        return str_replace('тг.', '', $str);
+                    'originalCouponPrice' => Apist::filter('.act_info .act_price_out')->text()->call(function ($str) {
+                        return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),
-                    'originalPrice' => Apist::filter('div.akc_diskount > ul > li.prices > font')->text(),
-                    'discountPercent' => Apist::filter('div.akc_diskount > ul > li.discount > div > font')->text(),
-                    'discountPrice' => Apist::filter('div.akc_diskount > ul > li.summ > font')->text(),
-                    'pageLink' => Apist::filter('.akc_name > a')->attr('href')->call(function ($href) {
+                    'originalPrice' => Apist::filter('.act_info .act_price')->text()->call(function ($str) {
+                        return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
+                    }),
+                    'discountPercent' => Apist::filter('.act_info .act_skidka')->text(),
+                    'discountPrice' => Apist::filter('.act_info .act_price')->text()->call(function ($str) {
+                        return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
+                    }),
+                    'pageLink' => Apist::filter('.act_info > a')->attr('href')->call(function ($href) {
                         return $href;
                     }),
-                    'boughtCount' => Apist::filter('div.akc_info > div > div.kupon_count > font')->text()->call(function ($str) {
-                        return str_replace('человек', '', $str);
-                    }),
+                    'boughtCount' => Apist::current()->attr("count_bought"),
+                    'viewCount' => Apist::current()->attr("view_count"),
                     'sourceServiceCategories' => $links[$i][1],
                     'sourceServiceId' => $this->getSourceServiceId(),
                     'imagesLinks' => 'empty',
-                    'mainImageLink' => Apist::filter('div.akc_t > div.akc_img > img')->attr('data-original'),
+                    'mainImageLink' => Apist::filter('.act_image img.lazy')->attr('data-original'),
+                    'currentLink' => $links[$i][0]
                 ]),
             ]);
 
