@@ -574,6 +574,7 @@ abstract class BaseApi extends Apist
                 'tryToUpdateCount' => 0,
             ], ['id' => $couponId])->execute();
 
+            //Если на странице записи мы нашли текст сообщающий о том что акция официально считается завершённой - переносим её в архив
             if ($result['isOfficialCompleted']) {
                 $connection->createCommand()->update('coupon', [
                     'isArchive' => 1,
