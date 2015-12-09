@@ -190,6 +190,16 @@ class KupiKuponApi extends BaseApi
         $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
 
         $result = $this->get($pageLink, [
+            'pageLink' => $pageLink,
+            'couponId' => $couponId,
+            'isOfficialCompleted' => Apist::filter('.e-offer__expire-text')->text()->call(function($text){
+                if (trim($text) == "Акция завершена") {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }),
+            'discountPrice' => Apist::filter('#price')->text(),
             'longDescription' => Apist::filter('div.deal_cat_title p')->text(),
             'conditions' => 'empty',
             'features' => Apist::filter('#deal_body_blocks')->html(),

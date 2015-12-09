@@ -61,12 +61,13 @@ abstract class BaseApi extends Apist
         }
     }
 
-    public function testAdvancedCoupon($couponId)
+    public function testAdvancedCoupon($couponId, $runUpdate = false)
     {
         \Yii::info('run testAdvancedCoupon '.get_class($this), 'kupon');
         $advancedCoupon = $this->couponAdvancedById($couponId);
         \Yii::info(serialize($advancedCoupon), 'kupon');
         Tools::print_array('Advanced coupon', $advancedCoupon);
+        if ($runUpdate) $this->updateCouponById($couponId);
     }
 
     public function getBaseUrl()
@@ -500,6 +501,9 @@ abstract class BaseApi extends Apist
             ->createCommand()
             ->queryScalar();
 
+        //echo "Last update date time: " . $res;
+
+        //в случае успешного обновления, мы считаем, что следующее обновление нужно выполнить не раньше чем через 4 часа.
         if ( !is_null ($res) ) {
             $time = time();
             $diff = $time - strtotime ($res);
@@ -511,11 +515,20 @@ abstract class BaseApi extends Apist
         }
 
         $result = $this->couponAdvancedById($couponId);
+
+        if ($result == -1) {
+            //TODO it means, the coupon update for this service is unavailable (e.g. AutoKupon.kz)
+            return;
+        }
+
         \Yii::info(serialize($result), 'kupon');
 
+        //echo "try '" . trim($result['longDescription']) . "', '" . trim($result['features']) . "', '" . trim($result['conditions']) . "', '" . trim($result['boughtCount']) . "', '" . $couponId . "'!'";
+
         //Если данные пусты, то скорее всего запись обновить не удалось и она является архивной. Пробуем 5 раз для каждой записи. Если так и не получилось - архивируем запись.
-        if (empty($result['longDescription']) && empty($result['timeToCompletion'])
-        && empty($result['conditions']) && empty($result['boughtCount'])) {
+        if (empty(trim($result['longDescription'])) && empty(trim($result['features']))
+        && empty(trim($result['conditions'])) && empty(trim($result['boughtCount']))) {
+            echo $couponId;
 
             //обновить одну запись пробуем максимум пять раз после чего считаем её архивной.
             $tryToUpdateCount = $query->select('tryToUpdateCount')
@@ -528,8 +541,11 @@ abstract class BaseApi extends Apist
                 ->createCommand()
                 ->queryScalar();
 
+            //echo $tryToUpdateCount;
+
             \Yii::info('tryToUpdateCoupon '. $couponId . ' ' .get_class($this) . ' UPDATE COUNT ' . $tryToUpdateCount, 'kupon');
 
+            //если количество неудачныхз попыток обновления превысило 5 - переносим запись в архив.
             if ($tryToUpdateCount >= 5) {
                 $connection->createCommand()->update('coupon', [
                     'isArchive' => 1,
@@ -545,15 +561,24 @@ abstract class BaseApi extends Apist
             
             \Yii::info('tryToUpdateCoupon '. $couponId . ' ' .get_class($this) . ' UPDATE COMPLETED!', 'kupon');
 
+            //если нам удалось успешно обновить запись - обнуляем количество неудачных попыток обновления и заносим в запись новую инфомрацию
             $connection->createCommand()->update('coupon', [
                 'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
                 'longDescription' => $result['longDescription'],
+                'discountPrice' => $result['discountPrice'],
                 'conditions' => $result['conditions'],
                 'features' => $result['features'],
                 'timeToCompletion' => $result['timeToCompletion'],
                 'boughtCount' => $result['boughtCount'],
                 'imagesLinks' => implode(', ', $result['imageLinks']),
+                'tryToUpdateCount' => 0,
             ], ['id' => $couponId])->execute();
+
+            if ($result['isOfficialCompleted']) {
+                $connection->createCommand()->update('coupon', [
+                    'isArchive' => 1,
+                ], ['id' => $couponId])->execute();
+            }
 
             //$coupon = Coupon::findOne($couponId);
             $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),

@@ -173,10 +173,22 @@ class ChocolifeApi extends BaseApi
         $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
 
         $result = $this->get($pageLink, [
-            'longDescription' => Apist::filter('#information > p.e-offer__description')->text(),
-            'conditions' => Apist::filter('#information > div.b-conditions')->html(),
-            'features' => Apist::filter('#information > div.b-offer__features')->html(),
-            'imageLinks' => Apist::filter('div.b-offer__imgs img')->each()->attr('src'),
+            'pageLink' => $pageLink,
+            'couponId' => $couponId,
+            'isOfficialCompleted' => Apist::filter('.e-offer__expire-text2')->text()->call(function($text){
+                if (trim($text) == "Акция завершена") {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }),
+            'discountPrice' => Apist::filter('.e-offer__price')->text()->call(function($text){
+                return trim(str_replace("от", "", str_replace("тг.", "", $text)));
+            }),
+            'longDescription' => Apist::filter('#information > .e-offer__description')->html(),
+            'conditions' => Apist::filter('#information > .b-conditions')->html(),
+            'features' => Apist::filter('#information > .b-offer__features')->html(),
+            'imageLinks' => Apist::filter('.b-offer__imgs img')->each()->attr('src'),
             'timeToCompletion' => Apist::filter('.e-offer__expire-date')->text()->call(function($stamp){
                 $stamp = substr(trim($stamp),0,10);
                 $diff = intval($stamp) - time();
@@ -187,7 +199,9 @@ class ChocolifeApi extends BaseApi
             }),
         ]);
 
-        if (empty($result['longDescription']) && empty($result['timeToCompletion'])) {
+        //print_r($result);
+
+        if (empty($result['longDescription']) && empty($result['conditions']) && empty($result['features']) && empty($result['timeToCompletion'])) {
             //TODO SpecialPage!!!
             return 0;
         }

@@ -239,17 +239,22 @@ class Tools {
         return $randomString;
     }
 
-    public static function print_array($title,$array) {
+    public static function print_array($title, $array) {
 
-        if(is_array($array)){
+        if(is_array($array) ||  is_object($array)) {
 
             echo $title.". Count: ". count($array) .'<br/>'.
                 "<pre>";
             print_r($array);
             echo "</pre>".
                 "END ".$title."<br/>";
-        }else{
-            echo $title." is not an array.";
+        } else {
+            echo $title." mayby is not an array or object.";
+            echo $title.". Count: ". count($array) .'<br/>'.
+                "<pre>";
+            print_r ($array);
+            echo "</pre>".
+                "END ".$title."<br/>";
         }
     }
 

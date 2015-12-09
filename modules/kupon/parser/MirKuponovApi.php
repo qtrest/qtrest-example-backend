@@ -202,6 +202,16 @@ class MirKuponovApi extends BaseApi
         $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
 
         $result = $this->get($pageLink, [
+            'pageLink' => $pageLink,
+            'couponId' => $couponId,
+            'isOfficialCompleted' => Apist::filter('.e-offer__expire-text')->text()->call(function($text){
+                if (trim($text) == "Акция завершена") {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }),
+            'discountPrice' => Apist::filter('#price')->text(),
             'longDescription' => Apist::filter('#content_container > div.offer_page_body > div.description')->html(),
             'conditions' => Apist::filter('#content_container > div.offer_page_body > div.terms_body > div.terms')->html(),
             'features' => Apist::filter('#content_container > div.offer_page_body > div.terms_body > div.features')->html(),

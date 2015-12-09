@@ -223,8 +223,8 @@ class BlizzardApi extends BaseApi
                 'city' => Apist::filter('#tows > div > span')->text(),
                 //'cityLat'  => Tools::ru2lat(Apist::filter('#js-b-header > div.b-logo__city__wrapper > div.b-city__change > a > span')->text()->mb_substr(0, -1)),
                 'coupons' => Apist::filter('#page_content figure')->each([
-                    'title' => Apist::filter('.act_info .podcateg_name')->text(),
-                    'shortDescription' => Apist::filter('.act_info .act_title')->text(),
+                    'title' => Apist::filter('.act_info .act_title')->text(),
+                    'shortDescription' => Apist::filter('.act_info .podcateg_name')->text(),
                     'longDescription' => 'empty',
                     'conditions' => 'empty',
                     'features' => 'empty',
@@ -236,7 +236,7 @@ class BlizzardApi extends BaseApi
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),
                     'discountPercent' => Apist::filter('.act_info .act_skidka')->text(),
-                    'discountPrice' => Apist::filter('.act_info .act_price')->text()->call(function ($str) {
+                    'discountPrice' => Apist::filter('.act_info .act_price_out')->text()->call(function ($str) {
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),
                     'pageLink' => Apist::filter('.act_info > a')->attr('href')->call(function ($href) {
@@ -294,18 +294,24 @@ class BlizzardApi extends BaseApi
         $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
 
         $result = $this->get($pageLink, [
-            'longDescription' => Apist::filter('#con_tab2 > p:nth-child(1)')->text(),
+            'pageLink' => $pageLink,
+            'couponId' => $couponId,
+            'isOfficialCompleted' => false,
+            'discountPrice' => Apist::filter('#price')->text(),
+            'longDescription' => Apist::filter('div.wrap_action > div.description_of_goods')->html(),
             'conditions' => Apist::filter('#con_tab1 > div.usl_osb > div.tab_usl')->html(),
-            'features' => Apist::filter('#con_tab1 > div.usl_osb > div.tab_osoben')->html(),
-            'imageLinks' => Apist::filter('#new_slider > img')->each()->attr('src'),
-            'timeToCompletion' => Apist::current()->call(function(){
+            'features' => Apist::filter('div.wrap_action > div.records_goods')->html(),
+            'imageLinks' => Apist::filter('#thumbs-wrapper #thumbs img')->each()->attr('src'),
+            'timeToCompletion' => Apist::current()->call(function() {
                 $dates=explode("-", date("m-d-Y"));
                 $then=mktime (0,0,0,$dates[0],$dates[1]+1,$dates[2]);
                 $now=time();
                 $how=$then-$now - 21600; //TODO gmt!!
                 return $how;
             }),
-            'boughtCount' => Apist::filter('div.kupon_peop span')->text(),
+            'boughtCount' => Apist::filter('.already_bought_ac')->text()->call(function($text){
+                return trim(str_replace("Уже купили", "", str_replace("человек", "", $text)));
+            })
         ]);
 
         if (empty($result['longDescription']) && empty($result['timeToCompletion'])) {

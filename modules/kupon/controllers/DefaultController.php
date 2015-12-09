@@ -229,8 +229,12 @@ class DefaultController extends Controller
                 $api->testCoupons(2, false); //astana
                 break;
             case 5:
-                $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\'')->queryScalar();
+                $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\' ORDER BY id DESC')->queryScalar();
                 $api->testAdvancedCoupon($lastCouponId);
+                break;
+            case 6:
+                $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\' ORDER BY id DESC')->queryScalar();
+                $api->testAdvancedCoupon($lastCouponId, true);
                 break;
             default:
                 echo "Not found!";

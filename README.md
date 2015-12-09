@@ -90,5 +90,8 @@ http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
 3. coupons for Almaty
 4. coupons for Astana
 5. advanced coupon for last coupon id
+6. advanced coupon for last coupon id with call real update coupon
+7. advanced coupon for first (oooold) coupon id
+8. advanced coupon for first (oooold) coupon id with call real update coupon
 
 Example: http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
