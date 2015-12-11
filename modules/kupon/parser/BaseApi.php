@@ -549,6 +549,7 @@ abstract class BaseApi extends Apist
             if ($tryToUpdateCount >= 5) {
                 $connection->createCommand()->update('coupon', [
                     'isArchive' => 1,
+                    'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
                 ], ['id' => $couponId])->execute();
             } else {
                 $connection->createCommand()->update('coupon', [
