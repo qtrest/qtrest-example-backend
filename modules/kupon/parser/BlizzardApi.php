@@ -242,7 +242,9 @@ class BlizzardApi extends BaseApi
                     'pageLink' => Apist::filter('.act_info > a')->attr('href')->call(function ($href) {
                         return $href;
                     }),
-                    'boughtCount' => Apist::current()->attr("count_bought"),
+                    'boughtCount' => Apist::current()->attr("count_bought")->call(function ($attr) {
+                        return trim(str_replace("Уже купили", "", $attr));
+                    }),
                     'viewCount' => Apist::current()->attr("view_count"),
                     'sourceServiceCategories' => $links[$i][1],
                     'sourceServiceId' => $this->getSourceServiceId(),
