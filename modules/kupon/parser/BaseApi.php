@@ -366,6 +366,7 @@ abstract class BaseApi extends Apist
                 return;
             }
         }
+        $newKuponsCount = 0;
 
         $result = $this->couponsByCityId($cityId);
         $cityCode = $result['cityCode'];
@@ -386,7 +387,6 @@ abstract class BaseApi extends Apist
                 )
                 ->createCommand()
                 ->queryScalar();
-
             if (empty($res)) {
                 $connection->createCommand()->insert('coupon', [
                     'sourceServiceId' => $this->getSourceServiceId(),
@@ -424,6 +424,7 @@ abstract class BaseApi extends Apist
                     'pageLink' => $value['pageLink'],
                     'mainImageLink' => $value['mainImageLink'],
                 ])->execute();
+                $newKuponsCount++;
             }
         }
 
@@ -431,9 +432,10 @@ abstract class BaseApi extends Apist
         $connection->createCommand()->update('cityUrl', [
             'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
         ],['cityId' => $cityId, 'sourceServiceId' => $this->getSourceServiceId()])->execute();
-
-        $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),
-            'new', date('Y-m-d'), count($kupons));
+        if ($newKuponsCount !== 0) {
+            $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),
+                'new', date('Y-m-d'), $newKuponsCount);
+        }
     }
 
     private function createUpdateStatistics($sourceId, $sourceAlias, $codeType, $createDate, $countKupons)
@@ -551,6 +553,9 @@ abstract class BaseApi extends Apist
                     'isArchive' => 1,
                     'lastUpdateDateTime' => date('Y.m.d H:i:s', time()),
                 ], ['id' => $couponId])->execute();
+                //и прибавляем количество архивных записей
+                $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),
+                    'archive', date('Y-m-d'), 1);
             } else {
                 $connection->createCommand()->update('coupon', [
                     'tryToUpdateCount' => $tryToUpdateCount + 1,
@@ -580,11 +585,12 @@ abstract class BaseApi extends Apist
                 $connection->createCommand()->update('coupon', [
                     'isArchive' => 1,
                 ], ['id' => $couponId])->execute();
+                //также добавляем в архивную статистику
+                $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),
+                    'archive', date('Y-m-d'), 1);
             }
 
             //$coupon = Coupon::findOne($couponId);
-            $this->createUpdateStatistics($this->getSourceServiceId(), static::getSourceServiceName(),
-                'archive', date('Y-m-d'), 1);
         }
     }
 }
