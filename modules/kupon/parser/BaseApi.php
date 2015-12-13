@@ -366,6 +366,7 @@ abstract class BaseApi extends Apist
                 return;
             }
         }
+        $newKuponsCount = 0;
 
         $result = $this->couponsByCityId($cityId);
         $cityCode = $result['cityCode'];
@@ -386,7 +387,6 @@ abstract class BaseApi extends Apist
                 )
                 ->createCommand()
                 ->queryScalar();
-            $newKuponsCount = 0;
             if (empty($res)) {
                 $connection->createCommand()->insert('coupon', [
                     'sourceServiceId' => $this->getSourceServiceId(),
