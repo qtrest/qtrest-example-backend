@@ -236,6 +236,14 @@ class DefaultController extends Controller
                 $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\' ORDER BY id DESC')->queryScalar();
                 $api->testAdvancedCoupon($lastCouponId, true);
                 break;
+            case 7:
+                $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\' ORDER BY id ASC')->queryScalar();
+                $api->testAdvancedCoupon($lastCouponId);
+                break;
+            case 8:
+                $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\' ORDER BY id ASC')->queryScalar();
+                $api->testAdvancedCoupon($lastCouponId, true);
+                break;
             default:
                 echo "Not found!";
                 return;
