@@ -4,7 +4,7 @@ $db     = require(__DIR__ . '/db.php');
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'basic',
+    'id' => 'api',
     'name' => 'Skid.kz',
     'language' => 'ru',
     'charset'=>'utf-8',
@@ -36,10 +36,10 @@ $config = [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'enableStrictParsing' => false,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/coupon','v1/time']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/coupon' => 'v1/coupon']],
             ],
         ], 
         'db' => $db,
