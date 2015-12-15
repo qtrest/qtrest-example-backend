@@ -65,19 +65,19 @@ $this->params['breadcrumbs'][] =  $this->title;
             //'recordHash',
             'title',
             'shortDescription',
-            'longDescription:html',
+            //'longDescription:html',
             [
                 'label' => 'Подробное описание',
                 'value' => (trim($model->longDescription) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->longDescription) : '<span class="not-set">(не задано)</span>',
                 'format' => 'raw'
             ],
-            'conditions:html',
+            //'conditions:html',
             [
                 'label' => 'Условия',
                 'value' => (trim($model->conditions) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->conditions) : '<span class="not-set">(не задано)</span>',
                 'format' => 'raw'
             ],
-            'features:html',
+            //'features:html',
             [
                 'label' => 'Особенности',
                 'value' => (trim($model->features) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->features) : '<span class="not-set">(не задано)</span>',
