@@ -4,20 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\db\Query;
 
-use app\modules\kupon\parser\BaseApi as BaseApi;
-use app\modules\kupon\parser\ChocolifeApi as ChocolifeApi;
-use app\modules\kupon\parser\BlizzardApi as BlizzardApi;
-use app\modules\kupon\parser\KupiKuponApi as KupiKuponApi;
-use app\modules\kupon\parser\MirKuponovApi as MirKuponovApi;
-use app\modules\kupon\parser\AutoKuponApi as AutoKuponApi;
-use app\modules\kupon\parser\BiglionApi as BiglionApi;
-
 /* @var $this yii\web\View */
 /* @var $model app\models\Coupon */
-
-
-$api = BaseApi::getApiObject($model->sourceService->id);
-$api->updateCouponById($model->id);
 
 $query = new Query;
 $serviceBaseUrl = $query->select('serviceBaseUrl')

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Query;
+use app\modules\kupon\parser\BaseApi as BaseApi;
 
 /**
  * CouponController implements the CRUD actions for Coupon model.
@@ -65,6 +66,11 @@ class CouponController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        $api = BaseApi::getApiObject($model->sourceService->id);
+        $api->updateCouponById($model->id);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
