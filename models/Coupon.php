@@ -64,11 +64,11 @@ class Coupon extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Идентификатор'),
             'sourceServiceId' => Yii::t('app', 'Купонатор'),
             'cityId' => Yii::t('app', 'Город'),
-            'createTimestamp' => Yii::t('app', 'Дата и время создания'),
-            'lastUpdateDateTime' => Yii::t('app', 'Дата и время последнего обновления'),
+            'createTimestamp' => Yii::t('app', 'Дата и время создания (UTC)'),
+            'lastUpdateDateTime' => Yii::t('app', 'Дата и время последнего обновления (UTC)'),
             'recordHash' => Yii::t('app', 'Хеш записи'),
             'title' => Yii::t('app', 'Заголовок'),
             'shortDescription' => Yii::t('app', 'Краткое описание'),

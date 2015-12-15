@@ -487,7 +487,7 @@ abstract class BaseApi extends Apist
         }
     }
 
-    private function updateCouponById($couponId)
+    public function updateCouponById($couponId)
     {
         \Yii::info('run updateCouponById '. $couponId . ' ' .get_class($this), 'kupon');
         $connection=\Yii::$app->db;
@@ -592,5 +592,31 @@ abstract class BaseApi extends Apist
 
             //$coupon = Coupon::findOne($couponId);
         }
+    }
+
+    
+    public static function getApiObject($serviceId) {
+        $api = NULL;
+        switch ($serviceId) {
+            case 1:
+                $api = new ChocolifeApi();
+                break;
+            case 2:
+                $api = new BlizzardApi();
+                break;
+            case 3:
+                $api = new KupiKuponApi();
+                break;
+            case 4:
+                $api = new MirKuponovApi();
+                break;
+            case 5:
+                $api = new AutoKuponApi();
+                break;
+            default:
+                echo "Not found!";
+                return;
+        }
+        return $api;
     }
 }

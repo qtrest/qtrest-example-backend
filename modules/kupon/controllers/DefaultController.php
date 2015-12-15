@@ -249,4 +249,29 @@ class DefaultController extends Controller
                 return;
         }
     }
+
+    public static function getApiObject($serviceId) {
+        $api = NULL;
+        switch ($serviceId) {
+            case 1:
+                $api = new ChocolifeApi();
+                break;
+            case 2:
+                $api = new BlizzardApi();
+                break;
+            case 3:
+                $api = new KupiKuponApi();
+                break;
+            case 4:
+                $api = new MirKuponovApi();
+                break;
+            case 5:
+                $api = new AutoKuponApi();
+                break;
+            default:
+                echo "Not found!";
+                return;
+        }
+        return $api;
+    }
 }

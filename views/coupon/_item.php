@@ -35,6 +35,7 @@ $createDate = date( 'd.m.y', $phpDate );
 
 $strippedBoughtCount = $model->boughtCount;
 $strippedBoughtCount = trim(str_replace("Уже купили", "", $strippedBoughtCount));
+$strippedBoughtCount = trim(str_replace("человек", "", $strippedBoughtCount));
 
 //Дополнительная пост обработка и актуализация данных в БД.
 if ($strippedBoughtCount != $model->boughtCount) {
