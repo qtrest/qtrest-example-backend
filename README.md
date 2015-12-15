@@ -3,14 +3,13 @@ Skid.KZ
 
 Skid.KZ - агрегатор данных со скидочных сервисов Республики Казахстан.
 
-Адрес в стеи Интернет: http://skid.kz
+Production URL: http://skid.kz
 
-Разработчики:
-1. Петров Виталий, v31337@gmail.com
-2. Абоимов Александр
-3. Назмиев Руслан
+Developers:
+1. Petrov Vitaliy, v31337@gmail.com
+2. Aboimov Alexander
 
-Install
+Install guide
 -------------------
 0) ssh-keygen -t rsa and add this to bitbucked repo
 
@@ -30,21 +29,12 @@ Install
 
 7) php yii migrate
 
-8) Setup apache virtualhost for /home/admin/web/skid.kz/public_html/web
+8) Setup apache virtualhost for web and api parts. See example in docs/skid.kz.apacheexample.conf
 
-9) Setup cron:
+9) Setup cron job for recieve and update elements:
 
-OLD:
-
- * */2 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/fetchall\&pass=kafeg >/dev/null 2>&1
-
- * */5 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/index.php?r=kupon/default/updateall\&pass=kafeg >/dev/null 2>&1
-
-NEW:
-
- 10 10 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/fetchall
-
- 30 2 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/updateall
+15 5 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/fetchall
+5 * * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/updateall
 
 10) Setup mysql wait_timeout=360
 
@@ -54,12 +44,12 @@ NEW:
 
 13) Setup clean urls for host in your apache or nginx.
 
-Deploy
-------------------
+Howto deploy to production
+------------------------------------
 skid.kz/deploy/bitbucket-hook-skid.kz.php
 
-Setup developing environment.
-------------------
+Howto setup developing environment
+------------------------------------
 1. Install git, vagrant, composer
 2. Git clone this project
 3. "composer install" 
@@ -68,19 +58,17 @@ Setup developing environment.
 5. "vagrant ssh" start ssh session on virtual machine and connect
 6. Project files will be mounted in /vagrant folder. Files are syncing automatically
 
+Howto test services
+--------------------------------------
 
-Test services!
---------------------
+Test service: http://skid.kz/kupon/default/testapi?serviceId=1
 
-ChocolifeApi: http://skid.kz/kupon/default/testapi?serviceId=1
-
-BlizzardApi: http://skid.kz/kupon/default/testapi?serviceId=2
-
-KupiKuponApi: http://skid.kz/kupon/default/testapi?serviceId=3
-
-MirKuponovApi: http://skid.kz/kupon/default/testapi?serviceId=4
-
-AutoKuponApi: http://skid.kz/kupon/default/testapi?serviceId=5
+Services ids:
+1. ChocolifeApi
+2. BlizzardApi
+3. KupiKuponApi
+4. MirKuponovApi
+5. AutoKuponApi
 
 You MUST specify TESTTYPE!!!
 http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
@@ -95,3 +83,12 @@ http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
 8. advanced coupon for first (oooold) coupon id with call real update coupon
 
 Example: http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
+
+Howto use REST API
+--------------------------------------
+1. Setup apache config as exampled: docs/skid.kz.apacheexample.conf
+
+2. Use as documented:
+
+https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-quick-start.md
+https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-resources.md
