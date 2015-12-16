@@ -32,11 +32,11 @@ return [
             'sourceDirs' => [
                 __DIR__ . '/../api/modules/v1/controllers',   // <-- path to your API controllers
             ],
-            'template' => '/../api/doc/restdoc.twig',
+            'template' => '/../api/doc/restdoc.php',
             'class' => '\pahanini\restdoc\controllers\BuildController',
             'sortProperty' => 'shortDescription', // <-- default value (how controllers will be sorted)
             'targetFile' => __DIR__ . '/../web/slate/index.md',
-            'on afterAction' => function() { exec("bundle exec middleman build") }
+            //'on afterAction' => function() { exec("bundle exec middleman build") }
         ],
     ],
     'params' => $params,

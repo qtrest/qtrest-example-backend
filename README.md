@@ -94,3 +94,10 @@ Howto use REST API
 2. Use as documented:
 - https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-quick-start.md
 - https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-resources.md
+
+Howto rebuild API documentation
+--------------------------------------
+
+cd ~/web/skid.kz/public_html/ or cd /var/www/html/kupon
+
+./yii build-rest-doc; cd web/slate/; rm -rf build/; bundle exec middleman build; cd ../..

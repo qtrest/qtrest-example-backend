@@ -10,6 +10,8 @@ use yii\rest\ActiveController;
 
 class CouponController extends ActiveController
 {
+    public $shortDesc = 'CouponController';
+
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Coupon';
 
