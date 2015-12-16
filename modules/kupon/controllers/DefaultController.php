@@ -184,7 +184,7 @@ class DefaultController extends Controller
         //}
     }
     
-    public function actionTestapi($serviceId, $testType = 1)
+    public function actionTestapi($serviceId, $testType = 1, $couponId = 0)
     {
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
@@ -244,34 +244,12 @@ class DefaultController extends Controller
                 $lastCouponId = \Yii::$app->db->createCommand('SELECT id FROM coupon WHERE sourceServiceId=\''.$api->getSourceServiceId().'\' ORDER BY id ASC')->queryScalar();
                 $api->testAdvancedCoupon($lastCouponId, true);
                 break;
-            default:
-                echo "Not found!";
-                return;
-        }
-    }
-
-    public static function getApiObject($serviceId) {
-        $api = NULL;
-        switch ($serviceId) {
-            case 1:
-                $api = new ChocolifeApi();
-                break;
-            case 2:
-                $api = new BlizzardApi();
-                break;
-            case 3:
-                $api = new KupiKuponApi();
-                break;
-            case 4:
-                $api = new MirKuponovApi();
-                break;
-            case 5:
-                $api = new AutoKuponApi();
+            case 9:
+                $api->testAdvancedCoupon($couponId, true);
                 break;
             default:
                 echo "Not found!";
                 return;
         }
-        return $api;
     }
 }

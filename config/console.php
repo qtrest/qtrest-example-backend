@@ -27,5 +27,16 @@ return [
         ],
         'db' => $db,
     ],
+    'controllerMap' => [
+        'build-rest-doc' => [
+            'sourceDirs' => [
+                'app\api\modules\v1\controllers',   // <-- path to your API controllers
+            ],
+            'template' => __DIR__ . '/../api/doc/restdoc.twig',
+            'class' => '\pahanini\restdoc\controllers\BuildController',
+            'sortProperty' => 'shortDescription', // <-- default value (how controllers will be sorted)
+            'targetFile' => __DIR__ . '/../api/doc/restdoc.html'
+        ],
+    ],
     'params' => $params,
 ];
