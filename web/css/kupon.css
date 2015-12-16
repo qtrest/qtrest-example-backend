@@ -102,3 +102,11 @@
 .socialShareBlock {
     float: right;
 }
+
+.detail-view h2 {
+    font-size: 20px;
+}
+
+.detail-view h3 {
+    font-size: 16px;
+}

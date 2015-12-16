@@ -21,7 +21,7 @@ Install guide
 
 4) cd /home/admin/web/skid.kz/public_html/
 
-5) composer.phar global require "fxp/composer-asset-plugin:1.0.0"
+5) composer.phar global require "fxp/composer-asset-plugin:~1.0.3"
 
 6) composer.phar update
 
@@ -90,6 +90,5 @@ Howto use REST API
 1. Setup apache config as exampled: docs/skid.kz.apacheexample.conf
 
 2. Use as documented:
-
-https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-quick-start.md
-https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-resources.md
+- https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-quick-start.md
+- https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-resources.md

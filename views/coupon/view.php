@@ -20,12 +20,47 @@ $serviceName = $query->select('serviceName')
     ->createCommand()
     ->queryScalar();
 
+$cats = implode(", ", explode(",",$model->sourceServiceCategories));
+
+$categoriesCommand = $query->select('categoryName')
+    ->from('categories')
+    ->where('sourceServiceId=:sourceServiceId AND categoryIdentifier IN ( :categoryIdentifier )', 
+        [':sourceServiceId' => $model->sourceServiceId, ':categoryIdentifier' => $cats])
+    ->createCommand();
+
+//TODO why is Database Exception - SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+//The SQL being executed was: SELECT `categoryName` FROM `categories` WHERE sourceServiceId=2 AND categoryIdentifier IN ( '101' )
+//$categories = $categoriesCommand->queryColumn();
+
 $this->title = 'Skid.kz - Все купоны Казахстана - ' . $serviceName . ' - ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все купоны'), 'url' => ['index']];
+if ($model->isArchive == 0) {
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все актуальный купоны и скидки Казахстана'), 'url' => ['index']];
+} else {
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все архивные купоны и скидки Казахстана'), 'url' => ['index']];
+}
 $this->params['breadcrumbs'][] =  $serviceName;
 $this->params['breadcrumbs'][] =  $this->title;
 
+//text blocks
+
+$longDescription =  (trim($model->longDescription) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->longDescription) : '<span class="not-set">(не задано)</span>';
+$longDescription = preg_replace('/src="(?!http:\/\/)([^"]+)"/', "src=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $longDescription);
+
+$conditions =  (trim($model->conditions) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->conditions) : '<span class="not-set">(не задано)</span>';  
+$conditions = preg_replace('/src="(?!http:\/\/)([^"]+)"/', "src=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $conditions);
+
+$features =  (trim($model->features) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->features) : '<span class="not-set">(не задано)</span>';
+$features = preg_replace('/src="(?!http:\/\/)([^"]+)"/', "src=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $features);
+
+//images for carousel
+$images = explode (",", $model->imagesLinks);
+foreach ($images as &$image) {
+    $image = "<center><img src=\"".(substr_count($image, 'http') > 0 ? ($image) :($serviceBaseUrl . '/' . $image))."\" alt=\"".$serviceName." - ". $model->shortDescription ."\"/></center>";
+}
+$images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)) . '"/></center>';
+
 ?>
+
 <div class="coupon-view">
 
     <h1><?= Html::encode($model->title) ?></h1>
@@ -39,7 +74,8 @@ $this->params['breadcrumbs'][] =  $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'title',
+            'shortDescription',
             [                      // the owner name of the model
                 'label' => 'Купонатор',
                 'value' => $model->sourceService->serviceName,
@@ -48,46 +84,60 @@ $this->params['breadcrumbs'][] =  $this->title;
                 'label' => 'Город',
                 'value' => $model->city->cityName,
             ],
-            'createTimestamp',
-            'lastUpdateDateTime',
-            //'recordHash',
-            'title',
-            'shortDescription',
-            //'longDescription:html',
             [
-                'label' => 'Подробное описание',
-                'value' => (trim($model->longDescription) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->longDescription) : '<span class="not-set">(не задано)</span>',
-                'format' => 'raw'
-            ],
-            //'conditions:html',
-            [
-                'label' => 'Условия',
-                'value' => (trim($model->conditions) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->conditions) : '<span class="not-set">(не задано)</span>',
-                'format' => 'raw'
-            ],
-            //'features:html',
-            [
-                'label' => 'Особенности',
-                'value' => (trim($model->features) > '') ? preg_replace('/href="(?!http:\/\/)([^"]+)"/', "href=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $model->features) : '<span class="not-set">(не задано)</span>',
-                'format' => 'raw'
-            ],
-            'imagesLinks:ntext',
-            'timeToCompletion',
-            [
-                'label' => 'Основное изображение',
-                'value' => '<img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)) . '"/>',
+                'label' => 'Актуальное предложение',
+                'value' => ($model->isArchive == 0 ? 'да' : 'нет'),
                 'format' => 'raw'
             ],
             'originalPrice',
             'discountPercent',
             'discountPrice',
             'boughtCount',
-            'sourceServiceCategories',
             [
                 'label' => 'Ссылка на страницу',
                 'value' => '<a target="_BLANK" href="' . (substr_count($model->pageLink, 'http') > 0 ? ($model->pageLink) :($serviceBaseUrl . '/' . $model->pageLink)) . '">Перейти в магазин источник</a>',
                 'format' => 'raw'
             ],
+            [
+                'label' => 'Изображения',
+                'value' => yii\bootstrap\Carousel::widget(['items'=>$images]),
+                'format' => 'raw'
+            ],
+            // [
+            //     'label' => 'Основное изображение',
+            //     'value' => '<img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)) . '"/>',
+            //     'format' => 'raw'
+            // ],
+            'id',
+            'createTimestamp',
+            'lastUpdateDateTime',
+            //'recordHash',
+            //'longDescription:html',
+            [
+                'label' => 'Подробное описание',
+                'value' => $longDescription,
+                'format' => 'raw'
+            ],
+            //'conditions:html',
+            [
+                'label' => 'Условия',
+                'value' => $conditions,
+                'format' => 'raw'
+            ],
+            //'features:html',
+            [
+                'label' => 'Особенности',
+                'value' => $features,
+                'format' => 'raw'
+            ],
+            //'imagesLinks:ntext',
+            'timeToCompletion',
+            'sourceServiceCategories',
+            // [
+            //     'label' => 'Категории',
+            //     'value' => implode(", ", $categories),
+            //     //'format' => 'raw'
+            // ],
         ],
     ]) ?>
 

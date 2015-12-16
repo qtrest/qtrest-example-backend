@@ -477,7 +477,7 @@ abstract class BaseApi extends Apist
                 ]
             )
             ->orderBy('lastUpdateDateTime')
-            ->limit(5) //only 5 coupons every 2 hours
+            ->limit(10) //only 5 coupons every cron call
             ->createCommand()
             ->queryColumn();
 
