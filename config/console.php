@@ -35,7 +35,8 @@ return [
             'template' => '/../api/doc/restdoc.twig',
             'class' => '\pahanini\restdoc\controllers\BuildController',
             'sortProperty' => 'shortDescription', // <-- default value (how controllers will be sorted)
-            'targetFile' => __DIR__ . '/../views/site/restdoc.html'
+            'targetFile' => __DIR__ . '/../web/slate/index.md',
+            'on afterAction' => function() { exec("bundle exec middleman build") }
         ],
     ],
     'params' => $params,
