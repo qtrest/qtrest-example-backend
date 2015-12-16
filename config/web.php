@@ -165,7 +165,7 @@ $config = [
                 ],
             ],
             'enableGzip' => true, // default is false
-            'cacheExpire' => 1, // 1 second. Default is 24 hours
+            //'cacheExpire' => 1, // 1 second. Default is 24 hours
         ],
 	],
     'params' => $params,
