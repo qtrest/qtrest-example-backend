@@ -48,7 +48,7 @@ if ($strippedBoughtCount != $model->boughtCount) {
     <div itemscope itemtype="http://schema.org/Product" class="thumbnail image-ratio-base" style="background-image:url('/img/skid_bg_2.jpg')">
         <div class="image-ratio" itemprop="image" style="background-image:url('<?= (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)); ?>')">
             <span itemprop="brand" itemscope itemtype="http://schema.org/Brand"><span itemprop="name" class="label label-info span-right"><?= $serviceName . '<br/>' . $cityName; ?></span></span>
-            <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><span itemprop="ratingValue" class="label label-warning span-left "><?= 'Купили: ' . ($strippedBoughtCount > '' ? $strippedBoughtCount : '?') . '<br/> ' . $createDate; ?></span></span>
+            <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><span itemprop="ratingCount" ><span itemprop="ratingValue" class="label label-warning span-left "><?= 'Купили: ' . ($strippedBoughtCount > '' ? $strippedBoughtCount : '?') . '<br/> ' . $createDate; ?></span></span></span>
             <div class="coupon-content" style="display:block">
                 <p class="coupon-caption"><span itemprop="name"><?= Html::encode($model->title) ?></span><br/></p>
                 <div itemprop="description" class="coupon-description">
