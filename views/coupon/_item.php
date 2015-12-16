@@ -45,13 +45,13 @@ if ($strippedBoughtCount != $model->boughtCount) {
 
 ?>
 
-    <div class="thumbnail image-ratio-base" style="background-image:url('/img/skid_bg_2.jpg')">
-        <div class="image-ratio" style="background-image:url('<?= (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)); ?>')">
-            <span class="label label-info span-right"><?= $serviceName . '<br/>' . $cityName; ?></span>
-            <span class="label label-warning span-left "><?= 'Купили: ' . ($strippedBoughtCount > '' ? $strippedBoughtCount : '?') . '<br/> ' . $createDate; ?></span>
+    <div itemscope itemtype="http://schema.org/Product" class="thumbnail image-ratio-base" style="background-image:url('/img/skid_bg_2.jpg')">
+        <div class="image-ratio" itemprop="image" style="background-image:url('<?= (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)); ?>')">
+            <span itemprop="brand" itemscope itemtype="http://schema.org/Brand"><span itemprop="logo" class="label label-info span-right"><?= $serviceName . '<br/>' . $cityName; ?></span></span>
+            <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><span itemprop="ratingCount" class="label label-warning span-left "><?= 'Купили: ' . ($strippedBoughtCount > '' ? $strippedBoughtCount : '?') . '<br/> ' . $createDate; ?></span></span>
             <div class="coupon-content" style="display:block">
-                <p class="coupon-caption"><?= Html::encode($model->title) ?><br/></p>
-                <div class="coupon-description">
+                <p class="coupon-caption"><span itemprop="name"><?= Html::encode($model->title) ?></span><br/></p>
+                <div itemprop="description" class="coupon-description">
                     <?= Html::encode($model->shortDescription) ?>
                     <div class="span-bottomright">
                         <a target="_BLANK" href="<?= Url::toRoute(['view', 'id' => $model->id]); ?>" class="btn btn-success btn-sm">i</a>
