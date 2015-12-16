@@ -94,7 +94,7 @@ $images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') 
                 'value' => (trim($model->originalPrice) > '' ? $model->originalPrice : '<span class="not-set">(не задано)</span>'),
                 'format' => 'raw'
             ],
-            'originalPrice',
+            //'originalPrice',
             'discountPercent',
             'discountPrice',
             'boughtCount',
