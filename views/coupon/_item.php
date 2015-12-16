@@ -54,10 +54,10 @@ if ($strippedBoughtCount != $model->boughtCount) {
                 <div itemprop="description" class="coupon-description">
                     <?= Html::encode($model->shortDescription) ?>
                     <div class="span-bottomright">
-                        <a target="_BLANK" href="<?= Url::toRoute(['view', 'id' => $model->id]); ?>" class="btn btn-success btn-sm">i</a>
+                        <a target="_BLANK" hreflang="ru" href="<?= Url::toRoute(['view', 'id' => $model->id]); ?>" class="btn btn-success btn-sm">i</a>
 
                         <?php if (Yii::$app->controller->action->id == 'actual'): ?>
-                            <a target="_BLANK" href="<?php 
+                            <a hreflang="ru" target="_BLANK" href="<?php 
                             if(Tools::startsWith($model->pageLink, 'http://') || Tools::startsWith($model->pageLink, 'https://')) {
                                 echo $model->pageLink;
                             } else {

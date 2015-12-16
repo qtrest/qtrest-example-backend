@@ -100,7 +100,7 @@ $images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') 
             'boughtCount',
             [
                 'label' => 'Ссылка на страницу',
-                'value' => '<a target="_BLANK" href="' . (substr_count($model->pageLink, 'http') > 0 ? ($model->pageLink) :($serviceBaseUrl . '/' . $model->pageLink)) . '">Перейти в магазин источник</a>',
+                'value' => '<a hreflang="ru" target="_BLANK" href="' . (substr_count($model->pageLink, 'http') > 0 ? ($model->pageLink) :($serviceBaseUrl . '/' . $model->pageLink)) . '">Перейти в магазин источник</a>',
                 'format' => 'raw'
             ],
             [

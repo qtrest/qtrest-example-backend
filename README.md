@@ -44,6 +44,8 @@ Install guide
 
 13) Setup clean urls for host in your apache or nginx.
 
+14) Install ruby for slate and slate dependencies (slate in web/slate): https://github.com/kafeg/slate
+
 Howto deploy to production
 ------------------------------------
 skid.kz/deploy/bitbucket-hook-skid.kz.php
