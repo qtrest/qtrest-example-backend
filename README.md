@@ -83,7 +83,7 @@ http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
 8. advanced coupon for first (oooold) coupon id with call real update coupon
 9. advanced coupon for specified couponId
 
-Example: http://skid.kz/kupon/default/testapi?serviceId=1&testType=2couponId=17538
+Example: http://skid.kz/kupon/default/testapi?serviceId=2&testType=9&couponId=17538
 
 Howto use REST API
 --------------------------------------
