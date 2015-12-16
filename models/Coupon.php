@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use himiklab\sitemap\behaviors\SitemapBehavior;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "coupon".
@@ -104,5 +106,28 @@ class Coupon extends \yii\db\ActiveRecord
     public function getSourceService()
     {
         return $this->hasOne(SourceService::className(), ['id' => 'sourceServiceId']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'sitemap' => [
+                'class' => SitemapBehavior::className(),
+                'scope' => function ($model) {
+                    /** @var \yii\db\ActiveQuery $model */
+                    //$model->select(['url', 'lastmod']);
+                    //$model->andWhere(['is_deleted' => 0]);
+                },
+                'dataClosure' => function ($model) {
+                    /** @var self $model */
+                    return [
+                        'loc' => Url::to(['/coupon/view', 'id' => $model->id]),
+                        'lastmod' => strtotime($model->lastUpdateDateTime),
+                        'changefreq' => SitemapBehavior::CHANGEFREQ_DAILY,
+                        'priority' => 0.8
+                    ];
+                }
+            ],
+        ];
     }
 }

@@ -55,9 +55,9 @@ $features = preg_replace('/src="(?!http:\/\/)([^"]+)"/', "src=\"".$model->source
 //images for carousel
 $images = explode (",", $model->imagesLinks);
 foreach ($images as &$image) {
-    $image = "<center><img src=\"".(substr_count($image, 'http') > 0 ? ($image) :($serviceBaseUrl . '/' . $image))."\" alt=\"".$serviceName." - ". $model->shortDescription ."\"/></center>";
+    $image = "<center><img src=\"".(substr_count($image, 'http') > 0 ? trim(($image)) :($serviceBaseUrl . '/' . trim($image)))."\" alt=\"".$serviceName." - ". $model->shortDescription ."\"/></center>";
 }
-$images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)) . '"/></center>';
+$images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . trim($model->mainImageLink))) . '"/></center>';
 
 ?>
 

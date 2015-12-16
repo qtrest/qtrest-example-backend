@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4871a2dc8f4e5bb17739b0105acb71df",
-    "content-hash": "947dd269c2345c9de2ff319e3bc381e6",
+    "hash": "e6de7e86dd9e799f6439cf2854a2b750",
+    "content-hash": "f144b6defef9dfdd7cc653a3143d0e55",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -690,6 +690,48 @@
                 "stream"
             ],
             "time": "2014-10-12 19:18:40"
+        },
+        {
+            "name": "himiklab/yii2-sitemap-module",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/himiklab/yii2-sitemap-module.git",
+                "reference": "83ac08e23673d5d6de4f11aee3b44a1bf77972df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/himiklab/yii2-sitemap-module/zipball/83ac08e23673d5d6de4f11aee3b44a1bf77972df",
+                "reference": "83ac08e23673d5d6de4f11aee3b44a1bf77972df",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "himiklab\\sitemap\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HimikLab",
+                    "homepage": "https://github.com/himiklab"
+                }
+            ],
+            "description": "Yii2 module for automatically generation XML Sitemap",
+            "keywords": [
+                "Sitemap",
+                "module",
+                "xml",
+                "yii2"
+            ],
+            "time": "2015-07-31 15:11:09"
         },
         {
             "name": "ijackua/yii2-sharelinks-widget",
