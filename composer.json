@@ -20,15 +20,16 @@
         "yiisoft/yii2-swiftmailer": "*",
         "sleeping-owl/apist": "1.x",
         "yiisoft/yii2-gii": "*",
-	    "xj/yii2-holder-widget": "*",
+        "xj/yii2-holder-widget": "*",
         "yiisoft/yii2-debug": "*",
-	    "ijackua/yii2-sharelinks-widget": "dev-master",
+        "ijackua/yii2-sharelinks-widget": "dev-master",
         "alexandernst/yii2-device-detect": "0.0.8",
         "kartik-v/yii2-widget-switchinput": "*",
         "romdim/yii2-bootstrap-material": "dev-master",
         "rmrevin/yii2-fontawesome": "~2.12",
-	    "pahanini/yii2-rest-doc": "*",
-        "himiklab/yii2-sitemap-module": "*"
+        "pahanini/yii2-rest-doc": "*",
+        "himiklab/yii2-sitemap-module": "*",
+        "eold/yii2-apidoc-generator": "^1.0."
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

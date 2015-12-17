@@ -3,8 +3,7 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - python
+  - php
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -28,13 +27,7 @@ This example API documentation page was created with [Slate](http://github.com/t
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
+```php
 import kittn
 
 api = kittn.authorize('meowmeowmeow')
@@ -55,21 +48,28 @@ Kittn expects for the API key to be included in all API requests to the server i
 `Authorization: meowmeowmeow`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace `meowmeowmeow` with your personal API key.
 </aside>
+
+    
+#Coupon Controller
+Coupon API controller
+
+The blank line above denotes a paragraph break
+## index
+
+## view
+
+## options
+
+
 
 # Kittens
 
 ## Get All Kittens
 
-```ruby
-require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
+```php
 import kittn
 
 api = kittn.authorize('meowmeowmeow')
@@ -106,7 +106,7 @@ This endpoint retrieves all kittens.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET http://example.com/kittens`
 
 ### Query Parameters
 
@@ -121,14 +121,8 @@ Remember — a happy kitten is an authenticated kitten!
 
 ## Get a Specific Kitten
 
-```ruby
-require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
+```php
 import kittn
 
 api = kittn.authorize('meowmeowmeow')
@@ -136,7 +130,7 @@ api.kittens.get(2)
 ```
 
 ```shell
-curl "http://example.com/api/kittens/2"
+curl "http://example.com/api/kittens/3"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -164,5 +158,4 @@ This endpoint retrieves a specific kitten.
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
-
+ID | The ID of the cat to retrieve

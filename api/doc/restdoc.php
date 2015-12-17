@@ -51,6 +51,26 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace `meowmeowmeow` with your personal API key.
 </aside>
 
+<?php foreach ($controllers as $controller): ?>
+    
+#<?= $controller->shortDescription ?>
+
+<?=$controller->longDescription ?>
+
+<?php foreach ($controller->actions as $action): ?>
+## <?= $action ?>
+
+<?php foreach ($controller->query as $item ): ?>
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+$item.variableName | $item.defaultValue | $item.descriptio
+<?php endforeach ?>
+
+<?php endforeach ?>
+<?php endforeach ?>
 
 
 # Kittens

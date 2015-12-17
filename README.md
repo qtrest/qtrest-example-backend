@@ -100,4 +100,4 @@ Howto rebuild API documentation
 
 cd ~/web/skid.kz/public_html/ or cd /var/www/html/kupon
 
-./yii build-rest-doc; cd web/slate/; rm -rf build; bundle exec middleman build --clean; cd ../..
+./yii build-rest-doc; cd web/slate/; bundle exec middleman build; cd ../..

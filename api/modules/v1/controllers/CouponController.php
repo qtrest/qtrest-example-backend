@@ -8,9 +8,16 @@ use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
+/**
+ * Coupon Controller
+ *
+ * Coupon API controller
+ *
+ * The blank line above denotes a paragraph break
+ */
+
 class CouponController extends ActiveController
 {
-    public $shortDesc = 'CouponController';
 
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Coupon';

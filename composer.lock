@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e6de7e86dd9e799f6439cf2854a2b750",
-    "content-hash": "f144b6defef9dfdd7cc653a3143d0e55",
+    "hash": "da33e8282d8e1291088fa60ec406a597",
+    "content-hash": "73f92a919bcdee60a78d8265fac0599d",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -486,6 +486,48 @@
                 "markdown-extra"
             ],
             "time": "2015-03-06 05:28:07"
+        },
+        {
+            "name": "eold/yii2-apidoc-generator",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/enryold/yii2-apidoc-generator.git",
+                "reference": "13ebd8d3b2d60771aad84b3bea7cbf769109bb43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/enryold/yii2-apidoc-generator/zipball/13ebd8d3b2d60771aad84b3bea7cbf769109bb43",
+                "reference": "13ebd8d3b2d60771aad84b3bea7cbf769109bb43",
+                "shasum": ""
+            },
+            "require-dev": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "eold\\apidocgen\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Enrico Vecchio",
+                    "email": "enrico.vecchio1@gmail.com"
+                }
+            ],
+            "description": "A simple comments generator in Apidoc.js format for your yii2 RESTFul API's",
+            "keywords": [
+                "apidoc",
+                "apidoc.js",
+                "generator",
+                "yii2"
+            ],
+            "time": "2015-07-21 10:36:12"
         },
         {
             "name": "ezyang/htmlpurifier",
