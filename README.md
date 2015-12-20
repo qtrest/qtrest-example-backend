@@ -44,7 +44,7 @@ Install guide
 
 13) Setup clean urls for host in your apache or nginx.
 
-14) Install ruby for slate and slate dependencies (slate in web/slate): https://github.com/kafeg/slate
+14) Setup apache config as exampled for API: docs/skid.kz.apacheexample.conf
 
 Howto deploy to production
 ------------------------------------
@@ -89,15 +89,9 @@ Example: http://skid.kz/kupon/default/testapi?serviceId=2&testType=9&couponId=17
 
 Howto use REST API
 --------------------------------------
-1. Setup apache config as exampled: docs/skid.kz.apacheexample.conf
+Base URL: http://api.skid.kz/v1/coupon
 
-2. Use as documented:
-- https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-quick-start.md
-- https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-resources.md
-
-Howto rebuild API documentation
---------------------------------------
-
-cd ~/web/skid.kz/public_html/ or cd /var/www/html/kupon
-
-./yii build-rest-doc; cd web/slate/; bundle exec middleman build; cd ../..
+API documentation
+- Info: https://github.com/yiisoft/yii2/blob/master/docs/guide/rest-quick-start.md, https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-resources.md
+- Search: http://stackoverflow.com/questions/25522462/yii2-rest-query#answer-25618361
+- Sorting: http://stackoverflow.com/questions/26884449/sorting-data-in-default-rest-api-yii2-framework
