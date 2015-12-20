@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da33e8282d8e1291088fa60ec406a597",
-    "content-hash": "73f92a919bcdee60a78d8265fac0599d",
+    "hash": "8df7bba297c33aeacff5ffb0feab71f8",
+    "content-hash": "8bafa48ade67fa81d3c823ebbdd7f08e",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -337,6 +337,47 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/material-design-lite",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/material-design-lite.git",
+                "reference": "f7b21af1f4cc92bdd59260550283dca85c9fef97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/material-design-lite/zipball/f7b21af1f4cc92bdd59260550283dca85c9fef97",
+                "reference": "f7b21af1f4cc92bdd59260550283dca85c9fef97",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "material.min.css",
+                    "material.min.js"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "./lib/.bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "Apache-2"
+            ],
+            "description": "Material Design Components in CSS, JS and HTML",
+            "keywords": [
+                "design",
+                "guide",
+                "material",
+                "style",
+                "styleguide"
             ]
         },
         {
@@ -1238,6 +1279,52 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "rafaelvaloto/yii2-material-design-lite",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rafaelvaloto/yii2-material-design-lite.git",
+                "reference": "633da6b00eee16bf263efefbed42382075cb7218"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rafaelvaloto/yii2-material-design-lite/zipball/633da6b00eee16bf263efefbed42382075cb7218",
+                "reference": "633da6b00eee16bf263efefbed42382075cb7218",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/material-design-lite": "*",
+                "yiisoft/yii2": "^2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "rafaelvaloto\\mdl\\material\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "rafaelvaloto",
+                    "email": "rafaelvaloto@gmail.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Extension AssetBundle google design material for yii2",
+            "keywords": [
+                "MDL",
+                "material-design-lite",
+                "yii",
+                "yii-material",
+                "yii2",
+                "yii2-material"
+            ],
+            "time": "2015-12-17 03:26:23"
         },
         {
             "name": "react/promise",
@@ -2218,7 +2305,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "ijackua/yii2-sharelinks-widget": 20,
-        "romdim/yii2-bootstrap-material": 20
+        "romdim/yii2-bootstrap-material": 20,
+        "rafaelvaloto/yii2-material-design-lite": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -67,26 +67,26 @@ $config = [
         'devicedetect' => [
             'class' => 'alexandernst\devicedetect\DeviceDetect'
         ],
-        // 'assetManager' => [
-        //     'class' => 'yii\web\AssetManager',
-        //     'appendTimestamp' => true,
-        //     'bundles' => [
-        //         'romdim\bootstrap\material\BootMaterialCssAsset' => [
-        //             'sourcePath' => '@bower/bower-asset/bootstrap-material-design/dist',
-        //             'css' => [
-        //                 YII_ENV_DEV ? 'css/ripples.css' : 'css/ripples.min.css',
-        //                 YII_ENV_DEV ? 'css/material-fullpalette.css' : 'css/material-fullpalette.min.css',
-        //             ]
-        //         ],
-        //         'romdim\bootstrap\material\BootMaterialJsAsset' => [
-        //             'sourcePath' => '@bower/bower-asset/bootstrap-material-design/dist',
-        //             'js' => [
-        //                 YII_ENV_DEV ? 'js/ripples.js' : 'js/ripples.min.js',
-        //                 YII_ENV_DEV ? 'js/material.js' : 'js/material.min.js',
-        //             ]
-        //         ]
-        //     ]
-        // ]
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'appendTimestamp' => true,
+            'bundles' => [
+                // 'romdim\bootstrap\material\BootMaterialCssAsset' => [
+                //     'sourcePath' => '@bower/bootstrap-material-design/dist',
+                //     'css' => [
+                //         YII_ENV_DEV ? 'css/ripples.css' : 'css/ripples.css',
+                //         YII_ENV_DEV ? 'css/bootstrap-material-design.css' : 'css/bootstrap-material-design.css',
+                //     ]
+                // ],
+                // 'romdim\bootstrap\material\BootMaterialJsAsset' => [
+                //     'sourcePath' => '@bower/bootstrap-material-design/dist',
+                //     'js' => [
+                //         YII_ENV_DEV ? 'js/ripples.js' : 'js/ripples.js',
+                //         YII_ENV_DEV ? 'js/material.js' : 'js/material.js',
+                //     ]
+                // ]
+            ]
+        ]
     ],
 	'modules' => [
 		'kupon' => [

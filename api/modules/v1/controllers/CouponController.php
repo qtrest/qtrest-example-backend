@@ -54,11 +54,25 @@ class CouponController extends ActiveController
         //sample https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-controllers.md
         //$actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
 
+        $actions['index'] = [
+            'class'       => 'app\api\components\SearchAction',
+            'modelClass'  => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess'],
+            'params'      => \Yii::$app->request->get()
+        ];
+
         return $actions;
     }
 
-    public function prepareDataProvider()
-    {
+    //public function prepareDataProvider()
+    //{
         // подготовить и вернуть провайдер данных для действия "index"
+    //}
+
+    public function verbs() {
+        $verbs = [
+            'search'   => ['GET']
+        ];
+        return array_merge(parent::verbs(), $verbs);
     }
 }
