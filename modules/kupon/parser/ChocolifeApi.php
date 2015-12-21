@@ -50,7 +50,7 @@ class ChocolifeApi extends BaseApi
                 }),
                 'path' => Apist::current()->attr('href'),
             ]),
-        ]);
+        ],  ['proxy' => \Yii::$app->params['proxy']]);
 
         $result = Tools::trimArray($result);
 
@@ -69,7 +69,7 @@ class ChocolifeApi extends BaseApi
                         return '0';
                 }),
             ]),
-        ]);
+        ],  ['proxy' => \Yii::$app->params['proxy']]);
 
         $result = Tools::trimArray($result);
         //used before 03/12/2015
@@ -142,7 +142,7 @@ class ChocolifeApi extends BaseApi
                 'altMainImageLink' => Apist::filter('.e-plate__img')->attr('data-original'),
                 'altSrcMainImageLink' => Apist::filter('.e-plate__img')->attr('src'),
 			]),
-        ]);
+        ],  ['proxy' => \Yii::$app->params['proxy']]);
 
         $result = Tools::trimArray($result);
 
@@ -197,7 +197,7 @@ class ChocolifeApi extends BaseApi
             'boughtCount' => Apist::filter('.b-offer__how_many_bought span')->text()->call(function ($str) {
                 return Tools::getFirstWord($str);
             }),
-        ]);
+        ],  ['proxy' => \Yii::$app->params['proxy']]);
 
         //print_r($result);
 

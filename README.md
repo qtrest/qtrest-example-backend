@@ -34,6 +34,7 @@ Install guide
 9) Setup cron job for recieve and update elements:
 
 15 5 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/fetchall
+
 5 * * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/updateall
 
 10) Setup mysql wait_timeout=360
@@ -45,6 +46,10 @@ Install guide
 13) Setup clean urls for host in your apache or nginx.
 
 14) Setup apache config as exampled for API: docs/skid.kz.apacheexample.conf
+
+15) Install tor (HOWTO http://help.ubuntu.ru/wiki/tor)
+
+16) Setup proxy in config/params.php
 
 Howto deploy to production
 ------------------------------------

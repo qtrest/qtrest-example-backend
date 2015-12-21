@@ -29,6 +29,14 @@ class DefaultController extends Controller
         $bgl->updateAllCoupons();
     }
 
+    public function actionChocolife()
+    {
+        $bgl = new ChocolifeApi();
+        $bgl->initData();
+        //$bgl->fetchAllCities();
+        //$bgl->updateAllCoupons();
+    }
+
     public function actionFetchblizzard()
     {
         $bgl = new BlizzardApi();
