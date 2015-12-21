@@ -109,7 +109,7 @@ if (trim($model->imagesLinks) != 'empty') {
             ],
             [
                 'label' => 'Изображения',
-                'value' => (trim($model->imagesLinks) != 'empty') ? yii\bootstrap\Carousel::widget(['items'=>$images]) : implode("", $images),
+                'value' => (trim($model->imagesLinks) != 'empty') ? yii\bootstrap\Carousel::widget(['items'=>$images]) : $images,
                 'format' => 'raw'
             ],
             // [
