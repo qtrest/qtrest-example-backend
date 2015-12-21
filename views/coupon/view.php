@@ -107,7 +107,7 @@ $images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') 
             ],
             [
                 'label' => 'Изображения',
-                'value' => trim($images) != 'empty' ? yii\bootstrap\Carousel::widget(['items'=>$images]) : $images[0],
+                'value' => (trim($images) != 'empty') ? yii\bootstrap\Carousel::widget(['items'=>$images]) : $images[0],
                 'format' => 'raw'
             ],
             // [
