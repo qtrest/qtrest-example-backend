@@ -53,7 +53,7 @@ $features =  (trim($model->features) > '') ? preg_replace('/href="(?!http:\/\/)(
 $features = preg_replace('/src="(?!http:\/\/)([^"]+)"/', "src=\"".$model->sourceService->serviceBaseUrl."/\\1\"", $features);
 
 //images for carousel
-if (trim($images) != 'empty') {}
+if (trim($images) != 'empty') {
     $images = explode (",", $model->imagesLinks);
     foreach ($images as &$image) {
         $image = "<center><img src=\"".(substr_count($image, 'http') > 0 ? trim(($image)) :($serviceBaseUrl . '/' . trim($image)))."\" alt=\"".$serviceName." - ". $model->shortDescription ."\"/></center>";
