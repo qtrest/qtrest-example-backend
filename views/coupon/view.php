@@ -34,9 +34,9 @@ $categoriesCommand = $query->select('categoryName')
 
 $this->title = 'Skid.kz - Все купоны Казахстана - ' . $serviceName . ' - ' . $model->title;
 if ($model->isArchive == 0) {
-    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все актуальный купоны и скидки Казахстана'), 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все актуальные купоны и скидки Казахстана'), 'url' => ['actual']];
 } else {
-    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все архивные купоны и скидки Казахстана'), 'url' => ['index']];
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Все архивные купоны и скидки Казахстана'), 'url' => ['archive']];
 }
 $this->params['breadcrumbs'][] =  $serviceName;
 $this->params['breadcrumbs'][] =  $this->title;
