@@ -58,8 +58,10 @@ if (trim($model->imagesLinks) != 'empty') {
     foreach ($images as &$image) {
         $image = "<center><img src=\"".(substr_count($image, 'http') > 0 ? trim(($image)) :($serviceBaseUrl . '/' . trim($image)))."\" alt=\"".$serviceName." - ". $model->shortDescription ."\"/></center>";
     }
+    $images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . trim($model->mainImageLink))) . '"/></center>';
+} else {
+    $images = '<center><img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . trim($model->mainImageLink))) . '"/></center>';
 }
-$images[] = '<center><img src="' . (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . trim($model->mainImageLink))) . '"/></center>';
 
 ?>
 
