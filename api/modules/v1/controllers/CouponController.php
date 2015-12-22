@@ -22,6 +22,11 @@ class CouponController extends ActiveController
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Coupon';
 
+     public $serializer = [
+        'class' => 'app\api\components\CouponSerializer',
+        //'collectionEnvelope' => 'categories',
+    ];
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -52,27 +57,27 @@ class CouponController extends ActiveController
 
         // настроить подготовку провайдера данных с помощью метода "prepareDataProvider()"
         //sample https://github.com/yiisoft/yii2/blob/master/docs/guide-ru/rest-controllers.md
-        //$actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
 
         $actions['index'] = [
             'class'       => 'app\api\components\SearchAction',
             'modelClass'  => $this->modelClass,
             'checkAccess' => [$this, 'checkAccess'],
-            'params'      => \Yii::$app->request->get()
+            'params'      => \Yii::$app->request->get(),
+            //'prepareDataProvider' => [$this, 'prepareDataProvider']
         ];
 
         return $actions;
     }
 
-    //public function prepareDataProvider()
-    //{
-        // подготовить и вернуть провайдер данных для действия "index"
-    //}
-
-    public function verbs() {
-        $verbs = [
-            'search'   => ['GET']
-        ];
-        return array_merge(parent::verbs(), $verbs);
+    public function prepareDataProvider()
+    {
+        return "1";
     }
+
+    // public function verbs() {
+    //     $verbs = [
+    //         'search'   => ['GET']
+    //     ];
+    //     return array_merge(parent::verbs(), $verbs);
+    // }
 }
