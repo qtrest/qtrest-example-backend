@@ -15,7 +15,7 @@ use app\models\CouponCategories;
 use app\components\Tools;
 ?>
 
-<div class="coupon-search">
+<div class="coupon-search col-xs-12">
 
     <?php $form = ActiveForm::begin([
         'action' => [Yii::$app->controller->action->id],

@@ -48,7 +48,7 @@ $this->title = 'Skid.KZ - О сайте';
         <li>MirKuponov.kz;</li>
         <li>AutoKupon.kz;</li>
     </ul>
-    В наших планах - научить роботов общатся с оставшимися сайтами:
+    В наших планах - научить роботов общаться с оставшимися сайтами:
     <ul>
         <li>BeSmart.kz;</li>
         <li>Biglion.kz;</li>
