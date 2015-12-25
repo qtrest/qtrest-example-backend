@@ -28,9 +28,17 @@ $config = [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
-                     // Create API log in the standard log dir
-                     // But in file 'api.log':
-                    'logFile' => '@app/runtime/logs/api.log',
+                    'categories' => ['kupon'],
+                    'logFile' => '@app/runtime/logs/api/error.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 20,
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'logFile' => '@app/runtime/logs/api/info.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 20,
                 ],
             ],
         ],

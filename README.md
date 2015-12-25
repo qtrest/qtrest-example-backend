@@ -31,11 +31,9 @@ Install guide
 
 8) Setup apache virtualhost for web and api parts. See example in docs/skid.kz.apacheexample.conf
 
-9) Setup cron job for recieve and update elements:
+9) Setup cron job for recieve and update elements (e.g. https://github.com/DenisOgr/yii2-cronjobs):
 
-15 5 * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/fetchall
-
-5 * * * * /usr/bin/wget -O /dev/null -q http://skid.kz/kupon/default/updateall
+* * * * * /home/admin/web/skid.kz/public_html//yii cron
 
 10) Setup mysql wait_timeout=360
 

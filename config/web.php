@@ -34,11 +34,16 @@ $config = [
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'flushInterval' => 1, // <-- here
+            'flushInterval' => 100, // <-- here
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                    'categories' => ['kupon'],
+                    'logFile' => '@app/runtime/logs/web/error.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 20,
+                    'exportInterval' => 100, // <-- and here
                 ],
                 [
                     'class' => 'yii\log\FileTarget',
@@ -46,10 +51,10 @@ $config = [
                     'categories' => ['kupon'],
                     'except' => ['application'],
                     'logVars' => [null],
-                    'logFile' => '@app/runtime/logs/kupon/kupon.log',
+                    'logFile' => '@app/runtime/logs/web/info.log',
                     'maxFileSize' => 1024 * 2,
                     'maxLogFiles' => 20,
-                    'exportInterval' => 1, // <-- and here
+                    'exportInterval' => 100, // <-- and here
                 ],
             ],
         ],
@@ -92,9 +97,9 @@ $config = [
 		'kupon' => [
 			'class' => 'app\modules\kupon\Kupon'
 		],
-        'autoproxy' => [
-            'class' => 'app\modules\autoproxy\AutoProxy',
-        ],
+        // 'autoproxy' => [
+        //     'class' => 'app\modules\autoproxy\AutoProxy',
+        // ],
 		'debug' => [
 			'class' => 'yii\debug\Module',
 			'allowedIPs' => ['127.0.0.1', '::1', '192.168.1.102', '192.168.1.11', '192.168.1.5'],

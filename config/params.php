@@ -2,5 +2,10 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'proxy' => 'tcp://127.0.0.1:8118'
+    'proxy' => 'tcp://127.0.0.1:8118',
+    'cronJobs' =>[
+        'kupon/cron/index' => [
+            'cron'      => '* * * * *',            
+        ]
+    ],
 ];
