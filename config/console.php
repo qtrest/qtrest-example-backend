@@ -5,7 +5,7 @@ Yii::setAlias('@tests', dirname(__DIR__) . '/tests');
 $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
 
-Yii::setAlias('@runnerScript', dirname(dirname(dirname(__FILE__))) .'/yii');
+Yii::setAlias('@runnerScript', dirname(__DIR__) .'/yii');
 
 return [
     'id' => 'basic-console',
@@ -26,7 +26,16 @@ return [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['info'],
-                    'categories' => ['kupon'],
+                    'logFile' => '@app/runtime/logs/console/cron.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 5,
+                    'exportInterval' => 100, // <-- and here
+                    'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION'],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'categories' => ['kupon', ''],
                     'logFile' => '@app/runtime/logs/console/info.log',
                     'maxFileSize' => 1024 * 2,
                     'maxLogFiles' => 5,
@@ -62,7 +71,7 @@ return [
             //'on afterAction' => function() { exec("bundle exec middleman build") }
         ],
         'cron' => [
-           'class' => 'denisog\cronjobs\CronController'
+           'class' => 'app\commands\CronController'
         ],
     ],
     'params' => $params,

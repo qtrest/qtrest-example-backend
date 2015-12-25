@@ -22,7 +22,7 @@ class CronController extends Controller
         \Yii::error('error test', 'kupon');
     }
 
-    public function actionFetchbiglion()
+    public function actionBiglion()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
         $bgl = new BiglionApi();
@@ -32,7 +32,7 @@ class CronController extends Controller
         \Yii::info('complete', 'kupon');
     }
 
-    public function actionFetchchocolife()
+    public function actionChocolife()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
         $bgl = new ChocolifeApi();
@@ -42,7 +42,7 @@ class CronController extends Controller
         \Yii::info('complete', 'kupon');
     }
 
-    public function actionFetchblizzard()
+    public function actionBlizzard()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
         $bgl = new BlizzardApi();
@@ -52,7 +52,7 @@ class CronController extends Controller
         \Yii::info('complete', 'kupon');
     }
 
-    public function actionFetchkupikupon()
+    public function actionKupikupon()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
         $bgl = new KupiKuponApi();
@@ -62,7 +62,7 @@ class CronController extends Controller
         \Yii::info('complete', 'kupon');
     }
 
-    public function actionFetchmirkuponov()
+    public function actionMirkuponov()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
         $bgl = new MirKuponovApi();
@@ -72,7 +72,7 @@ class CronController extends Controller
         \Yii::info('complete', 'kupon');
     }
 
-    public function actionFetchautokupon()
+    public function actionAutokupon()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
         $bgl = new MirKuponovApi();
@@ -82,7 +82,7 @@ class CronController extends Controller
         \Yii::info('complete', 'kupon');
     }
 
-    public function actionUpdateall()
+    public function actionUpdate()
     {
         \Yii::info(__FUNCTION__, 'kupon');
 

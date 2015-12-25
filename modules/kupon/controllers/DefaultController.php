@@ -17,108 +17,108 @@ use app\modules\kupon\parser\BiglionApi as BiglionApi;
 class DefaultController extends Controller
 {
 
-    public function actionFetchall()
-    {
-        $chocolife = new ChocolifeApi();
-        $chocolife->initData();
-        $chocolife->fetchAllCities();
-        $chocolife->updateAllCoupons();
-        echo 'ChocolifeApi Success!<br/>';
+    // public function actionFetchall()
+    // {
+    //     $chocolife = new ChocolifeApi();
+    //     $chocolife->initData();
+    //     $chocolife->fetchAllCities();
+    //     $chocolife->updateAllCoupons();
+    //     echo 'ChocolifeApi Success!<br/>';
 
-        $blizzard = new BlizzardApi();
-        $blizzard->initData();
-        $blizzard->fetchAllCities();
-        $blizzard->updateAllCoupons();
-        echo 'BlizzardApi Success!<br/>';
+    //     $blizzard = new BlizzardApi();
+    //     $blizzard->initData();
+    //     $blizzard->fetchAllCities();
+    //     $blizzard->updateAllCoupons();
+    //     echo 'BlizzardApi Success!<br/>';
 
-        $kupiKupon = new KupiKuponApi();
-        $kupiKupon->initData();
-        $kupiKupon->fetchAllCities();
-        $kupiKupon->updateAllCoupons();
-        echo 'KupiKuponApi Success!<br/>';
+    //     $kupiKupon = new KupiKuponApi();
+    //     $kupiKupon->initData();
+    //     $kupiKupon->fetchAllCities();
+    //     $kupiKupon->updateAllCoupons();
+    //     echo 'KupiKuponApi Success!<br/>';
 
-        $mirKuponov = new MirKuponovApi();
-        $mirKuponov->initData();
-        $mirKuponov->fetchAllCities();
-        $mirKuponov->updateAllCoupons();
-        echo 'MirKuponovApi Success!<br/>';
+    //     $mirKuponov = new MirKuponovApi();
+    //     $mirKuponov->initData();
+    //     $mirKuponov->fetchAllCities();
+    //     $mirKuponov->updateAllCoupons();
+    //     echo 'MirKuponovApi Success!<br/>';
 
-        $autoKupon = new AutoKuponApi();
-        $autoKupon->initData();
-        $autoKupon->fetchAllCities();
-        $autoKupon->updateAllCoupons();
-        echo 'AutoKuponApi Success!<br/>';
-    }
+    //     $autoKupon = new AutoKuponApi();
+    //     $autoKupon->initData();
+    //     $autoKupon->fetchAllCities();
+    //     $autoKupon->updateAllCoupons();
+    //     echo 'AutoKuponApi Success!<br/>';
+    // }
 
-    public function actionUpdateall()
-    {
-        echo 'Start updating!<br/>';
+    // public function actionUpdateall()
+    // {
+    //     echo 'Start updating!<br/>';
 
-        //ob_flush();
+    //     //ob_flush();
 
-        \Yii::info('actionUpdateall start', 'kupon');
+    //     \Yii::info('actionUpdateall start', 'kupon');
 
-        $chocolife = new ChocolifeApi();
-        \Yii::info('ChocolifeApi created', 'kupon');
-        //\Yii::getLogger()->collect();
-        $chocolife->updateAllCoupons();
-        echo 'ChocolifeApi Success!<br/>';
+    //     $chocolife = new ChocolifeApi();
+    //     \Yii::info('ChocolifeApi created', 'kupon');
+    //     //\Yii::getLogger()->collect();
+    //     $chocolife->updateAllCoupons();
+    //     echo 'ChocolifeApi Success!<br/>';
 
-        //ob_flush();
+    //     //ob_flush();
 
-        \Yii::info('ChocolifeApi Success!', 'kupon');
+    //     \Yii::info('ChocolifeApi Success!', 'kupon');
 
-        $blizzard = new BlizzardApi();
-        $blizzard->updateAllCoupons();
-        echo 'BlizzardApi Success!<br/>';
+    //     $blizzard = new BlizzardApi();
+    //     $blizzard->updateAllCoupons();
+    //     echo 'BlizzardApi Success!<br/>';
 
-        //ob_flush();
+    //     //ob_flush();
 
-        \Yii::info('BlizzardApi Success!', 'kupon');
+    //     \Yii::info('BlizzardApi Success!', 'kupon');
 
-        $kupiKupon = new KupiKuponApi();
-        $kupiKupon->updateAllCoupons();
-        echo 'KupiKuponApi Success!<br/>';
+    //     $kupiKupon = new KupiKuponApi();
+    //     $kupiKupon->updateAllCoupons();
+    //     echo 'KupiKuponApi Success!<br/>';
 
-        //ob_flush();
+    //     //ob_flush();
 
-        \Yii::info('KupiKuponApi Success!', 'kupon');
+    //     \Yii::info('KupiKuponApi Success!', 'kupon');
 
-        $mirKuponov = new MirKuponovApi();
-        $mirKuponov->updateAllCoupons();
-        echo 'MirKuponovApi Success!<br/>';
+    //     $mirKuponov = new MirKuponovApi();
+    //     $mirKuponov->updateAllCoupons();
+    //     echo 'MirKuponovApi Success!<br/>';
 
-        //ob_flush();
+    //     //ob_flush();
 
-        \Yii::info('MirKuponovApi Success!', 'kupon');
+    //     \Yii::info('MirKuponovApi Success!', 'kupon');
 
-        $autoKupon = new AutoKuponApi();
-        $autoKupon->updateAllCoupons();
-        echo 'AutoKuponApi Success!<br/>';
+    //     $autoKupon = new AutoKuponApi();
+    //     $autoKupon->updateAllCoupons();
+    //     echo 'AutoKuponApi Success!<br/>';
 
-        //ob_flush();
+    //     //ob_flush();
 
-        \Yii::info('AutoKuponApi Success!', 'kupon');
+    //     \Yii::info('AutoKuponApi Success!', 'kupon');
 
-        \Yii::info('actionUpdateall end', 'kupon');
+    //     \Yii::info('actionUpdateall end', 'kupon');
 
-        return;
-    }
+    //     return;
+    // }
 
-    public function actionUpdateproxies()
-    {
-        //if ($pass == 'kafeg') {
-            $proxyHandler = new ProxyParser();
-            $proxyList = $proxyHandler->googleProxy();
-            foreach ($proxyList as $p) {
-                $m = new Proxy();
-                $m->ip = $p['ip'];
-                $m->port = $p['port'];
-                $m->save();
-            }
-            echo count($proxyList) . ' proxies added.';
-        //}
-    }
+    // public function actionUpdateproxies()
+    // {
+    //     //if ($pass == 'kafeg') {
+    //         $proxyHandler = new ProxyParser();
+    //         $proxyList = $proxyHandler->googleProxy();
+    //         foreach ($proxyList as $p) {
+    //             $m = new Proxy();
+    //             $m->ip = $p['ip'];
+    //             $m->port = $p['port'];
+    //             $m->save();
+    //         }
+    //         echo count($proxyList) . ' proxies added.';
+    //     //}
+    // }
     
     public function actionTestapi($serviceId, $testType = 1, $couponId = 0)
     {

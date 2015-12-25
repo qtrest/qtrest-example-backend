@@ -33,7 +33,7 @@ Install guide
 
 9) Setup cron job for recieve and update elements (e.g. https://github.com/DenisOgr/yii2-cronjobs):
 
-* * * * * /home/admin/web/skid.kz/public_html//yii cron
+* * * * * /home/admin/web/skid.kz/public_html/yii cron
 
 10) Setup mysql wait_timeout=360
 
@@ -48,6 +48,8 @@ Install guide
 15) Install tor (HOWTO http://help.ubuntu.ru/wiki/tor)
 
 16) Setup proxy in config/params.php
+
+17) sudo chmod 777 -R on runitme directory
 
 Howto deploy to production
 ------------------------------------
