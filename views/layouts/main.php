@@ -25,6 +25,10 @@ AppAsset::register($this);
     скидки Алматы,  скидки Астана,  скидки Актау,  скидки Актобе,  скидки Атырау,  скидки Балхаш,  скидки Жезказган,  скидки Караганда,  скидки Кокшетау,  скидки Костанай,  скидки Кызылорда,  скидки Павлодар,  скидки Петропавловск,  скидки Рудный,  скидки Семей,  скидки Талдыкорган,  скидки Тараз,  скидки Темиртау,  скидки Туркестан,  скидки Уральск,  скидки Усть-Каменогорск,  скидки Шымкент,  скидки Экибастуз,
     купоны Алматы,  купоны Астана,  купоны Актау,  купоны Актобе,  купоны Атырау,  купоны Балхаш,  купоны Жезказган,  купоны Караганда,  купоны Кокшетау,  купоны Костанай,  купоны Кызылорда,  купоны Павлодар,  купоны Петропавловск,  купоны Рудный,  купоны Семей,  купоны Талдыкорган,  купоны Тараз,  купоны Темиртау,  купоны Туркестан,  купоны Уральск,  купоны Усть-Каменогорск,  купоны Шымкент,  купоны Экибастуз">
 
+      <!-- CSS  -->
+      <!--<link href="/themes/material-default/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>-->
+      <!--<link href="/themes/material-default/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>-->
+
     <!-- Google Analitycs -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -142,6 +146,11 @@ JS
             <p class="pull-left">&copy; Skid.KZ, <?= '2014 - ' . date('Y') ?></p>
         </div>
     </footer>
+
+  <!--  Scripts-->
+  <!--  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>-->
+  <!--  <script src="/themes/material-default/js/materialize.js"></script>-->
+  <!--  <script src="/themes/material-default/js/init.js"></script>-->
 
 <?php $this->endBody() ?>
 </body>

@@ -336,8 +336,6 @@ RAW;
             foreach ($methods as $runCommand => $runSettings) {
                 $runCommand = explode('/', $runCommand);
 
-                Yii::info('Params count ' . count($runCommand), 'cron');
-
                 //base actions
                 if (count($runCommand) == 2) {
                     $actions[] = array(

@@ -7,10 +7,22 @@ $config = [
     'language' => 'ru',
     'charset'=>'utf-8',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'view'],
     'defaultRoute' => 'coupon',
     'vendorPath' => dirname(__DIR__)."/vendor",
     'components' => [
+        // 'view' => [
+        //     'class' => 'yii\web\View',
+        //     'theme' => [
+        //         'basePath' => '@app/themes/material-default',
+        //         'baseUrl' => '@web/themes/material-default',
+        //         'pathMap' => [
+        //             '@app/views' => '@app/themes/material-default',
+        //             '@app/modules' => '@app/themes/material-default/modules',
+        //             '@app/widgets' => '@app/themes/material-default/widgets',
+        //         ],
+        //     ]
+        // ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'kupons',
@@ -76,20 +88,13 @@ $config = [
             'class' => 'yii\web\AssetManager',
             'appendTimestamp' => true,
             'bundles' => [
-                // 'romdim\bootstrap\material\BootMaterialCssAsset' => [
-                //     'sourcePath' => '@bower/bootstrap-material-design/dist',
-                //     'css' => [
-                //         YII_ENV_DEV ? 'css/ripples.css' : 'css/ripples.css',
-                //         YII_ENV_DEV ? 'css/bootstrap-material-design.css' : 'css/bootstrap-material-design.css',
-                //     ]
-                // ],
-                // 'romdim\bootstrap\material\BootMaterialJsAsset' => [
-                //     'sourcePath' => '@bower/bootstrap-material-design/dist',
-                //     'js' => [
-                //         YII_ENV_DEV ? 'js/ripples.js' : 'js/ripples.js',
-                //         YII_ENV_DEV ? 'js/material.js' : 'js/material.js',
-                //     ]
-                // ]
+                //for slate theme or every theme from https://bootswatch.com/
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [
+                        '/css/bootstrap-themes/slate.min.css',
+                        //'/css/bootstrap-themes/darkly.min.css',
+                    ]
+                ],
             ]
         ]
     ],

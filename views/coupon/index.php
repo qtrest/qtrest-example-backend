@@ -17,7 +17,7 @@ $this->params['breadcrumbs'] = '';
 
 ?>
 
-<div class="col-md-12" style="margin-bottom: 30px; text-align: justify;">
+<!-- <div class="col-md-12" style="margin-bottom: 30px; text-align: justify;">
     <div class="col-md-8">
         <br/>
         Привет! На сайте Skid.KZ Вы можете найти купоны всех популярных сервисов скидок (купонаторов) во всех городах Казахстана!
@@ -27,22 +27,20 @@ $this->params['breadcrumbs'] = '';
         Для поиска любой доступной у Казахстанских купонаторов скидки, теперь достаточно просто зайти на сайт skid.kz!
     </div>
     <div class="col-md-4">
-        <!-- Put this script tag to the <head> of your page -->
         <script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
 
         <script type="text/javascript">
           VK.init({apiId: 4797182, onlyWidgets: true});
         </script>
 
-        <!-- Put this div tag to the place, where the Poll block will be -->
         <div id="vk_poll"></div>
         <script type="text/javascript">
         VK.Widgets.Poll("vk_poll", {width: "350"}, "206881005_df8c142231b4afa13c");
         </script>
     </div>
-</div>
+</div> -->
 
-
+<center><h4>Skid.KZ - просто и удобно. Для всех найдутся самые выгодные предложения. Все купоны Казахстана здесь!</h4></center>
 
 <div class="coupon-index">
 
