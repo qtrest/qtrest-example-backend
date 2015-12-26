@@ -43,7 +43,20 @@ if ($strippedBoughtCount != $model->boughtCount) {
     $model->save();
 }
 
+$certText = '. Сертификат: ';
+if (\Yii::$app->devicedetect->isMobile()) {
+    if (\Yii::$app->devicedetect->isTablet()) {
+
+    } else {
+        $certText = '. Серт.: ';
+    }
+} else {
+    $itemClass .= ' col-xs-4';
+}
+
 ?>
+
+    
 
     <div itemscope itemtype="http://schema.org/Product" class="thumbnail image-ratio-base" style="background-image:url('/img/skid_bg_2.jpg'); background-size: cover;">
         <div class="image-ratio" itemprop="image" style="background-image:url('<?= (substr_count($model->mainImageLink, 'http') > 0 ? ($model->mainImageLink) :($serviceBaseUrl . '/' . $model->mainImageLink)); ?>')">
@@ -71,7 +84,7 @@ if ($strippedBoughtCount != $model->boughtCount) {
             <span class="label label-success span-full-down">
                     <?= ((($model->discountType == 'coupon') || ($model->discountType == 'freeCoupon') )
                         ? 'Купон: ' . Html::encode($model->originalCouponPrice)
-                        : 'Цена: ' . (Html::encode($model->originalPrice) . '. Сертификат: ' . Html::encode($model->discountPrice))) . '. Скидка: ' . str_replace('%', '', Html::encode($model->discountPercent)) . '%'
+                        : 'Цена: ' . (Html::encode($model->originalPrice) . $certText . Html::encode($model->discountPrice))) . '. Скидка: ' . str_replace('%', '', Html::encode($model->discountPercent)) . '%'
                     ?>
             </span>
         </div>
