@@ -18,6 +18,9 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
