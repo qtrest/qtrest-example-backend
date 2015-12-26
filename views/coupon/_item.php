@@ -50,8 +50,6 @@ if (\Yii::$app->devicedetect->isMobile()) {
     } else {
         $certText = '. Серт.: ';
     }
-} else {
-    $itemClass .= ' col-xs-4';
 }
 
 ?>

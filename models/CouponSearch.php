@@ -63,10 +63,20 @@ class CouponSearch extends Coupon
         //print_r($params);
         $query = Coupon::find();
 
+        $pageSize = 15;
+        if (\Yii::$app->devicedetect->isMobile()) {
+            if (\Yii::$app->devicedetect->isTablet()) {
+                $pageSize = 20;
+            } else {
+                $pageSize = 25;
+            }
+        }
+
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 15,
+                'pageSize' => $pageSize,
             ],
             'sort'=> ['defaultOrder' => ['id'=>SORT_DESC]]
         ]); 
