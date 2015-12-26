@@ -52,13 +52,17 @@ $this->params['breadcrumbs'] = '';
     </p>
 -->
     <?php
+
+    $maxButtonCount = 15;
     
     $itemClass = 'coupon-item ';
     if (\Yii::$app->devicedetect->isMobile()) {
         if (\Yii::$app->devicedetect->isTablet()) {
             $itemClass .= ' col-xs-6';
+            $maxButtonCount = 10;
         } else {
             $itemClass .= ' col-xs-12';
+            $maxButtonCount = 5;
         }
     } else {
         $itemClass .= ' col-xs-4';
@@ -67,10 +71,14 @@ $this->params['breadcrumbs'] = '';
     echo ListView::widget([
 		//'summary' => '',
         'dataProvider' => $dataProvider,
-        'layout' => '{summary}<div class="block-items">{items}</div>{pager}',
+        'layout' => '{summary}<div class="block-items">{items}</div><div align=\'center\'>{pager}</div>',
         //'options' => ['class' => ''],
         'itemOptions' => ['class' => $itemClass],
         'itemView' => '_item',
+        'pager' => [
+            'class' => 'yii\widgets\LinkPager',
+            'maxButtonCount' => $maxButtonCount
+        ]
     ]) ?>
 
     <?php

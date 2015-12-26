@@ -93,7 +93,7 @@ use app\components\Tools;
 
     <?php // echo $form->field($model, 'pageLink') ?>
 
-    <div class="form-group">
+    <div class="form-group" style="text-align: center;">
         <?= Html::submitButton(Yii::t('app', 'Поиск'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('app', 'Сброс'), ['class' => 'btn btn-default']) ?>
     </div>
