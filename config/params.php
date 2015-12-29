@@ -20,7 +20,7 @@ return [
             'cron'      => '10 22 * * *',
         ],
         'kupon/cron/update' => [
-            'cron'      => '15 7 * * *',
+            'cron'      => '10 5 3 * *',
         ],
     ],
 ];
