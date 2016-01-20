@@ -160,7 +160,17 @@ class BeSmartApi extends BaseApi
         $allResult['coupons'] = [];
         
         for ($i = 0; $i < count($links); $i++) {
-            $result = $this->get($links[$i][0], [
+            
+            $preparedLink = $links[$i][0];
+            if ( $preparedLink == "//" ) {
+                $preparedLink = "/";
+            }
+            
+            if ( substr_count($preparedLink, "//") > 0 ) {
+                //todo replace
+            }
+            
+            $result = $this->get($preparedLink, [
                 'city' => Apist::filter('div.city.CityButton')->text(),
                 //'cityLat'  => Tools::ru2lat(Apist::filter('#js-b-header > div.b-logo__city__wrapper > div.b-city__change > a > span')->text()->mb_substr(0, -1)),
                 'coupons' => Apist::filter('#deals .deal')->each([
