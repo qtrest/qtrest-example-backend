@@ -58,11 +58,11 @@ $this->title = 'Skid.KZ - О сайте';
         <li>KupiKupon.kz;</li>
         <li>MirKuponov.kz;</li>
         <li>AutoKupon.kz;</li>
+        <li>BeSmart.kz.</li>
     </ul>
     В наших планах - научить роботов общаться с оставшимися сайтами:
     <ul>
-        <li>BeSmart.kz;</li>
-        <li>Biglion.kz;</li>
+        <li>Biglion.kz.</li>
     </ul>
 
     <h3>Как я могу помочь?</h3>
