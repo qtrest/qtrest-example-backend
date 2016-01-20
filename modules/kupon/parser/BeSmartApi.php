@@ -182,7 +182,7 @@ class BeSmartApi extends BaseApi
                     'discountPrice' => Apist::filter('.act_info .act_price_out')->text()->call(function ($str) {
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),
-                    'pageLink' => Apist::filter('.act_info > a')->attr('href')->call(function ($href) {
+                    'pageLink' => Apist::filter('.details a')->attr('href')->call(function ($href) {
                         return $href;
                     }),
                     'boughtCount' => Apist::filter(".sold")->text()->call(function ($attr) {
