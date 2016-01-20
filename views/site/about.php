@@ -6,7 +6,18 @@ $this->title = 'Skid.KZ - О сайте';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <center><h1><?= Html::encode($this->title) ?></h1></center>
+
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Все мои сервисы -->
+        <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-7212327600726803"
+                data-ad-slot="3252207281"
+                data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
     <p>
     <h3>Кто мы?</h3>

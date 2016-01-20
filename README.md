@@ -76,6 +76,7 @@ Services ids:
 3. KupiKuponApi
 4. MirKuponovApi
 5. AutoKuponApi
+6. BeSmartApi
 
 You MUST specify TESTTYPE!!!
 http://skid.kz/kupon/default/testapi?serviceId=1&testType=2

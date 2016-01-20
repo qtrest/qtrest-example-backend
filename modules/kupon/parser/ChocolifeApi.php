@@ -80,7 +80,7 @@ class ChocolifeApi extends BaseApi
 
     protected function couponsByCityId($cityId)
     {
-        $cityPath = \Yii::$app->db->createCommand('SELECT path FROM cityUrl WHERE cityId=\''.$cityId.'\'')->queryScalar();
+        $cityPath = \Yii::$app->db->createCommand('SELECT path FROM cityUrl WHERE cityId=\''.$cityId.'\' AND sourceServiceId=\'' . $this->getSourceServiceId() . '\'')->queryScalar();
         if (empty($cityPath)) {
             throw new \yii\web\HttpException(400, 'empty cityPath', 405);
             return;

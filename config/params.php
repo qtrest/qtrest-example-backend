@@ -19,6 +19,9 @@ return [
         'kupon/cron/autokupon' => [
             'cron'      => '10 22 * * *',
         ],
+        'kupon/cron/besmartkz' => [
+            'cron'      => '10 28 * * *',
+        ],
         'kupon/cron/update' => [
             'cron'      => '10 5 3 * *',
         ],

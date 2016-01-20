@@ -11,6 +11,7 @@ use app\modules\kupon\parser\KupiKuponApi as KupiKuponApi;
 use app\modules\kupon\parser\MirKuponovApi as MirKuponovApi;
 use app\modules\kupon\parser\AutoKuponApi as AutoKuponApi;
 use app\modules\kupon\parser\BiglionApi as BiglionApi;
+use app\modules\kupon\parser\BeSmartApi as BeSmartApi;
  
 class CronController extends Controller
 {
@@ -25,60 +26,70 @@ class CronController extends Controller
     public function actionBiglion()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
-        $bgl = new BiglionApi();
-        $bgl->initData();
-        $bgl->fetchAllCities();
-        $bgl->updateAllCoupons();
+        $api = new BiglionApi();
+        $api->initData();
+        $api->fetchAllCities();
+        $api->updateAllCoupons();
         \Yii::info('complete', 'kupon');
     }
 
     public function actionChocolife()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
-        $bgl = new ChocolifeApi();
-        $bgl->initData();
-        $bgl->fetchAllCities();
-        $bgl->updateAllCoupons();
+        $api = new ChocolifeApi();
+        $api->initData();
+        $api->fetchAllCities();
+        $api->updateAllCoupons();
         \Yii::info('complete', 'kupon');
     }
 
     public function actionBlizzard()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
-        $bgl = new BlizzardApi();
-        $bgl->initData();
-        $bgl->fetchAllCities();
-        $bgl->updateAllCoupons();
+        $api = new BlizzardApi();
+        $api->initData();
+        $api->fetchAllCities();
+        $api->updateAllCoupons();
         \Yii::info('complete', 'kupon');
     }
 
     public function actionKupikupon()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
-        $bgl = new KupiKuponApi();
-        $bgl->initData();
-        $bgl->fetchAllCities();
-        $bgl->updateAllCoupons();
+        $api = new KupiKuponApi();
+        $api->initData();
+        $api->fetchAllCities();
+        $api->updateAllCoupons();
         \Yii::info('complete', 'kupon');
     }
 
     public function actionMirkuponov()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
-        $bgl = new MirKuponovApi();
-        $bgl->initData();
-        $bgl->fetchAllCities();
-        $bgl->updateAllCoupons();
+        $api = new MirKuponovApi();
+        $api->initData();
+        $api->fetchAllCities();
+        $api->updateAllCoupons();
         \Yii::info('complete', 'kupon');
     }
 
     public function actionAutokupon()
     {
     	\Yii::info(__FUNCTION__, 'kupon');
-        $bgl = new MirKuponovApi();
-        $bgl->initData();
-        $bgl->fetchAllCities();
-        $bgl->updateAllCoupons();
+        $api = new MirKuponovApi();
+        $api->initData();
+        $api->fetchAllCities();
+        $api->updateAllCoupons();
+        \Yii::info('complete', 'kupon');
+    }
+    
+    public function actionBesmartkz()
+    {
+    	\Yii::info(__FUNCTION__, 'kupon');
+        $api = new BeSmartApi();
+        $api->initData();
+        $api->fetchAllCities();
+        $api->updateAllCoupons();
         \Yii::info('complete', 'kupon');
     }
 
@@ -87,8 +98,6 @@ class CronController extends Controller
         \Yii::info(__FUNCTION__, 'kupon');
 
         $chocolife = new ChocolifeApi();
-        \Yii::info('ChocolifeApi created', 'kupon');
-
         $chocolife->updateAllCoupons();
         \Yii::info('ChocolifeApi Success!', 'kupon');
 
@@ -107,6 +116,10 @@ class CronController extends Controller
         $autoKupon = new AutoKuponApi();
         $autoKupon->updateAllCoupons();
         \Yii::info('AutoKuponApi Success!', 'kupon');
+        
+        $besmart = new BeSmartApi();
+        $besmart->updateAllCoupons();
+        \Yii::info('BeSmartApi Success!', 'kupon');
 
         \Yii::info('complete', 'kupon');
     }

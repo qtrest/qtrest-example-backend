@@ -262,6 +262,19 @@ class Tools {
     {
         return !strncmp($haystack, $needle, strlen($needle));
     }
+    
+    public static function startsWithCut($haystack, $needle)
+    {
+        $length = strlen($needle);
+        $lengthStr = strlen($haystack);
+        if ($length == 0) {
+            return $haystack;
+        }
+
+        if (substr($haystack, 0, $length) === $needle) {
+            return substr($haystack, $length, $lengthStr-$length);
+        }
+    }
 
     public static function endsWith($haystack, $needle)
     {
@@ -278,7 +291,7 @@ class Tools {
         $length = strlen($needle);
         $lengthStr = strlen($haystack);
         if ($length == 0) {
-            return true;
+            return $haystack;
         }
 
         if (substr($haystack, -$length) === $needle) {

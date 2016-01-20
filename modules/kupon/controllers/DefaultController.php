@@ -13,6 +13,7 @@ use app\modules\kupon\parser\KupiKuponApi as KupiKuponApi;
 use app\modules\kupon\parser\MirKuponovApi as MirKuponovApi;
 use app\modules\kupon\parser\AutoKuponApi as AutoKuponApi;
 use app\modules\kupon\parser\BiglionApi as BiglionApi;
+use app\modules\kupon\parser\BeSmartApi as BeSmartApi;
 
 class DefaultController extends Controller
 {
@@ -143,6 +144,9 @@ class DefaultController extends Controller
                 break;
             case 5:
                 $api = new AutoKuponApi();
+                break;
+            case 6:
+                $api = new BeSmartApi();
                 break;
             default:
                 echo "Not found!";

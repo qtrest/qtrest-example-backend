@@ -44,6 +44,17 @@ $this->params['breadcrumbs'] = '';
 
 <div class="coupon-index">
 
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Все мои сервисы -->
+        <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-7212327600726803"
+                data-ad-slot="3252207281"
+                data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+
     <h1><?php // echo Html::encode($this->title) ?></h1>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -67,7 +78,7 @@ $this->params['breadcrumbs'] = '';
     } else {
         $itemClass .= ' col-xs-4';
     }
-    
+
     echo ListView::widget([
 		//'summary' => '',
         'dataProvider' => $dataProvider,
