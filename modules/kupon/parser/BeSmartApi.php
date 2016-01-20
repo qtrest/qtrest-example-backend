@@ -12,7 +12,7 @@ class BeSmartApi extends BaseApi
 
     public function getBaseUrl()
     {
-        return 'https://besmart.kz/';
+        return 'https://besmart.kz';
     }
 
     protected function getSourceServiceCode()
