@@ -82,7 +82,7 @@ $this->params['breadcrumbs'] = '';
     echo ListView::widget([
 		//'summary' => '',
         'dataProvider' => $dataProvider,
-        'layout' => '{summary}<div class="block-items">{items}</div><div align=\'center\'>{pager}</div>',
+        'layout' => '<div align=\'center\'>{summary}</div><div class="block-items">{items}</div><div align=\'center\'>{pager}</div>',
         //'options' => ['class' => ''],
         'itemOptions' => ['class' => $itemClass],
         'itemView' => '_item',

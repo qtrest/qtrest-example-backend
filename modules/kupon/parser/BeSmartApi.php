@@ -195,7 +195,9 @@ class BeSmartApi extends BaseApi
                     'originalPrice' => Apist::filter('.price-block .old')->text()->call(function ($str) {
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),
-                    'discountPercent' => Apist::filter('.grey')->text(),
+                    'discountPercent' => Apist::filter('.grey')->text()->call(function ($text) {
+                        return trim(str_replace('-', '', $str));
+                    }),
                     'discountPrice' => Apist::filter('.price-block .old')->text()->call(function ($str) {
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),

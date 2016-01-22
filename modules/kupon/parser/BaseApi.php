@@ -593,7 +593,6 @@ abstract class BaseApi extends Apist
             //$coupon = Coupon::findOne($couponId);
         }
     }
-
     
     public static function getApiObject($serviceId) {
         $api = NULL;
@@ -612,6 +611,10 @@ abstract class BaseApi extends Apist
                 break;
             case 5:
                 $api = new AutoKuponApi();
+                break;
+            case 6:
+            case 8:
+                $api = new BeSmartApi();
                 break;
             default:
                 echo "Not found!";
