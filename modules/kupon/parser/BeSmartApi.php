@@ -122,6 +122,8 @@ class BeSmartApi extends BaseApi
             throw new \yii\web\HttpException(400, 'empty cityPath', 405);
             return;
         }
+
+        $cityName = \Yii::$app->db->createCommand('SELECT cityName FROM city WHERE id=\''.$cityId.'\'')->queryScalar();
         
         //return $cityPath;
 
@@ -158,17 +160,22 @@ class BeSmartApi extends BaseApi
 
         $allResult = [];
         $allResult['coupons'] = [];
+
+        //echo "<br/>links " . count($links);
         
         for ($i = 0; $i < count($links); $i++) {
             
             $preparedLink = $links[$i][0];
-            if ( $preparedLink == "//" ) {
-                $preparedLink = "/";
+            if ( Tools::startsWith($preparedLink, "//") ) {
+
+                $preparedLink = "/".Tools::startsWithCut($preparedLink, "//");
             }
             
             if ( substr_count($preparedLink, "//") > 0 ) {
                 //todo replace
             }
+
+            //echo "<br/>".$preparedLink;
             
             $result = $this->get($preparedLink, [
                 'city' => Apist::filter('div.city.CityButton')->text(),
@@ -182,14 +189,14 @@ class BeSmartApi extends BaseApi
                     'conditions' => 'empty',
                     'features' => 'empty',
                     'timeToCompletion' => 'empty',
-                    'originalCouponPrice' => Apist::filter('.price-block')->text()->call(function ($str) {
+                    'originalCouponPrice' => Apist::filter('.price-block .new')->text()->call(function ($str) {
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг', '', $str))));
                     }),
-                    'originalPrice' => Apist::filter('.act_info .act_price')->text()->call(function ($str) {
+                    'originalPrice' => Apist::filter('.price-block .old')->text()->call(function ($str) {
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),
                     'discountPercent' => Apist::filter('.grey')->text(),
-                    'discountPrice' => Apist::filter('.act_info .act_price_out')->text()->call(function ($str) {
+                    'discountPrice' => Apist::filter('.price-block .old')->text()->call(function ($str) {
                         return trim(str_replace('от', '', str_replace('до', '', str_replace('тг.', '', $str))));
                     }),
                     'pageLink' => Apist::filter('.details a')->attr('href')->call(function ($href) {
@@ -236,11 +243,12 @@ class BeSmartApi extends BaseApi
                 foreach ($result['coupons'] as $key => $value) {
                     $allResult['coupons'][] = $value;
                 }
+                //echo "<br/>" . $links[$i][0] . " - coupons " . count($result['coupons']);
             }
         }
 
-        $allResult['city'] = $result['city'];
-        $allResult['cityCode'] = Tools::ru2lat($result['city']);
+        $allResult['city'] = $cityName;
+        $allResult['cityCode'] = Tools::ru2lat($cityName);
 
         return $allResult;
     }
