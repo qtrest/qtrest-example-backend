@@ -64,7 +64,7 @@ class CouponController extends ActiveController
             'checkAccess' => [$this, 'checkAccess'],
             'params'      => \Yii::$app->request->get(),
             'pagination' => [
-                $pageSizeLimit = [1, 2500]
+                'pageSizeLimit' => [1, 2500]
             ],
             //'prepareDataProvider' => [$this, 'prepareDataProvider']
         ];
