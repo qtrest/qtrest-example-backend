@@ -66,6 +66,9 @@ class SearchAction extends Action {
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSizeLimit' => [1, 2500]
+            ],
         ]);
 
         if (empty($params)) {
