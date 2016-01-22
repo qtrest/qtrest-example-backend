@@ -255,41 +255,35 @@ class BeSmartApi extends BaseApi
 
     protected function couponAdvancedById($couponId)
     {
-    //     $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
+        $pageLink = \Yii::$app->db->createCommand('SELECT pageLink FROM coupon WHERE id=\''.$couponId.'\'')->queryScalar();
 
-    //     $result = $this->get($pageLink, [
-    //         'pageLink' => $pageLink,
-    //         'couponId' => $couponId,
-    //         'isOfficialCompleted' => Apist::filter('.e-offer__expire-text2')->text()->call(function($text){
-    //             if (trim($text) == "Акция завершена") {
-    //                 return 1;
-    //             } else {
-    //                 return 0;
-    //             }
-    //         }),
-    //         'discountPrice' => Apist::filter('.e-offer__price')->text()->call(function($text){
-    //             return trim(str_replace("от", "", str_replace("тг.", "", $text)));
-    //         }),
-    //         'longDescription' => Apist::filter('#information > .e-offer__description')->html(),
-    //         'conditions' => Apist::filter('#information > .b-conditions')->html(),
-    //         'features' => Apist::filter('#information > .b-offer__features')->html(),
-    //         'imageLinks' => Apist::filter('.b-offer__imgs img')->each()->attr('src'),
-    //         'timeToCompletion' => Apist::filter('.e-offer__expire-date')->text()->call(function($stamp){
-    //             $stamp = substr(trim($stamp),0,10);
-    //             $diff = intval($stamp) - time();
-    //             return  $diff;
-    //         }),
-    //         'boughtCount' => Apist::filter('.b-offer__how_many_bought span')->text()->call(function ($str) {
-    //             return Tools::getFirstWord($str);
-    //         }),
-    //     ],  ['proxy' => \Yii::$app->params['proxy']]);
+        $result = $this->get($pageLink, [
+            'pageLink' => $pageLink,
+            'couponId' => $couponId,
+            'isOfficialCompleted' => false,
+            'discountPrice' => Apist::filter('#fittext')->text()->call(function($text){
+                return trim(str_replace("от", "", str_replace("тенге", "", $text)));
+            }),
+            'longDescription' => Apist::filter('#about')->html(),
+            'conditions' => Apist::filter('#terms')->html(),
+            'features' => Apist::filter('#place')->html(),
+            'imageLinks' => Apist::filter('#slider img')->each()->attr('src'),
+            'timeToCompletion' => Apist::current()->call(function() {
+                $dates=explode("-", date("m-d-Y"));
+                $then=mktime (0,0,0,$dates[0],$dates[1]+1,$dates[2]);
+                $now=time();
+                $how=$then-$now - 21600; //TODO gmt!!
+                return $how;
+            }),
+            'boughtCount' => Apist::filter('#sidebar > div.properties > span.text-right')->text()->call(function($text){
+                return trim(str_replace("Купили:", "", str_replace("человек", "", $text)));
+            })
+        ]);
 
-    //     //print_r($result);
-
-    //     if (empty($result['longDescription']) && empty($result['conditions']) && empty($result['features']) && empty($result['timeToCompletion'])) {
-    //         //TODO SpecialPage!!!
-    //         return 0;
-    //     }
-    //     return $result;
+        if (empty($result['longDescription']) && empty($result['timeToCompletion'])) {
+            //TODO SpecialPage!!!
+            return 0;
+        }
+        return $result;
     }
 }
