@@ -39,6 +39,16 @@ class CouponSerializer extends Serializer
             ->where('id=:id', [':id' => $data['sourceServiceId']])
             ->createCommand()
             ->queryScalar();
+        $serviceName = $query->select('serviceName')
+            ->from('sourceService')
+            ->where('id=:id', [':id' => $data['sourceServiceId']])
+            ->createCommand()
+            ->queryScalar();
+        $cityName = $query->select('cityName')
+            ->from('city')
+            ->where('id=:id', [':id' => $data['cityId']])
+            ->createCommand()
+            ->queryScalar();
 
         $images = array_map('trim', explode(",", $data['imagesLinks']));
         foreach ($images as $i => $image) {
@@ -52,6 +62,14 @@ class CouponSerializer extends Serializer
         $data['imagesLinks'] = $images;
         $data['mainImageLink'] = substr_count($data['mainImageLink'], 'http') > 0 ? ($data['mainImageLink']) : ($serviceBaseUrl . '/' . trim($data['mainImageLink']));
         $data['pageLink'] = substr_count($data['pageLink'], 'http') > 0 ? ($data['pageLink']) : ($serviceBaseUrl . '/' . trim($data['pageLink']));
+
+        $data['serviceName'] = $serviceName;
+        $data['cityName'] = $cityName;
+
+        if ($data['boughtCount'] == "") {
+            $data['boughtCount'] = "0";
+        }
+
         return $data;
     }
 
