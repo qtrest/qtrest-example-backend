@@ -5,7 +5,7 @@ namespace app\api\components;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\rest\Action;
-
+use app\components\Tools;
 
 class SearchAction extends Action {
 
@@ -50,8 +50,7 @@ class SearchAction extends Action {
          */
         $modelClass = $this->modelClass;
 
-        $model = new $this->modelClass([
-        ]);
+        $model = new $this->modelClass([]);
 
         $safeAttributes = $model->safeAttributes();
         $params = array();
@@ -64,10 +63,13 @@ class SearchAction extends Action {
 
         $query = $modelClass::find();
 
+        //echo $modelClass;
+        //Tools::print_array('safe', $safeAttributes);
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSizeLimit' => [1, 2500]
+                'pageSizeLimit' => [1, 30]
             ],
         ]);
 

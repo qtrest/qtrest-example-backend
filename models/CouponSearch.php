@@ -49,6 +49,7 @@ class CouponSearch extends Coupon
         if (!isset($params['CouponSearch'])) {
             $params['CouponSearch'] = [];
         }
+
         if (!isset($params['CouponSearch']['isArchive'])) {
             if (Yii::$app->controller->action->id == 'archive') {
                 //$this->isArchive = 1;
@@ -79,7 +80,7 @@ class CouponSearch extends Coupon
                 'pageSize' => $pageSize,
             ],
             'sort'=> ['defaultOrder' => ['id'=>SORT_DESC]]
-        ]); 
+        ]);
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;

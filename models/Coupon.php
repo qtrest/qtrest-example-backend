@@ -52,7 +52,7 @@ class Coupon extends \yii\db\ActiveRecord
     {
         return [
             [['sourceServiceId', 'cityId'], 'integer'],
-            [['createTimestamp', 'lastUpdateDateTime'], 'safe'],
+            [['createTimestamp', 'lastUpdateDateTime', 'isArchive'], 'safe'],
             [['longDescription', 'conditions', 'features', 'imagesLinks'], 'string'],
             [['recordHash', 'title', 'shortDescription', 'timeToCompletion', 'mainImageLink',
                 'originalPrice', 'discountPercent', 'discountType', 'discountPrice', 'boughtCount',
