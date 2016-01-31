@@ -25,5 +25,8 @@ return [
         'kupon/cron/update' => [
             'cron'      => '10 5 3 * *',
         ],
+        'kupon/cron/actualize-category' => [
+            'cron'      => '0 */10 * * *',
+        ],
     ],
 ];

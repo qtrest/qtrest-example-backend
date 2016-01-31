@@ -14,6 +14,7 @@ use Yii;
  * @property string $categoryIdentifier
  * @property string $parentCategoryIdentifier
  * @property string $categoryAdditionalInfo
+ * @property integer $isActive
  *
  * @property SourceService $sourceService
  */
@@ -33,7 +34,7 @@ class CouponCategories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sourceServiceId'], 'integer'],
+            [['sourceServiceId', 'isActive'], 'integer'],
             [['categoryName', 'categoryCode', 'categoryIdentifier', 'parentCategoryIdentifier'], 'required'],
             [['categoryName', 'categoryCode', 'categoryIdentifier', 'parentCategoryIdentifier', 'categoryAdditionalInfo'], 'string', 'max' => 255]
         ];
@@ -45,13 +46,14 @@ class CouponCategories extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('city', 'ID'),
-            'sourceServiceId' => Yii::t('city', 'Source Service ID'),
-            'categoryName' => Yii::t('city', 'Category Name'),
-            'categoryCode' => Yii::t('city', 'Category Code'),
-            'categoryIdentifier' => Yii::t('city', 'Category Identifier'),
-            'parentCategoryIdentifier' => Yii::t('city', 'Parent Category Identifier'),
-            'categoryAdditionalInfo' => Yii::t('city', 'Category Additional Info'),
+            'id' => Yii::t('app', 'ID'),
+            'sourceServiceId' => Yii::t('app', 'Source Service ID'),
+            'categoryName' => Yii::t('app', 'Category Name'),
+            'categoryCode' => Yii::t('app', 'Category Code'),
+            'categoryIdentifier' => Yii::t('app', 'Category Identifier'),
+            'parentCategoryIdentifier' => Yii::t('app', 'Parent Category Identifier'),
+            'categoryAdditionalInfo' => Yii::t('app', 'Category Additional Info'),
+            'isActive' => Yii::t('app', 'Is Active'),
         ];
     }
 

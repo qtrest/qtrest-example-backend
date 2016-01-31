@@ -2,6 +2,7 @@
 
 namespace app\modules\kupon\commands;
  
+use app\models\CouponCategories;
 use yii\console\Controller;
 use yii\helpers\Console;
 
@@ -123,4 +124,28 @@ class CronController extends Controller
 
         \Yii::info('complete', 'kupon');
     }
+
+    public function actionActualizeCategory()
+    {
+        \Yii::info(__FUNCTION__, 'kupon');
+        $sqlActual = "SELECT categories.id FROM categories JOIN coupon
+                  ON FIND_IN_SET(categories.id, REPLACE(coupon.sourceServiceCategories, SPACE(1), ''))
+                  GROUP BY categoryCode";
+        $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        try {
+            $getActual = $connection->createCommand($sqlActual);
+            $connection->createCommand()->update('categories', ['isActive' => 0])->execute();
+            $reader = $getActual->query();
+            foreach ($reader as $row) {
+                $connection->createCommand()->update('categories', ['isActive' => 1], 'id='.$row['id'])->execute();
+            }
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+        \Yii::info('complete', 'kupon');
+    }
+
 }

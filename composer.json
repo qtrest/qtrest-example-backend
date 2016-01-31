@@ -26,7 +26,8 @@
         "alexandernst/yii2-device-detect": "0.0.8",
         "kartik-v/yii2-widget-switchinput": "*",
         "himiklab/yii2-sitemap-module": "*",
-        "denisogr/yii2-cronjobs": "dev-master"
+        "denisogr/yii2-cronjobs": "dev-master",
+        "pahanini/yii2-rest-doc" : "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

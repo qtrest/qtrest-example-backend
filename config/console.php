@@ -14,6 +14,9 @@ return [
     'controllerNamespace' => 'app\commands',
     'modules' => [
         'gii' => 'yii\gii\Module',
+        'kupon' => [
+            'class' => 'app\modules\kupon\Kupon'
+        ],
     ],
     'components' => [
         'cache' => [
@@ -53,11 +56,6 @@ return [
             ],
         ],
         'db' => $db,
-    ],
-    'modules' => [
-        'kupon' => [
-            'class' => 'app\modules\kupon\Kupon'
-        ],
     ],
     'controllerMap' => [
         'build-rest-doc' => [
