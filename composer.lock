@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3c6007fb2be532f4723d6d342364b035",
-    "content-hash": "5b52a2fea90ac9b9f851a17bb3acdc60",
+    "hash": "6ac3b3ab0774923df28f2ae08942c91e",
+    "content-hash": "d79a6360d11b5f386a88a5360c4625b4",
     "packages": [
         {
             "name": "alexandernst/yii2-device-detect",
@@ -354,12 +354,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DenisOgr/yii2-cronjobs.git",
-                "reference": "4a4d371f91df52a064c59c6b57b4da24e5372166"
+                "reference": "405d98a8eb5c179c3439fa23db0e640088473a63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DenisOgr/yii2-cronjobs/zipball/4a4d371f91df52a064c59c6b57b4da24e5372166",
-                "reference": "4a4d371f91df52a064c59c6b57b4da24e5372166",
+                "url": "https://api.github.com/repos/DenisOgr/yii2-cronjobs/zipball/405d98a8eb5c179c3439fa23db0e640088473a63",
+                "reference": "405d98a8eb5c179c3439fa23db0e640088473a63",
                 "shasum": ""
             },
             "require": {
@@ -387,7 +387,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2015-03-30 07:08:31"
+            "time": "2016-01-20 08:37:46"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -683,16 +683,16 @@
         },
         {
             "name": "kartik-v/yii2-krajee-base",
-            "version": "v1.8.0",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "602e7203680642ac4a2a5f9355316eaa9939b6ff"
+                "reference": "0c274e31e4392cbafc5fe158eae81738794e02ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/602e7203680642ac4a2a5f9355316eaa9939b6ff",
-                "reference": "602e7203680642ac4a2a5f9355316eaa9939b6ff",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/0c274e31e4392cbafc5fe158eae81738794e02ce",
+                "reference": "0c274e31e4392cbafc5fe158eae81738794e02ce",
                 "shasum": ""
             },
             "require": {
@@ -725,20 +725,20 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-12-11 19:01:49"
+            "time": "2016-01-10 12:26:29"
         },
         {
             "name": "kartik-v/yii2-widget-switchinput",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-switchinput.git",
-                "reference": "f6fd88e978b526323538b62ffd9d8845a9799758"
+                "reference": "7d8ee999d79bcdc1601da5cd59439ac7eb1f5ea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-switchinput/zipball/f6fd88e978b526323538b62ffd9d8845a9799758",
-                "reference": "f6fd88e978b526323538b62ffd9d8845a9799758",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-switchinput/zipball/7d8ee999d79bcdc1601da5cd59439ac7eb1f5ea6",
+                "reference": "7d8ee999d79bcdc1601da5cd59439ac7eb1f5ea6",
                 "shasum": ""
             },
             "require": {
@@ -775,7 +775,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-01-14 16:27:26"
+            "time": "2016-01-10 16:47:35"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -832,6 +832,202 @@
             "time": "2015-03-11 10:02:22"
         },
         {
+            "name": "nikic/php-parser",
+            "version": "v0.9.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "ef70767475434bdb3615b43c327e2cae17ef12eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ef70767475434bdb3615b43c327e2cae17ef12eb",
+                "reference": "ef70767475434bdb3615b43c327e2cae17ef12eb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "PHPParser": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov"
+                }
+            ],
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "time": "2014-07-23 18:24:17"
+        },
+        {
+            "name": "pahanini/yii2-rest-doc",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pahanini/yii2-rest-doc.git",
+                "reference": "d793a58e891f5efb963ec0395cad32f6f65cf3c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pahanini/yii2-rest-doc/zipball/d793a58e891f5efb963ec0395cad32f6f65cf3c4",
+                "reference": "d793a58e891f5efb963ec0395cad32f6f65cf3c4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.4.0",
+                "phpdocumentor/reflection": ">=1.0.3",
+                "phpdocumentor/reflection-docblock": ">2.0.1",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "pahanini\\restdoc\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel Tetyaev",
+                    "email": "pahanini@gmail.com"
+                }
+            ],
+            "description": "A Yii2 tool to create slate index.md for you REST controllers.",
+            "homepage": "https://github.com/pahanini/yii2-rest-to-slate",
+            "keywords": [
+                "api",
+                "doc",
+                "rest",
+                "slate",
+                "yii2"
+            ],
+            "time": "2016-01-20 11:14:23"
+        },
+        {
+            "name": "phpdocumentor/reflection",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/Reflection.git",
+                "reference": "fc40c3f604ac2287eb5c314174d5109b2c699372"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/Reflection/zipball/fc40c3f604ac2287eb5c314174d5109b2c699372",
+                "reference": "fc40c3f604ac2287eb5c314174d5109b2c699372",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "~0.9.4",
+                "php": ">=5.3.3",
+                "phpdocumentor/reflection-docblock": "~2.0",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "behat/behat": "~2.4",
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "phpDocumentor": [
+                        "src/",
+                        "tests/unit/",
+                        "tests/mocks/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Reflection library to do Static Analysis for PHP Projects",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "time": "2014-11-14 11:43:04"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "dflydev/markdown": "~1.0",
+                "erusev/parsedown": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "phpDocumentor": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "mike.vanriel@naenius.com"
+                }
+            ],
+            "time": "2015-02-03 12:10:50"
+        },
+        {
             "name": "phpspec/php-diff",
             "version": "v1.0.2",
             "source": {
@@ -864,6 +1060,44 @@
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
             "time": "2013-11-01 13:02:21"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
         },
         {
             "name": "react/promise",
@@ -1013,16 +1247,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b600fec37c0efca08046d481d79e7eabc07108ff"
+                "reference": "ac06d8173bd80790536c0a4a634a7d705b91f54f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b600fec37c0efca08046d481d79e7eabc07108ff",
-                "reference": "b600fec37c0efca08046d481d79e7eabc07108ff",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/ac06d8173bd80790536c0a4a634a7d705b91f54f",
+                "reference": "ac06d8173bd80790536c0a4a634a7d705b91f54f",
                 "shasum": ""
             },
             "require": {
@@ -1062,20 +1296,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2016-01-03 15:33:41"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "740c98235f5b6e2b0b13df2fb97c7a1c7d1a18fc"
+                "reference": "650d37aacb1fa0dcc24cced483169852b3a0594e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/740c98235f5b6e2b0b13df2fb97c7a1c7d1a18fc",
-                "reference": "740c98235f5b6e2b0b13df2fb97c7a1c7d1a18fc",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/650d37aacb1fa0dcc24cced483169852b3a0594e",
+                "reference": "650d37aacb1fa0dcc24cced483169852b3a0594e",
                 "shasum": ""
             },
             "require": {
@@ -1118,29 +1352,32 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-02 20:29:39"
+            "time": "2016-01-03 15:33:41"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497"
+                "reference": "1289d16209491b584839022f29257ad859b8532d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0b6a8940385311a24e060ec1fe35680e17c74497",
-                "reference": "0b6a8940385311a24e060ec1fe35680e17c74497",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
+                "reference": "1289d16209491b584839022f29257ad859b8532d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -1174,20 +1411,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2015-11-04 20:28:58"
+            "time": "2016-01-20 09:13:37"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.0",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "f79824187de95064a2f5038904c4d7f0227fedb5"
+                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/f79824187de95064a2f5038904c4d7f0227fedb5",
-                "reference": "f79824187de95064a2f5038904c4d7f0227fedb5",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/34c8a4b51e751e7ea869b8262f883d008a2b81b8",
+                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8",
                 "shasum": ""
             },
             "require": {
@@ -1223,7 +1460,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:35:10"
+            "time": "2016-01-13 10:28:07"
         },
         {
             "name": "xj/yii2-holder-widget",
@@ -1599,187 +1836,6 @@
     ],
     "packages-dev": [
         {
-            "name": "bower-asset/bootstrap-material-design",
-            "version": "v0.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FezVrasta/bootstrap-material-design.git",
-                "reference": "f60db9fd8a3a1b93086a1368213ff1762cf14bbb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FezVrasta/bootstrap-material-design/zipball/f60db9fd8a3a1b93086a1368213ff1762cf14bbb",
-                "reference": "f60db9fd8a3a1b93086a1368213ff1762cf14bbb",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/bootstrap": ">=3.3.5,<3.4",
-                "bower-asset/bootstrap-sass": ">=3.3.5,<3.4",
-                "bower-asset/jquery": ">=2.1.1,<2.2"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "dist/css/bootstrap-material-design.css",
-                    "dist/js/material.js",
-                    "dist/css/ripples.css",
-                    "dist/js/ripples.js"
-                ],
-                "bower-asset-ignore": [
-                    "test",
-                    "screenshots",
-                    "demo",
-                    ".editorconfig",
-                    ".gitignore",
-                    ".jshintrc",
-                    ".travis.yml",
-                    "CONTRIBUTING.md",
-                    "Gruntfile.json",
-                    "index.html",
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests"
-                ]
-            },
-            "license": [
-                "https://github.com/FezVrasta/bootstrap-material-design/blob/master/LICENSE.md"
-            ],
-            "description": "Material Design theme for Bootstrap 3",
-            "keywords": [
-                "android",
-                "bootstrap",
-                "design",
-                "google",
-                "material",
-                "theme"
-            ]
-        },
-        {
-            "name": "bower-asset/bootstrap-sass",
-            "version": "v3.3.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap-sass.git",
-                "reference": "446b41a5af0f20f139a6d33ded2a62101c3bd5a1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap-sass/zipball/446b41a5af0f20f139a6d33ded2a62101c3bd5a1",
-                "reference": "446b41a5af0f20f139a6d33ded2a62101c3bd5a1",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery": ">=1.9.0"
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "assets/stylesheets/_bootstrap.scss",
-                    "assets/javascripts/bootstrap.js"
-                ],
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "lib",
-                    "tasks",
-                    "templates",
-                    "test",
-                    "*.gemspec",
-                    "Rakefile",
-                    "Gemfile"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "bootstrap-sass is a Sass-powered version of Bootstrap 3, ready to drop right into your Sass powered applications.",
-            "keywords": [
-                "bootstrap",
-                "sass",
-                "twbs"
-            ]
-        },
-        {
-            "name": "bower-asset/fontawesome",
-            "version": "v4.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/fddd2c240452e6c8990c4ef75e0265b455aa7968",
-                "reference": "fddd2c240452e6c8990c4ef75e0265b455aa7968",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "less/font-awesome.less",
-                    "scss/font-awesome.scss"
-                ],
-                "bower-asset-ignore": [
-                    "*/.*",
-                    "*.json",
-                    "src",
-                    "*.yml",
-                    "Gemfile",
-                    "Gemfile.lock",
-                    "*.md"
-                ]
-            },
-            "license": [
-                "OFL-1.1",
-                "MIT",
-                "CC-BY-3.0"
-            ],
-            "description": "Font Awesome"
-        },
-        {
-            "name": "eold/yii2-apidoc-generator",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/enryold/yii2-apidoc-generator.git",
-                "reference": "13ebd8d3b2d60771aad84b3bea7cbf769109bb43"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/enryold/yii2-apidoc-generator/zipball/13ebd8d3b2d60771aad84b3bea7cbf769109bb43",
-                "reference": "13ebd8d3b2d60771aad84b3bea7cbf769109bb43",
-                "shasum": ""
-            },
-            "require-dev": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "eold\\apidocgen\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Enrico Vecchio",
-                    "email": "enrico.vecchio1@gmail.com"
-                }
-            ],
-            "description": "A simple comments generator in Apidoc.js format for your yii2 RESTFul API's",
-            "keywords": [
-                "apidoc",
-                "apidoc.js",
-                "generator",
-                "yii2"
-            ],
-            "time": "2015-07-21 10:36:12"
-        },
-        {
             "name": "fzaninotto/faker",
             "version": "v1.5.0",
             "source": {
@@ -1830,292 +1886,6 @@
                 "fixtures"
             ],
             "time": "2015-05-29 06:29:14"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v0.9.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ef70767475434bdb3615b43c327e2cae17ef12eb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ef70767475434bdb3615b43c327e2cae17ef12eb",
-                "reference": "ef70767475434bdb3615b43c327e2cae17ef12eb",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "PHPParser": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "time": "2014-07-23 18:24:17"
-        },
-        {
-            "name": "pahanini/yii2-rest-doc",
-            "version": "0.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pahanini/yii2-rest-doc.git",
-                "reference": "e367205de904722a77a493aa8e5a3e44a1df7a98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pahanini/yii2-rest-doc/zipball/e367205de904722a77a493aa8e5a3e44a1df7a98",
-                "reference": "e367205de904722a77a493aa8e5a3e44a1df7a98",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.4.0",
-                "phpdocumentor/reflection": ">=1.0.3",
-                "phpdocumentor/reflection-docblock": ">2.0.1",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "pahanini\\restdoc\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Pavel Tetyaev",
-                    "email": "pahanini@gmail.com"
-                }
-            ],
-            "description": "A Yii2 tool to create slate index.md for you REST controllers.",
-            "homepage": "https://github.com/pahanini/yii2-rest-to-slate",
-            "keywords": [
-                "api",
-                "doc",
-                "rest",
-                "slate",
-                "yii2"
-            ],
-            "time": "2015-08-25 04:18:45"
-        },
-        {
-            "name": "phpdocumentor/reflection",
-            "version": "1.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/Reflection.git",
-                "reference": "fc40c3f604ac2287eb5c314174d5109b2c699372"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/Reflection/zipball/fc40c3f604ac2287eb5c314174d5109b2c699372",
-                "reference": "fc40c3f604ac2287eb5c314174d5109b2c699372",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "~0.9.4",
-                "php": ">=5.3.3",
-                "phpdocumentor/reflection-docblock": "~2.0",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "behat/behat": "~2.4",
-                "mockery/mockery": "~0.8",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "phpDocumentor": [
-                        "src/",
-                        "tests/unit/",
-                        "tests/mocks/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Reflection library to do Static Analysis for PHP Projects",
-            "homepage": "http://www.phpdoc.org",
-            "keywords": [
-                "phpDocumentor",
-                "phpdoc",
-                "reflection",
-                "static analysis"
-            ],
-            "time": "2014-11-14 11:43:04"
-        },
-        {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "phpDocumentor": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
-                }
-            ],
-            "time": "2015-02-03 12:10:50"
-        },
-        {
-            "name": "psr/log",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Psr\\Log\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "time": "2012-12-21 11:40:51"
-        },
-        {
-            "name": "rmrevin/yii2-fontawesome",
-            "version": "2.13.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-                "reference": "2efbfacb22be59f373d11a7e3dfa9213e2ba18a9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/2efbfacb22be59f373d11a7e3dfa9213e2ba18a9",
-                "reference": "2efbfacb22be59f373d11a7e3dfa9213e2ba18a9",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/fontawesome": "4.5.*",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "2.0.*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "asset-installer-paths": {
-                    "npm-asset-library": "vendor/npm",
-                    "bower-asset-library": "vendor/bower"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "rmrevin\\yii\\fontawesome\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Revin Roman",
-                    "email": "roman@rmrevin.com",
-                    "homepage": "https://rmrevin.com/"
-                }
-            ],
-            "description": "Asset Bundle for Yii2 with Font Awesome",
-            "keywords": [
-                "asset",
-                "awesome",
-                "bundle",
-                "font",
-                "yii"
-            ],
-            "time": "2015-11-26 15:24:53"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -2214,7 +1984,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "ijackua/yii2-sharelinks-widget": 20,
-        "denisogr/yii2-cronjobs": 20
+        "denisogr/yii2-cronjobs": 20,
+        "pahanini/yii2-rest-doc": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

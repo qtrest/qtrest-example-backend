@@ -45,7 +45,7 @@ use app\components\Tools;
     echo $form->field($model, 'discountType')->dropDownList($types);
     ?>
     <?php
-    $categories = ArrayHelper::map(CouponCategories::find()->all(), 'id', 'categoryName');
+    $categories = ArrayHelper::map(CouponCategories::findAll(['isActive' => 1]), 'id', 'categoryName');
     $link = Html::a('(показать/скрыть)',
         \yii\helpers\Url::to('javascript:$("#couponsearch-sourceservicecategories").toggle();'));
     echo $form->field($model, 'sourceServiceCategories', [
