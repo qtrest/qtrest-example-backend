@@ -50,8 +50,7 @@ use app\components\Tools;
         \yii\helpers\Url::to('javascript:$("#couponsearch-sourceservicecategories").toggle();'));
     echo $form->field($model, 'sourceServiceCategories', [
         'template' => "{label}\n  $link\n{input}\n{hint}\n{error}"
-    ])->checkboxList($categories);
-    $this->registerJs('$("#couponsearch-sourceservicecategories").hide();', \yii\web\View::POS_READY);
+    ])->checkboxList($categories, ['style' => 'display:none']);
     ?>
 
 
