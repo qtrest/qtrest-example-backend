@@ -16,7 +16,7 @@ class CouponSerializer extends Serializer
     protected function serializeModel($model)
     {
         $data = parent::serializeModel($model);
-        $data = prepareModel($data);
+        $data = $this->prepareData($data);
         return $data;
     }
 

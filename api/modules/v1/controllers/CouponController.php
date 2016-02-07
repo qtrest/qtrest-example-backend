@@ -43,7 +43,7 @@ class CouponController extends ActiveController
         //         'application/json' => Response::FORMAT_JSON,
         //     ],
         // ];  
-        return $behaviors;  
+        return $behaviors;
     }
 
     public function actions()
