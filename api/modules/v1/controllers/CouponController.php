@@ -7,6 +7,8 @@ use yii\web\Response;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\HttpBearerAuth;
 
 /**
  * Coupon Controller
@@ -30,6 +32,10 @@ class CouponController extends ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
+
+        $behaviors['authenticator'] = [
+            'class' => HttpBearerAuth::className(),
+        ];
 
         //authentication
         // $behaviors['authenticator'] = [

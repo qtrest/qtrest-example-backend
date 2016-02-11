@@ -24,6 +24,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'enableSession' => false
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
