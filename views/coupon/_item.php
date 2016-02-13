@@ -37,6 +37,19 @@ $strippedBoughtCount = $model->boughtCount;
 $strippedBoughtCount = trim(str_replace("Уже купили", "", $strippedBoughtCount));
 $strippedBoughtCount = trim(str_replace("человек", "", $strippedBoughtCount));
 
+$originalCouponPrice = $model->originalCouponPrice;
+if (trim($originalCouponPrice) == "") { $originalCouponPrice = "?"; }
+
+$originalPrice = $model->originalPrice;
+if (trim($originalPrice) == "") { $originalPrice = "?"; }
+
+$discountPrice = $model->discountPrice;
+if (trim($discountPrice) == "") { $discountPrice = "?"; }
+
+$discountPercent = $model->discountPercent;
+$discountPercent = str_replace('—', '-', $discountPercent);
+if (trim($discountPercent) == "") { $discountPercent = "?"; }
+
 //Дополнительная пост обработка и актуализация данных в БД.
 if ($strippedBoughtCount != $model->boughtCount) {
     $model->boughtCount = $strippedBoughtCount;
@@ -81,8 +94,9 @@ if (\Yii::$app->devicedetect->isMobile()) {
             </div>
             <span class="label label-success span-full-down">
                     <?= ((($model->discountType == 'coupon') || ($model->discountType == 'freeCoupon') )
-                        ? 'Купон: ' . Html::encode($model->originalCouponPrice)
-                        : 'Цена: ' . (Html::encode($model->originalPrice) . $certText . Html::encode($model->discountPrice))) . '. Скидка: ' . str_replace('%', '', Html::encode($model->discountPercent)) . '%'
+                        ? 'Купон: ' . Html::encode($originalCouponPrice)
+                        : 'Цена: ' . (Html::encode($originalPrice) . $certText . Html::encode($discountPrice))) 
+                    . '. Скидка: ' . str_replace('%', '', Html::encode($discountPercent)) . '%'
                     ?>
             </span>
         </div>
