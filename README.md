@@ -13,19 +13,29 @@ Install guide
 -------------------
 0) ssh-keygen -t rsa and add this to bitbucked repo
 
+0.1) sudo tasksel install lamp-server
+0.2) sudo apt-get install php5-curl phpmyadmin php-apc tor tor-geoipdb privoxy apache2-mpm-itk
+0.3) sudo a2enmod rewrite
+
 1) Install composer
 
-2) Clone bare repository 'cd /home/admin/; git clone --mirror git@bitbucket.org:kafeg/kupon.git' (manual: https://serverpilot.io/community/articles/how-to$<br/>
+2) Production
 
-3) GIT_WORK_TREE=/home/admin/web/skid.kz/public_html/ git checkout -f master
+2.1) Clone bare repository 'cd /home/admin/; git clone --mirror git@bitbucket.org:kafeg/kupon.git' (manual: https://serverpilot.io/community/articles/how-to$<br/>
 
-4) cd /home/admin/web/skid.kz/public_html/
+2.2) GIT_WORK_TREE=/home/admin/web/skid.kz/public_html/ git checkout -f master
 
-5) composer.phar global require "fxp/composer-asset-plugin:~1.0.3"
+2.3) cd /home/admin/web/skid.kz/public_html/
 
-6) composer.phar update
+3) Development
 
-6.5) Setup database with config/db.php
+3.1) 'mkdir ~/web; cd ~/web; git clone git@bitbucket.org:kafeg/kupon.git; cd ~/web/kupon'
+
+4) composer.phar global require "fxp/composer-asset-plugin:~1.1.3"
+
+5) composer.phar update
+
+6) Setup database with config/db.php
 
 7) php yii migrate
 
@@ -37,19 +47,11 @@ Install guide
 
 10) Setup mysql wait_timeout=360
 
-11) Setup php max_execution_time to 240 or 360
+11) php max_execution_time to 240 or 360 in /etc/php5/apache2/php.ini
 
-12) sudo apt-get install php-apc
+12) Setup tor proxy in config/params.php and configure privoxy as http://help.ubuntu.ru/wiki/tor
 
-13) Setup clean urls for host in your apache or nginx.
-
-14) Setup apache config as exampled for API: docs/skid.kz.apacheexample.conf
-
-15) Install tor (HOWTO http://help.ubuntu.ru/wiki/tor)
-
-16) Setup proxy in config/params.php
-
-17) sudo chmod 777 -R on runitme directory
+13) sudo chmod 777 -R on runitme directory
 
 Howto deploy to production
 ------------------------------------
