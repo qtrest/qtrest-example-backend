@@ -69,7 +69,7 @@ return [
             //'on afterAction' => function() { exec("bundle exec middleman build") }
         ],
         'cron' => [
-           'class' => 'app\commands\CronController'
+           'class' => 'denisog\cronjobs\CronController'
         ],
     ],
     'params' => $params,

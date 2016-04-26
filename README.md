@@ -95,6 +95,10 @@ http://skid.kz/kupon/default/testapi?serviceId=1&testType=2
 
 Example: http://skid.kz/kupon/default/testapi?serviceId=2&testType=9&couponId=17538
 
+Manual launch
+--------------------------------------
+See 'php yii kupon/cron/' section
+
 Howto use REST API
 --------------------------------------
 Base URL: http://api.skid.kz/v1/coupon
