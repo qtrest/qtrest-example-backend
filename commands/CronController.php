@@ -5,7 +5,7 @@
  * Time: 14:51
  */
 
-namespace app\commands;
+namespace denisog\cronjobs;
 
 use Yii;
 use yii\console\Controller;
@@ -14,6 +14,7 @@ use yii\console\Exception;
 
 class CronController extends Controller {
 
+    const CATEGORY_LOGS = 'cron_controller_logs';
     /**
      * @var string PHPDoc tag prefix for using by PHPDocCrontab extension.
      */
@@ -81,14 +82,6 @@ class CronController extends Controller {
         if ($this->bootstrapScript === null){
             $this->bootstrapScript = Yii::getAlias('@runnerScript');
         }
-    }
-
-    /**
-     * Provides the command name.
-     * @return string the command name.
-     */
-    public function getName() {
-        return 'cron';
     }
 
     /**
@@ -195,13 +188,11 @@ RAW;
             $concat . escapeshellarg($stdout).
             ' 2>'.(($stdout === $stderr)?'&1':escapeshellarg($stderr));
 
-        //check alias setup for yii2 basic app: Yii::setAlias('@runnerScript', dirname(__DIR__) .'/yii');
-        Yii::info('Command: '.$command, 'cron');
-
         if ($this->isWindowsOS()){
             //Windows OS
             pclose(popen('start /B "Yii run command" '.$command, 'r'));
-        } else {
+        }
+        else{
             //nix based OS
             system($command.' &');
         }
@@ -255,28 +246,13 @@ RAW;
                     $stdout = '/dev/null';
                 }
                 $this->runCommandBackground($command, $stdout, $stderr);
-
-                /*
-                * Log to category 'cron'.
-                * Setup your target:
-                * [
-                *     'class' => 'yii\log\FileTarget',
-                *     'levels' => ['info'],
-                *     'logFile' => '@app/runtime/logs/console/cron.log',
-                *     'maxFileSize' => 1024 * 2,
-                *     'maxLogFiles' => 5,
-                *     'logVars' => ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION'],
-                * ],
-                * 
-                */
-                Yii::info('Running task ['.(++$runned).']: '.$task['command'].' '.$task['action'], 'cron');
+                Yii::info('Running task ['.(++$runned).']: '.$task['command'].' '.$task['action'], self::CATEGORY_LOGS);
             }
         }
-
-        if ($runned > 0) {
-            Yii::info('Runned '.$runned.' task(s) at '.date('r', $time), 'cron');
+        if ($runned > 0){
+            Yii::info('Runned '.$runned.' task(s) at '.date('r', $time), self::CATEGORY_LOGS);
         } else {
-            Yii::info('No task on '.date('r', $time), 'cron');
+            Yii::info('No task on '.date('r', $time), self::CATEGORY_LOGS);
         }
     }
 
@@ -327,7 +303,7 @@ RAW;
         $actions = array();
         try {
             $methods = Yii::$app->params['cronJobs'];
-        } catch (yii\base\ErrorException $e) {
+        }catch (yii\base\ErrorException $e) {
             throw new yii\base\ErrorException('Empty param cronJobs in params. ',8);
         }
 
@@ -336,7 +312,6 @@ RAW;
             foreach ($methods as $runCommand => $runSettings) {
                 $runCommand = explode('/', $runCommand);
 
-                //base actions
                 if (count($runCommand) == 2) {
                     $actions[] = array(
                         'command' => $runCommand[0],
@@ -344,8 +319,6 @@ RAW;
                         'docs'    => $this->parseDocComment($this->arrayToDocComment($runSettings))
                     );
                 }
-
-                //module actions support
                 if (count($runCommand) == 3) {
                     $actions[] = array(
                         'command' => $runCommand[0] . '/' . $runCommand[1],
@@ -354,9 +327,19 @@ RAW;
                     );
                 }
 
+                if (count($runCommand) == 4) {
+                    $actions[] = array(
+                        'command' => $runCommand[0] . '/' . $runCommand[1] .  '/' . $runCommand[2],
+                        'action'  => $runCommand[3],
+                        'docs'    => $this->parseDocComment($this->arrayToDocComment($runSettings))
+                    );
+                }
+
                 if(empty($actions)) {
                     continue;
                 }
+
+
             }
         }
         return $actions;
