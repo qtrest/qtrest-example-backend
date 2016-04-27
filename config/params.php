@@ -14,7 +14,7 @@ return [
             'cron'      => '10 7 * * *',
         ],
         'kupon/cron/mirkuponov' => [
-            'cron'      => '10 88 * * *',
+            'cron'      => '10 8 * * *',
         ],
         'kupon/cron/autokupon' => [
             'cron'      => '10 9 * * *',
