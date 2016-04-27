@@ -8,6 +8,16 @@ class CategoriesController extends ApiBaseController
 {
     public $modelClass = 'app\models\CouponCategories';
 
+	public function actionIndex(){
+        $activeData = new ActiveDataProvider([
+            'query' => Stnk::find(),
+            'pagination' => [
+                'defaultPageSize' => 20,
+            ],
+        ]);
+        return $activeData;
+    }
+
     public function actions()
     {
         $actions = parent::actions();

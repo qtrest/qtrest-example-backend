@@ -20,7 +20,7 @@ class CouponController extends ApiBaseController
     // We are using the regular web app modules:
     public $modelClass = 'app\models\Coupon';
 
-     public $serializer = [
+    public $serializer = [
         'class' => 'app\api\components\CouponSerializer',
         //'collectionEnvelope' => 'categories',
     ];
