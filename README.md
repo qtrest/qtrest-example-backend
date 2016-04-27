@@ -6,7 +6,9 @@ Skid.KZ - агрегатор данных со скидочных сервисо
 Production URL: http://skid.kz
 
 Developers:
+
 1. Petrov Vitaliy, v31337@gmail.com
+
 2. Aboimov Alexander
 
 Install guide
@@ -14,7 +16,9 @@ Install guide
 0) ssh-keygen -t rsa and add this to bitbucked repo
 
 0.1) sudo tasksel install lamp-server
+
 0.2) sudo apt-get install php5-curl phpmyadmin php-apc tor tor-geoipdb privoxy apache2-mpm-itk
+
 0.3) sudo a2enmod rewrite
 
 1) Install composer
@@ -73,6 +77,7 @@ Howto test services
 Test service: http://skid.kz/kupon/default/testapi?serviceId=1
 
 Services ids:
+
 1. ChocolifeApi
 2. BlizzardApi
 3. KupiKuponApi

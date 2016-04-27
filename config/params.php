@@ -10,17 +10,17 @@ return [
         'kupon/cron/blizzard' => [
             'cron'      => '10 6 * * *',
         ],
-        'kupon/cron/kupikupon' => [
-            'cron'      => '10 20 * * *',
+        'kupon/cron/besmartkz' => [
+            'cron'      => '10 7 * * *',
         ],
         'kupon/cron/mirkuponov' => [
-            'cron'      => '10 18 * * *',
+            'cron'      => '10 88 * * *',
         ],
         'kupon/cron/autokupon' => [
-            'cron'      => '10 22 * * *',
+            'cron'      => '10 9 * * *',
         ],
-        'kupon/cron/besmartkz' => [
-            'cron'      => '10 28 * * *',
+        'kupon/cron/kupikupon' => [
+            'cron'      => '10 10 * * *',
         ],
         'kupon/cron/update' => [
             'cron'      => '10 5 3 * *',
