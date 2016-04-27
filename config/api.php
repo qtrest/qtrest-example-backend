@@ -51,7 +51,11 @@ $config = [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/coupon' => 'v1/coupon']],
+                ['class' => 'yii\rest\UrlRule', 
+                    'controller' => ['v1/coupon' => 'v1/coupon',
+                                     'v1/categories' => 'v1/categories',
+                    ]
+                ],
             ],
         ], 
         'db' => $db,
