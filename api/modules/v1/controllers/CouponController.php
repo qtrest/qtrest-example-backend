@@ -3,12 +3,8 @@ namespace app\api\modules\v1\controllers;
 //Formato json
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
-//Segurança
-use yii\filters\auth\CompositeAuth;
-use yii\filters\auth\QueryParamAuth;
+
 use yii\rest\ActiveController;
-use yii\filters\auth\HttpBasicAuth;
-use yii\filters\auth\HttpBearerAuth;
 
 /**
  * Coupon Controller
@@ -18,7 +14,7 @@ use yii\filters\auth\HttpBearerAuth;
  * The blank line above denotes a paragraph break
  */
 
-class CouponController extends ActiveController
+class CouponController extends ApiBaseController
 {
 
     // We are using the regular web app modules:
@@ -28,29 +24,6 @@ class CouponController extends ActiveController
         'class' => 'app\api\components\CouponSerializer',
         //'collectionEnvelope' => 'categories',
     ];
-
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-
-        $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className(),
-        ];
-
-        //authentication
-        // $behaviors['authenticator'] = [
-        //     'class' => QueryParamAuth::className(),
-        // ];
-
-        //only json
-        // $behaviors['bootstrap'] = [
-        //     'class' => ContentNegotiator::className(),
-        //     'formats' => [
-        //         'application/json' => Response::FORMAT_JSON,
-        //     ],
-        // ];  
-        return $behaviors;
-    }
 
     public function actions()
     {
