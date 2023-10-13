@@ -4,6 +4,7 @@ Skid.KZ
 UPD 12.10.2023: This is no more actual for a long time and now used just as a backend sample for the https://github.com/qtrest/qtrest library with the other sample repo https://github.com/qtrest/qtrest-example
 
 Skid.KZ - is a sample WebApp to aggregate some data from Kazakhstan discount services.
+
 Skid.KZ - агрегатор данных со скидочных сервисов Республики Казахстан.
 
 Production URL: http://skid.kz
